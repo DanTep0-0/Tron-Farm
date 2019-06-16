@@ -1,0 +1,183 @@
+*{
+  font-family: sans-serif;
+}
+p{
+  padding: 0;
+  margin: 0;
+}
+.forButton{
+  width: 360px;
+  height: 150px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.play{
+  padding: 15px 100px;
+  background: #922B21;
+  color: white;
+  font-size: 80px;
+  border-radius: 100px 100px 100px 100px;
+  -webkit-transition: background-color 2s, color 0.4s;
+  transition: background-color 1s, color 0.4s;
+}
+.play:hover{
+  background-color: #F4D03F;
+  color: black;
+}
+.aboutGame {
+    width: 100%;
+    height: 100px;
+    background-color: #E67E22;
+    -webkit-padding-start: 0;
+    padding-inline-start: 0;
+    margin-block-start: 0;
+}
+.abgl{
+  width: calc(20% - 2px);
+  padding-top: 16.5px;
+  height: 81.5px;
+  list-style-type: none;
+  float: left;
+  font-size: 30px;
+  text-align: center;
+  border: 1px solid black;
+}
+.num{
+  width: 100%;
+  height: 37px;
+  margin-top: 10px;
+  font-size: 30px;
+  text-align: center;
+  border-width: 0;
+}
+.allani{
+  margin-left: calc(calc(100% - 1332px)/2);
+}
+.toInvest{
+  width: 40%;
+  height: 300px;
+  float: left;
+}
+.animalsp{
+  margin-top: 70px;
+  width: 100%;
+  height: 440px;
+}
+.f{
+  margin-top: 0;
+}
+.animal{
+  height: 350px;
+  width: 300px;
+  margin: 70px 70px;
+  background-color: #FFF5CE;
+  float: left;
+  border: 2px solid #922B21;
+}
+.invest{
+  height: 200px;
+  width: 300px;
+  background-color: #FFF5CE;
+  float: left;
+
+}
+.name {
+    width: 100%;
+    margin: 3px 0;
+    font-size: 36px;
+    text-align: center;
+    height: 60px;
+    color: #814B00;
+}
+.image{
+  height: 200px;
+  width: 300px;
+  background-color: #FFF5CE;
+}
+.about{
+  width: 100%;
+  height: 60px;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 10px;
+}
+.coin {
+    margin-top: 8px;
+    height: 30px;
+    float: left;
+    margin-left: 181px;
+    margin-top: -36px;
+}
+.dop{
+  font-size: 35px;
+  margin-left: 47px;
+  width: auto;
+  text-align: left;
+}
+.yourInf{
+  margin-left: calc(calc(100% - 1332px)/2);
+  margin-top: 70px;
+  height: 440px;
+}
+.food{
+  margin-top: 120px;
+  height: 300px;
+}
+.improveFood{
+  margin-left: -2px;
+  margin-top: -50px;
+  width: 304px;
+  height: 100px;
+  border-radius: 100px;
+  border: 2px solid black;
+  background-color: #922B21;
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  -webkit-transition: background-color 2s, color 0.4s;
+  transition: background-color 1s, color 0.4s;
+}
+.improveFood:hover{
+  background-color: #F4D03F;
+  color: black;
+}
+.ifi{
+  margin-top: 65px;
+  margin-left: -1px;
+  float: left;
+  width: 300px;
+  height: 50px;
+  font-size: 40px;
+  background-color: #FFF5CE;
+  border: 1px solid black;
+  border-right: none;
+  text-align: center;
+}
+.pers{
+  float: left;
+  margin-left: 160px;
+  margin-top: -54px;
+  font-size: 45px;
+  border-left: none;
+}
+.description{
+  font-size: 26px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.buLa{
+  margin-top: 60px;
+}
+
+//////////////////////////////////////////////////////////////////////////
+.dnone{
+  display: none;
+}
+.bgcn{
+  background-color: none;
+}
+.mt15{
+  margin-top: 15px;
+}
