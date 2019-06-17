@@ -43,7 +43,9 @@ class App extends React.Component {
               improveFoodval: '0',
               puv: '0',
               valueDep: '0',
-              allMoney: '0'
+              allMoney: '0',
+              investedMoney: '0',
+              usedMoney: '0'
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -164,6 +166,13 @@ class App extends React.Component {
         Address: result5 + '...'
       });
     }
+    async fetchYourData(){
+      var player = (await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())));
+      var result1 = player.allCoins;
+      var result2 = player.usedCoins;
+      var result3 = player.coinsReturned;
+      console.log(result1 + "  " + result2 + "  " + result3 + "  ");
+    }
 
     play(){
         if(!!window.tronWeb && window.tronWeb.ready){
@@ -171,6 +180,7 @@ class App extends React.Component {
         document.querySelector('.game').classList.remove('dnone');}
 
         this.fetchData();
+        this.fetchYourData();
     }
 
     async dep(value){
@@ -193,6 +203,7 @@ class App extends React.Component {
                 }
             ));
           this.fetchData();
+          this.fetchYourData();
         // }
       }
     }
@@ -214,6 +225,7 @@ class App extends React.Component {
               }
           ));
           this.fetchData();
+          this.fetchYourData();
           console.log('type: ', type, '  num: ', num);
         }
     }
@@ -276,6 +288,7 @@ class App extends React.Component {
           ));
 
       }
+      this.fetchYourData();
     }
 
 
@@ -337,12 +350,12 @@ class App extends React.Component {
                     this.pickUp(this.state.puv)}  }>Pick Up</button><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
 
                   <table className = "Infbo">
-                    <tr className = "yourInftr">
+                    <tr className = "yourInftr1">
                       <td className = "yitd" ><div className = "top">Your Money</div><input className = "bottom" value = {this.state.allMoney} /></td>
-                      <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom"/></td>
-                      <td className = "yitd" ><div className = "top">Used Money</div><input className = "bottom"/></td>
+                      <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
+                      <td className = "yitd" ><div className = "top">Used Money</div><input className = "bottom" value = {this.state.usedMoney}/></td>
                     </tr>
-                    <tr className  = "yourInftr">
+                    <tr className  = "yourInftr2">
 
                     </tr>
                     </table>
