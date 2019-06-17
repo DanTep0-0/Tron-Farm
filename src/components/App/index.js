@@ -3,11 +3,15 @@ import TronLinkGuide from 'components/TronLinkGuide';
 import TronWeb from 'tronweb';
 import Utils from 'utils';
 import Swal from 'sweetalert2';
+import Chick from './chick.png';
 import Pig from './Pig.png';
+import Sheep from './sheep.png';
+import Cow from './cow.png';
+import GoldenChicken from './goldenChicken.png';
 import Coin from './coin.png';
 
 
-import './App.scss';
+import './App.css';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -36,7 +40,10 @@ class App extends React.Component {
               ivco: '0',
               ivge: '0',
               ivper: '0',
-              improveFoodval: '0'
+              improveFoodval: '0',
+              puv: '0',
+              valueDep: '0',
+              allMoney: '0'
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -250,6 +257,25 @@ class App extends React.Component {
        );
      }
     }
+    async pickUp(coins){
+      console.log(coins);
+      if(coins > 0){
+        await Utils.contract.withdraw(coins).call({
+          shouldPollResponse: true,
+          callValue: 0
+        }).then(res => Swal({
+              title:'Transaction Successful',
+              type: 'success'
+            })).catch(err => Swal(
+              {
+                   title:'Transaction Failed',
+                   text: 'Make sure you pasted number of coins that you have',
+                   type: 'error'
+              }
+          ));
+
+      }
+    }
 
 
 
@@ -278,7 +304,7 @@ class App extends React.Component {
             </ul>
             <form className = "allani">
             <div className = "animalsp f">
-              <div className = "animal chicken"><div className = "name">Chicken</div><img className = "image" src = "./Chicken.jpeg"/><button className="buy" onClick={(event) => {event.preventDefault()
+              <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(0, this.state.ivch)}  }>buy</button><input type="number" name="chnumber" value = {this.state.ivch} onChange={e => this.setState({ivch: e.target.value})}/></div>
 
                                                                <div className = "animal pig"><div className = "name">Pig</div><div className = "forImage"><img className = "image" src = {Pig}/></div><button className="buy" onClick={(event) => {event.preventDefault()
@@ -293,22 +319,32 @@ class App extends React.Component {
 
             </div>
             <div className = "animalsp">
-              <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = "./Sheep.jpeg"/><button className="buy" onClick={(event) => {event.preventDefault()
+              <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = {Sheep}/><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(2, this.state.ivsh)}  }>buy</button><input type="number" name="shnumber" value = {this.state.ivsh} onChange={e => this.setState({ivsh: e.target.value})}/></div>
 
-              <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = "./Cow.jpeg"/><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = {Cow}/><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(3, this.state.ivco)}  }>buy</button><input type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
 
-                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = "./GoldenEgg.jpeg"/><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = {GoldenChicken}/><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </div>
             </form>
             <div className = "yourInf">
-              <div className = "animal bgcn"><div className = "invest"><button className="improveFood" onClick={(event) => {event.preventDefault()
-                this.dep(this.state.valueDep)}  }>Buy</button><input  className = "buLa" type="number" name="denumber" onChange={e => this.setState({valueDep: e.target.value})}/><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80<img className = "coin" src = {Coin}/></div></div></div>
+              <div className = "animal tw bgcn "><div className = "invest"><button className="improveFood" onClick={(event) => {event.preventDefault()
+                this.dep(this.state.valueDep)}  }>Buy</button><input  className = "buLa" type="number" name="denumber" onChange={e => this.setState({valueDep: e.target.value})}/><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80
+                <img src = {Coin} className= "coin" /></div><input  className = "pickUp" type="number" name="pinumber" onChange={e => this.setState({puv: e.target.value})}/><button className="pickUp" onClick={(event) => {event.preventDefault()
+                    this.pickUp(this.state.puv)}  }>Pick Up</button><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
 
-              <div className = "animal bgcn"><div className = "invest"><button className="improveFood" onClick={(event) => {event.preventDefault()
-                  this.dep(this.state.valueDep)}  }>Buy</button><input  className = "buLa" type="number" name="denumber" onChange={e => this.setState({valueDep: e.target.value})}/><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80<img className = "coin" src = {Coin}/></div></div></div>
+                  <table className = "Infbo">
+                    <tr className = "yourInftr">
+                      <td className = "yitd" ><div className = "top"><div className = "bottom"></div></div></td>
+                      <td className = "yitd" ><div className = "top"><div className = "bottom"></div></div></td>
+                      <td className = "yitd" ><div className = "top"><div className = "bottom"></div></div></td>
+                    </tr>
+                    <tr className  = "yourInftr">
+
+                    </tr>
+                    </table>
             </div>
           </div>
           </div>

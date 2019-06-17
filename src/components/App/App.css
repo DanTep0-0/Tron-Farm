@@ -5,6 +5,14 @@ p{
   padding: 0;
   margin: 0;
 }
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+td{
+  display: block;
+  float: left;
+}
 .forButton{
   width: 360px;
   height: 150px;
@@ -28,7 +36,7 @@ p{
 .aboutGame {
     width: 100%;
     height: 100px;
-    background-color: #E67E22;
+    background-color: salmon;
     -webkit-padding-start: 0;
     padding-inline-start: 0;
     margin-block-start: 0;
@@ -92,7 +100,8 @@ p{
 }
 .image{
   height: 200px;
-  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #FFF5CE;
 }
 .about{
@@ -169,6 +178,35 @@ p{
 }
 .buLa{
   margin-top: 60px;
+}
+.tw{
+  height: 450px;
+}
+.yourInftr{
+  height: 225px;
+}
+.Infbo{
+  width: 740px;
+  height: 450px;
+  margin-left: 70px;
+  margin-top: 70px;
+  float: left;
+  border: 1px solid black;
+
+}
+.yitd{
+  width: 245px;
+  border: 0.5px solid black;
+  height: 225px;
+  padding: 0px;
+}
+.top{
+  height: 78px;
+  width: 100%;
+}
+.bottom{
+  height: 145px;
+  width: 100%
 }
 
 //////////////////////////////////////////////////////////////////////////
