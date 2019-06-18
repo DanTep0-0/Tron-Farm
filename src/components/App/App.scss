@@ -110,6 +110,10 @@ table{
 .animal .about {
   height: 107px;
 }
+.youHave, .profit {
+  float: left;
+  margin-left: 10px;
+}
 .thisAnumber{
   padding-left: 10px;
   width: 50px;
@@ -117,10 +121,28 @@ table{
   background: none;
   margin: 0 15px;
   border: none;
-  font-size: 16px;
+  font-size: 22px;
 }
 .cost{
-  
+
+}
+.profit{
+  font-size: 22px;
+}
+.profitp{
+  display: inline-block;
+}
+.profitI{
+  padding-left: 10px;
+  width: 50px;
+  background: none;
+  border: none;
+  font-size: 22px;
+}
+.coinfp2, .coinfp1{
+  position: relative;
+  top: 7px;
+  margin-right: 5px;
 }
 .coinfa{
   position: relative;
