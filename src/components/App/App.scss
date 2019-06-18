@@ -108,36 +108,34 @@ table{
   box-sizing: border-box;
 }
 .animal .about {
-  height: 107px;
+  height: auto;
+  overflow: hidden;
 }
-.youHave, .profit {
+.youHave, .profit, .cost {
   float: left;
-  margin-left: 10px;
+  margin: 1px 0 0 10px;
 }
 .thisAnumber{
-  padding-left: 10px;
-  width: 50px;
+  width: 130px;
   height: 25px;
-  background: none;
-  margin: 0 15px;
-  border: none;
-  font-size: 22px;
 }
-.cost{
-
+.cost div, .profitI, .costI, .profitp{
+  display: inline-block;
 }
 .profit{
   font-size: 22px;
 }
-.profitp{
-  display: inline-block;
-}
-.profitI{
+.profitI, .costI, .thisAnumber{
   padding-left: 10px;
-  width: 50px;
   background: none;
   border: none;
   font-size: 22px;
+}
+.profitI{
+  width: 50px;
+}
+.costI{
+  width: 75px;
 }
 .coinfp2, .coinfp1{
   position: relative;
@@ -174,10 +172,10 @@ width: 60px;
 height: 30px;
 padding-left: 20px;
 }
-.quantity{
-  position: relative;
-  display: inline-block;
-}
+// .quantity{
+//   position: relative;
+//   display: inline-block;
+// }
 // .q-nav{
 //   float: left;
 //   position: relative;
