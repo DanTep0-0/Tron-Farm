@@ -63,46 +63,54 @@ table{
   float: left;
 }
 .animalsp{
-  margin-top: 70px;
+  margin-top: 35px;
   width: 100%;
-  height: 440px;
+  height: 520px;
 }
 .f{
   margin-top: 0;
 }
 .animal {
-  height: 350px;
+  height: 400px;
   width: 300px;
   margin: 70px 70px;
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.5);
   float: left;
   border: 2px solid #ffffff;
   text-align: center;
 }
-.chick img {
-  margin: 0 50px;
+.chick .image {
+  margin: 5px 50px 0 50px;
 }
 .invest{
   height: 200px;
   width: 300px;
   float: left;
-
 }
 .name {
   width: 100%;
-  margin: 3px 0;
-  font-size: 36px;
+  font-size: 34px;
   text-align: center;
-  height: 60px;
+  height: 50px;
   color: #814B00;
-  line-height: 60px;
+  line-height: 50px;
 }
 .image{
   height: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 5px;
 }
-.buy {
+.about{
+  width: 100%;
+  height: 65px;
+  font-size: 22px;
+  text-align: center;
+  margin-top: 10px;
+}
+.coinfa{
+  position: relative;
+  top: 5px;
+}
+.buy{
   background-color: white;
   height: 40px;
   width: 90px;
@@ -115,20 +123,63 @@ table{
   font-weight: bold;
   cursor: pointer;
 }
-.about{
-  width: 100%;
-  height: 60px;
-  font-size: 25px;
-  text-align: center;
-  margin-top: 10px;
+.wa::-webkit-outer-spin-button,
+.wa::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.coin {
-    margin-top: 8px;
-    height: 30px;
-    float: left;
-    margin-left: 181px;
-    margin-top: -36px;
+.wa{
+  -moz-appearance: textfield;
 }
+.wa{
+width: 60px;
+height: 30px;
+padding-left: 20px;
+}
+.quantity{
+  position: relative;
+  display: inline-block;
+}
+// .q-nav{
+//   float: left;
+//   position: relative;
+//   height: 30px;
+// }
+// .q-button {
+//   position: relative;
+//   cursor: pointer;
+//   border-left: 1px solid #eee;
+//   width: 20px;
+//   text-align: center;
+//   color: black;
+//   font-size: 13px;
+//   // font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+//   // line-height: 1.7;
+//   -webkit-transform: translateX(-100%);
+//   transform: translateX(-100%);
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   user-select: none;
+// }
+// .q-up {
+//   position: absolute;
+//   height: 50%;
+//   top: 0;
+//   border-bottom: 1px solid #eee;
+// }
+//
+// .q-down {
+//   position: absolute;
+//   bottom: -1px;
+//   height: 50%;
+// }
+// .coin {
+//   margin-top: 8px;
+//   height: 30px;
+//   float: left;
+//   margin-left: 181px;
+//   margin-top: -36px;
+// }
 .dop{
   font-size: 35px;
   margin-left: 47px;
@@ -141,8 +192,8 @@ table{
   height: 440px;
 }
 .food{
-  margin-top: 120px;
-  height: 300px;
+  margin-top: 70px;
+  height: 400px;
 }
 .improveFood {
   padding: 15px 30px;
@@ -152,14 +203,19 @@ table{
   color: white;
   font-size: 22px;
   position: absolute;
-  margin-top: -50px;
-  margin-left: -115px;
+  margin-top: 15px;
   transition: background-color 1s, color 0.4s;
 }
 .improveFood:hover{
   background-color: #F4D03F;
   color: black;
   cursor: pointer;
+}
+.button1{
+  margin-left: 33px;
+}
+.button2{
+  margin-left: 0px;
 }
 .ifi{
   margin-top: 65px;
