@@ -24,12 +24,8 @@
     }
 }
 
-.tronLink.hover {
-    transition: all 200ms ease;
-    cursor: pointer;
-}
 
 .tronLink:hover {
     transform: translateY(-2px);
-    border: 2px solid rgba(255, 255, 255, 0.3);;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }

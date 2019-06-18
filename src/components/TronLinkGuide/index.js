@@ -37,7 +37,7 @@ const TronLinkGuide = props => {
     }
 
     return (
-        <div className='tronLink hover' onClick={ openTronLink }>
+        <div className='tronLink' onClick={ openTronLink }>
             <div className='info'>
                 <h1>Log in Required</h1>
                 <p>
