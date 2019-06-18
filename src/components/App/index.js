@@ -387,15 +387,7 @@ class App extends React.Component {
                       <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
                       <td className = "yitd" ><div className = "top">Returned Money</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
                     </tr>
-                    <tr className  = "yourInftr2">
-                      <div className = "yourAnimals">Your Animals</div>
-                      <div className = "abThisAnimal"><div className = "forText">Chick</div><input className = "wa" type = "number" value = {this.state.yourChicks}/></div>
-                      <div className = "abThisAnimal"><div className = "forText">Pig</div></div>
-                      <div className = "abThisAnimal"><div className = "forText">Sheep</div></div>
-                      <div className = "abThisAnimal"><div className = "forText">Cow</div></div>
-                      <div className = "abThisAnimal"><div className = "forText">Golden Chicken</div></div>
-                    </tr>
-                    </table>
+                  </table>
             </div>
           </div>
           </div>
