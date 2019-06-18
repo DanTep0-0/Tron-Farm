@@ -2,7 +2,7 @@ module.exports = {
   networks: {
     development: {
 // For trontools/quickstart docker image
-      privateKey: '3b744907bd7cf31ae644e7bd0c018523a9414aea81af87062efb72e6d54bdb37',
+      privateKey: '6541d80b0c2f714564cd59613c98937893e94263905082588c1874dae4369359',
       consume_user_resource_percent: 30,
       fee_limit: 100000000,
       fullNode: "http://127.0.0.1:8090",
@@ -11,7 +11,7 @@ module.exports = {
       network_id: "*"
     },
     shasta: {
-      privateKey: '3b744907bd7cf31ae644e7bd0c018523a9414aea81af87062efb72e6d54bdb37',
+      privateKey: '6541d80b0c2f714564cd59613c98937893e94263905082588c1874dae4369359',
       consume_user_resource_percent: 30,
       fee_limit: 100000000,
       fullNode: "https://api.shasta.trongrid.io",
