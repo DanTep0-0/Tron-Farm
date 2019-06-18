@@ -20,7 +20,8 @@
 
 body{
 /* background: #FFF5CE; */
-  background-image: url(https://image.cnbcfm.com/api/v1/image/105875983-1556317921653gettyimages-998356384.jpeg?v=1556317945);
-  background-position: center center;
+  background-image: url('bg.jpg');
+  background-position: center 0;
   background-repeat: no-repeat;
+  background-size: cover;
 }
