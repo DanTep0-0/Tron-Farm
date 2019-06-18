@@ -224,7 +224,7 @@ padding-left: 20px;
 .yourInf{
   margin-left: calc(calc(100% - 1332px)/2);
   margin-top: 35px;
-  height: 440px;
+  height: 574px;
 }
 .improveFood {
   border-radius: 5px;
@@ -323,9 +323,60 @@ padding-left: 20px;
 .dnone{
   display: none;
 }
-.bgcn{
 
+// ------------------------ADAPTIVE DESIGN-------------------------------------
+
+@media (max-width: 1348px) {
+  body{
+    background-position: 0 0;
+  }
+  .animal{
+    width: 350px;
+  }
+  .animalsp{
+    margin: 0 4vw 35px 13vw;
+    height: 539px;
+  }
+  .ifi{
+    width: 350px;
+  }
+  .pers{
+    margin-left: 185px;
+  }
+  .Infbo{
+    margin: 70px 0 150px 22vw;
+    clear: both;
+  }
+  .tw{
+    margin: 70px 0 70px 37vw;
+  }
+  .invest{
+    width: auto;
+  }
 }
-.mt15{
+
+@media (max-width: 1198px) {
+  .animalsp{
+    margin: 0 0 35px 16vw;
+  }
+  .tw{
+    margin: 70px 0 70px 45vw;
+  }
+  .Infbo{
+    margin: 70px 0 150px 28vw;
+  }
+  .num{
+    font-size: 18px;
+    margin: 15px 0 15px 0;
+  }
+}
+
+@media (max-width: 1055px) {
+  .tw{
+    margin: 70px 0 70px 47vw;
+  }
+}
+
+@media (max-width: 920px) {
 
 }
