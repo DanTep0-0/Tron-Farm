@@ -35,7 +35,7 @@ class App extends React.Component {
               Animals: '...',
               Address: '...',
               ivch: '0',
-              ivp: '0',
+              ivpg: '0',
               ivsh: '0',
               ivco: '0',
               ivge: '0',
@@ -159,7 +159,7 @@ class App extends React.Component {
     async fetchData(){
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
       var result2 = (await Utils.contract.totalInvested().call()).toNumber() / 80;
-      var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 80;
+      var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
       result5 = result5.slice(0, 10);
@@ -173,13 +173,13 @@ class App extends React.Component {
     }
     async fetchYourData(){
       var player = new Object();
-      player = (await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())));
+      player = Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
       var result3 = player.coinsReturned;
       console.log(result1 + "  " + result2 + "  " + result3 + "  ");
       var animals = [];
-      animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
+      animals = Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result4 = animals[0];
       var result5 = animals[1];
       var result6 = animals[2];
@@ -290,12 +290,13 @@ class App extends React.Component {
           }
        );
      }
+     this.fetchYourData();
     }
 
     async pickUp(coins){
       console.log(coins);
       if(coins > 0){
-        await Utils.contract.withdraw(coins).call({
+        await Utils.contract.withdraw(coins).send({
           shouldPollResponse: true,
           callValue: 0
         }).then(res => Swal({
@@ -340,10 +341,10 @@ class App extends React.Component {
             </ul>
             <form className = "allani">
             <div className = "animalsp f">
-              <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><button className="buy" onClick={(event) => {event.preventDefault()
+              <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><div className = "about">5760<img className = "coinfa" src = {Coin}/></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(0, this.state.ivch)}  }>buy</button><input className = "wa" type="number" name="chnumber" value = {this.state.ivch} onChange={e => this.setState({ivch: e.target.value})}/></div>
 
-                                                               <div className = "animal pig"><div className = "name">Pig</div><div className = "forImage"><img className = "image" src = {Pig}/></div><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <div className = "animal pig"><div className = "name">Pig</div><div className = "forImage"><img className = "image" src = {Pig}/><div className = "about">11760<img className = "coinfa" src = {Coin}/></div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(1, this.state.ivpg)}  }>buy</button><input className = "wa" type="number" name="pgnumber" value = {this.state.ivpg} onChange={e => this.setState({ivpg: e.target.value})}/></div>
 
                                                                <div className = "animal food"><button className="improveFood button1" onClick={(event) => {event.preventDefault()
@@ -355,13 +356,13 @@ class App extends React.Component {
 
             </div>
             <div className = "animalsp">
-              <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = {Sheep}/><button className="buy" onClick={(event) => {event.preventDefault()
+              <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = {Sheep}/><div className = "about">24000<img className = "coinfa" src = {Coin}/></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(2, this.state.ivsh)}  }>buy</button><input className = "wa" type="number" name="shnumber" value = {this.state.ivsh} onChange={e => this.setState({ivsh: e.target.value})}/></div>
 
-                                                               <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = {Cow}/><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = {Cow}/><div className = "about">61200<img className = "coinfa" src = {Coin}/></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(3, this.state.ivco)}  }>buy</button><input className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
 
-                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = {GoldenChicken}/><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = {GoldenChicken}/><div className = "about">312000<img className = "coinfa" src = {Coin}/></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </div>
             </form>
@@ -378,13 +379,12 @@ class App extends React.Component {
                       <td className = "yitd" ><div className = "top">Used Money</div><input className = "bottom" value = {this.state.usedMoney}/></td>
                     </tr>
                     <tr className  = "yourInftr2">
-                      <div className = "yourAnimals">Your Animals</div>//width 100%
-                      <div className = "abThisAnimal"><img className = "instance fa" src = {Chick}/><input className = "wa" type = "number" value = {this.state.yourChicks}/>//input под картинкой, прямоугольник</div>//height 100%. input под картинкой, прямоугольник
-                      <div className = "abThisAnimal"><img className = "instance sa" src = {Pig}/></div>//height 100%
-                      <div className = "abThisAnimal"><img className = "instance tha" src = {Sheep}/></div>//height 100%
-                      <div className = "abThisAnimal"><img className = "instance foa" src = {Cow}/></div>//height 100%
-                      <div className = "abThisAnimal"><img className = "instance fia" src = {GoldenChicken}/></div>//height 100%
-                        //float left, это маленькие картинки животных(над их количеством)
+                      <div className = "yourAnimals">Your Animals</div>
+                      <div className = "abThisAnimal"><img className = "instance fa" src = {Chick}/><input className = "wa" type = "number" value = {this.state.yourChicks}/></div>
+                      <div className = "abThisAnimal"><img className = "instance sa" src = {Pig}/></div>
+                      <div className = "abThisAnimal"><img className = "instance tha" src = {Sheep}/></div>
+                      <div className = "abThisAnimal"><img className = "instance foa" src = {Cow}/></div>
+                      <div className = "abThisAnimal"><img className = "instance fia" src = {GoldenChicken}/></div>
                     </tr>
                     </table>
             </div>
