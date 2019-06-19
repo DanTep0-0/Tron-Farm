@@ -340,7 +340,23 @@ class App extends React.Component {
               <li className = "abgl">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
               <li className = "abgl">Animals:<p className = "num">{this.state.Animals}</p></li>
             </ul>
+            <div className = "yourInf">
+              <div className = "account">Your Account</div>
+              <div className = "animal tw bgcn "><div className = "invest"><button className="improveFood button2" onClick={(event) => {event.preventDefault()
+                this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value})}/><img className = "valCoins1" src = {Coin}/><input type = "number" className = "buLa2 wa"/><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80
+                <img src = {Coin} className= "coin" /></div><input min="1" step="1" className = "wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value})}/><button className="pickUp" onClick={(event) => {event.preventDefault()
+                    this.pickUp(this.state.puv)}  }>Pick Up</button><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
+
+                  <table className = "Infbo">
+                    <tr className = "yourInftr1">
+                      <td className = "yitd" ><div className = "top">Your Money</div><input className = "bottom" value = {this.state.allMoney} /></td>
+                      <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
+                      <td className = "yitd" ><div className = "top">Returned Money</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
+                    </tr>
+                  </table>
+            </div>
             <form className = "allani">
+              <div className = "store">Store</div>
             <div className = "animalsp f">
 
               <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourChicks}/></div><div className = "cost"><div>Cost:</div>
@@ -375,21 +391,7 @@ class App extends React.Component {
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </div>
             </form>
-            <div className = "yourInf">
-              <div className = "animal tw bgcn "><div className = "invest"><button className="improveFood button2" onClick={(event) => {event.preventDefault()
-                this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value})}/><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80
-                <img src = {Coin} className= "coin" /></div><input min="1" step="1" className = "wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value})}/><button className="pickUp" onClick={(event) => {event.preventDefault()
-                    this.pickUp(this.state.puv)}  }>Pick Up</button><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
-
-                  <table className = "Infbo">
-                    <tr className = "yourInftr1">
-                      <td className = "yitd" ><div className = "top">Your Money</div><input className = "bottom" value = {this.state.allMoney} /></td>
-                      <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
-                      <td className = "yitd" ><div className = "top">Returned Money</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
-                    </tr>
-                  </table>
             </div>
-          </div>
           </div>
         );
     }
