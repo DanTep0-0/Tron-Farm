@@ -33,6 +33,8 @@ table{
   cursor: pointer;
 }
 .aboutGame {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
   width: 100%;
   overflow: hidden;
   -webkit-padding-start: 0;
@@ -40,7 +42,7 @@ table{
   margin-block-start: 0;
 }
 .abgl{
-  width: 30%;
+  width: 20%;
   padding: 10px 0;
   list-style-type: none;
   float: left;
@@ -48,12 +50,6 @@ table{
   text-align: center;
   border: 1px solid black;
   box-sizing: border-box;
-}
-.adm{
-  width: 40%;
-}
-.adb{
-  width: 50%;
 }
 .num{
   margin-top: 10px;
@@ -138,13 +134,14 @@ table{
 .yourInf{
   margin-left: calc(calc(100% - 1332px)/2);
   margin-top: 50px;
-  height: 574px;
+  height: auto;
 }
 .allani{
   height: auto;
   overflow: hidden;
   margin-left: calc(calc(100% - 1332px)/2);
   margin-right: calc(calc(100% - 1332px)/2);
+  clear: both;
 }
 .toInvest{
   width: 40%;
@@ -160,7 +157,7 @@ table{
   margin-top: 0;
 }
 .animal {
-  height: 430px;
+  height: 450px;
   width: 300px;
   margin: 70px 70px;
   background-color: rgba(255,255,255,0.5);
@@ -209,6 +206,7 @@ table{
 .youHave, .profit, .cost, .cost2 {
   float: left;
   margin: 1px 0 0 15px;
+  clear: both;
 }
 .thisAnumber{
   width: 130px;
@@ -327,11 +325,19 @@ padding-left: 20px;
   display: none;
 }
 
-// ------------------------ADAPTIVE DESIGN-------------------------------------
+// ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
 @media (max-width: 1348px) {
+  .abgl{
+    width: 15%;
+  }
+  .adm{
+    width: 24%;
+  }
+  .adb{
+    width: 23%;
+  }
   .yourInf{
-    height: 983px;
     margin-top: 75px;
   }
   .allani{
@@ -391,13 +397,10 @@ padding-left: 20px;
     margin: 55px 0 70px 41%;
   }
   .account, .store{
-    margin: 0 0 15px 46%;
+    margin-left: 46%;
   }
   .Infbo{
-    margin: 70px 0 85px 25%;
-  }
-  .num{
-    font-size: 16px;
+    margin: 35px 0 85px 25%;
   }
   .abgl{
     font-size: 22px;
@@ -405,24 +408,101 @@ padding-left: 20px;
 }
 
 @media (max-width: 990px) {
+  .num, .description, .about, .improveFood, .profit, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
+    font-size: 26px;
+  }
   .tw{
-    margin: 55px 0 70px 45%;
+    margin: 55px 0 70px 36%;
   }
   .account, .store{
-    margin: 0 0 15px 51%;
+    margin-left: 49%;
+    padding: 20px;
+    font-size: 24px;
   }
-  .animal, .food, .goldenEgg{
-    margin: 70px 0 15px 45%;
+  .animal, .food{
+    margin: 70px 0 15px 36%;
+  }
+  .animal, .food, .yitd {
+    width: 550px;
+  }
+  .about{
+    padding: 5px 50px;
+    width: 550px;
+  }
+  .youHave, .profit, .cost, .cost2 {
+    margin: 1px 0 0 0;
+    clear: both;
+  }
+  .button2{
+    margin: 25px 0 40px 45px;
+    padding: 10px 40px;
+  }
+  .button1{
+    margin: 20px 33px 20px -115px;
+  }
+  .buy{
+    height: 50px;
+    width: 150px;
+    font-size: 24px;
+  }
+  .wa{
+    width: 60px;
+    height: 35px;
+    padding-left: 30px;
+    font-size: 24px;
+  }
+  .buLa, .buLa2, .buLa3, .buLa4 {
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  .buLa3, .buLa4{
+    margin-left: 85px;
+  }
+  .valCoins1, .valCoins2{
+    margin-top: 35px;
+  }
+  .TRX{
+    margin-top: 40px;
+  }
+  .invest .about {
+    padding: 5px 15px;
+  }
+  .mt15{
+    font-size: 26px;
+  }
+  .pickUp{
+    margin: -18px 80px 0 0;
+    clear: both;
+    padding: 15px 40px;
+  }
+  .ifi{
+    width: 550px;
+    font-size: 28px;
+    height: 50px;
+  }
+  .pers{
+    margin-left: 305px;
+    margin-top: -42px;
+    font-size: 28px;
+  }
+  .description{
+    margin: 25px 10px 0 10px;
+  }
+  .cost2, .food .youHave{
+    margin-top: 15px;
+    margin-left: 50px;
+  }
+  .goldenEgg{
+    margin: 70px 0 120px 36%;
   }
   .allani{
-    height: 3501px;
-    overflow: unset;
+    height: auto;
+    overflow: hidden;
   }
   .Infbo{
-    margin: 70px 0 85px 45%;
+    margin: 70px 0 85px 36%;
   }
   .yitd{
-    width: 350px;
     clear: both;
     float: left;
   }
@@ -430,16 +510,160 @@ padding-left: 20px;
     overflow: hidden;
     height: auto;
   }
+  .abgl{
+    width: 30%;
+    font-size: 26px;
+  }
+  .adm{
+    width: 40%;
+  }
+  .adb{
+    width: 50%;
+  }
 }
 
-@media (max-width: 768px) {
-
+@media (max-width: 700px) {
+  .account, .store {
+    margin-left: 55%;
+  }
+  .animal, .Infbo {
+    margin-left: 40%;
+  }
 }
 
-@media (max-width: 713px) {
+@media (max-width: 630px) {
+  .description, .about, .improveFood, .profit, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
+    font-size: 22px;
+  }
+  .num{
+    font-size: 18px;
+  }
+  .account {
+    margin-left: 58%;
+  }
+  .animal, .Infbo {
+    margin-left: 51%;
+  }
+  .animal, .food, .yitd {
+    width: 350px;
+  }
+  .buy{
+    height: 40px;
+    width: 90px;
+    margin: 10px 5px;
+  }
+  .wa{
+    width: 60px;
+    height: 30px;
+    padding-left: 20px;
+  }
+  .wa, .buy{
+    font-size: 14px;
+  }
+  .about, .ifi {
+    width: 350px;
+  }
+  .ifi{
+    height: 50px;
+    font-size: 28px;
+  }
+  .valCoins1, .valCoins2{
+    margin-top: 12px;
+  }
+  .buLa, .buLa2, .buLa3, .buLa4 {
+    margin-top: 11px;
+    margin-left: 15px;
+  }
+  .buLa3, .buLa4{
+    margin-left: 30px;
+  }
+  .TRX{
+    margin-top: 22px;
+  }
+  .pickUp{
+    padding: 5px 20px;
+    margin: 35px 25px;
+    clear: none;
+  }
+  .button1{
+    margin: 20px 33px 20px -115px;
+  }
+  .button2{
+    margin: 30px 25px 35px 40px;
+    padding: 5px 30px;
+  }
+  .pers{
+    margin-left: 195px;
+  }
+  .description{
+    margin: 25px 10px 0 10px;
+  }
+}
 
+
+@media (max-width: 550px) {
+  .account, .store {
+    margin-left: 60%;
+  }
+  .animal, .goldenEgg, .Infbo {
+    margin-left: 53%;
+  }
 }
 
 @media (max-width: 480px) {
+  .num{
+    font-size: 16px;
+  }
+  .animal, .yitd, .invest .about, .ifi {
+    width: 300px;
+  }
+  .top, .profitI, .thisAnumber, .bottom, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
+    font-size: 20px;
+  }
+  .name{
+    font-size: 28px;
+  }
+  .account, .store {
+    margin-left: 63%;
+  }
+  .animal, .Infbo {
+    margin-left: 58%;
+  }
+  .animal{
+    height: 428px;
+  }
+  .button2{
+    margin: 30px 20px 40px 25px;
+  }
+  .pickUp{
+    margin: 35px 15px 0 0;
+  }
+  .buLa3, .buLa4{
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+  .pers{
+    font-size: 24px;
+    margin-top: -40px;
+  }
+  .yitd{
+    height: 140px;
+  }
+  .top, .bottom{
+    height: 70px;
+    line-height: 70px;
+  }
+  .coin{
+    position: relative;
+    top: 5px;
+  }
+}
 
+@media (max-width: 435px) {
+  .account, .store {
+    margin-left: 65%;
+  }
+  .animal, .Infbo {
+    margin-left: 60%;
+  }
 }
