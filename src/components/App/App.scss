@@ -65,15 +65,18 @@ table{
   border: 2px solid black;
   border-radius: 25px;
 }
-.buLa, .buLa2, .buLa3{
+.buLa, .buLa2, .buLa3, .buLa4{
   margin-top: 16px;
   float: left;
+}
+.buLa3, .buLa4 {
+  margin-left: 10px;
 }
 .valCoins1, .valCoins2, .TRX{
   float: left;
   margin-left: 3px;
 }
-.valCoins1{
+.valCoins1, .valCoins2{
   margin-top: 17px;
 }
 .TRX{
@@ -87,7 +90,7 @@ table{
   color: white;
   font-size: 22px;
   float: right;
-  margin: 20px 15px;
+  margin: 35px 10px;
   transition: background-color 1s, color 0.4s;
 }
 .pickUp:hover{
@@ -163,9 +166,10 @@ table{
   margin: 5px 50px 0 50px;
 }
 .invest{
-  height: 200px;
-  width: 300px;
   float: left;
+}
+.invest .about{
+  margin-top: 10px;
 }
 .name {
   width: 100%;
@@ -191,6 +195,7 @@ table{
 }
 .mt15 {
   font-size: 26px;
+  border: 2px solid white;
 }
 .youHave, .profit, .cost {
   float: left;
