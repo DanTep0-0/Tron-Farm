@@ -176,6 +176,7 @@ class App extends React.Component {
     }
     async fetchYourData(){
       var player = new Object();
+      await Utils.contract.collect(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
@@ -329,10 +330,10 @@ class App extends React.Component {
           </div>
           <div className = "game dnone">
             <ul className = "aboutGame">
-              <li className = "abgl adf">Your Address:<p className = "num">{this.state.Address}</p></li>
-              <li className = "abgl">Players:<p className = "num">{this.state.Players}</p></li>
-              <li className = "abgl">Invested:<p className = "num">{this.state.Invested}</p></li>
-              <li className = "abgl ads">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
+              <li className = "abgl adm">Your Address:<p className = "num">{this.state.Address}</p></li>
+              <li className = "abgl ads">Players:<p className = "num">{this.state.Players}</p></li>
+              <li className = "abgl adb">Invested:<p className = "num">{this.state.Invested}</p></li>
+              <li className = "abgl adb">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
               <li className = "abgl ads">Animals:<p className = "num">{this.state.Animals}</p></li>
             </ul>
             <div className = "yourInf">

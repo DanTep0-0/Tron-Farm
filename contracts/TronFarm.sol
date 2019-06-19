@@ -6,7 +6,7 @@ contract TronFarm {
     uint constant animals = 5;
     uint constant period = 1 minutes;
 
-    uint[animals] prices = [1, 2, 1, 2, 1];
+    uint[animals] prices = [1, 2, 3, 4, 5];
     uint[animals] profit = [1, 1, 1, 1, 1];
     uint perPrice = 1;
     uint startCoe = 100;
@@ -16,7 +16,7 @@ contract TronFarm {
     uint public totalAnimals;
     uint public totalPayout;
 
-    address owner;
+     address owner;
 
     struct Player {
         uint coinsReturned;
@@ -37,12 +37,13 @@ contract TronFarm {
         require(msg.value >= coinPrice);
 
         Player storage player = players[msg.sender];
-        player.allCoins = player.allCoins + msg.value / coinPrice;
-        player.coe = startCoe;
+        uint startCoins = player.allCoins;
+        player.allCoins = startCoins + (msg.value / coinPrice);
 
         if (player.time == 0) {
             player.time = now;
             totalPlayers++;
+            player.coe = startCoe;
         }
         return true;
     }
@@ -74,9 +75,9 @@ contract TronFarm {
         players[msg.sender].allCoins = players[msg.sender].allCoins - _coins;
         transfer(msg.sender, _coins * coinPrice);
         return true;
-    }
+     }
 
-    function collect(address _addr) internal {
+    function collect(address _addr) public {
         Player storage player = players[_addr];
         require(player.time > 0);
         require(address(this).balance >= 0);
@@ -93,13 +94,14 @@ contract TronFarm {
         }
     }
 
-    function transfer(address _to, uint _amount) internal {
+    function transfer(address _to, uint _amount) internal returns(bool success){
         if (_amount > 0 && _to != address(0)) {
             uint contractBalance = address(this).balance;
             if (contractBalance > 0) {
                 uint payout = _amount > contractBalance ? contractBalance : _amount;
                 totalPayout = totalPayout + payout;
                 msg.sender.transfer(payout);
+                return true;
             }
         }
     }
