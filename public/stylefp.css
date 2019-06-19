@@ -5,17 +5,17 @@
 }
 
 @font-face{
-  font-family: 'Gothic';
-  src: url('./src/components/App/fonts/TrueGothicCyr.woff') format('woff'),
-  url('./src/components/App/fonts/TrueGothicCyr.ttf') format('ttf'),
-  url('./src/components/App/fonts/TrueGothicCyr.eot') format('eot');
+  font-family: 'BigJohn';
+  src: url('fonts/BigJohnPRO-Regular.woff2') format('woff2'),
+  url('fonts/BigJohnPRO-Regular.ttf') format('ttf'),
+  url('fonts/BigJohnPRO-Regular.woff') format('woff');
 }
 
 @font-face{
   font-family: 'Rochester';
-  src: url('./src/components/App/fonts/Rochester.woff') format('woff'),
-  url('./src/components/App/fonts/Rochester.ttf') format('ttf'),
-  url('./src/components/App/fonts/Rochester.eot') format('eot');
+  src: url('fonts/Rochester.woff') format('woff'),
+  url('fonts/Rochester.ttf') format('ttf'),
+  url('fonts/Rochester.eot') format('eot');
 }
 
 body{
