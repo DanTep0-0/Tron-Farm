@@ -65,7 +65,26 @@ body{
 .menu p{
   font-family: 'BigJohn';
 }
-
+.divForLogo{
+  width: 800px;
+  height: auto;
+  text-align: center;
+  margin: 100px auto 0 auto;
+  padding: 50px;
+}
+.divForLogo:hover{
+  -webkit-transform: scale(.96);
+  transform: scale(.96);
+}
+.tronFarmLogo{
+  width: 800px;
+  margin: ;
+}
+.aboutFarm{
+  width: 100%;
+  height: 800px;
+  background:
+}
 
 @media (max-width: 990px) {
   .menu{
