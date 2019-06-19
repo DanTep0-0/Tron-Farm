@@ -80,6 +80,11 @@ body{
   width: 800px;
   margin: ;
 }
+.aboutFarm{
+  width: 100%;
+  height: 800px;
+  background:
+}
 
 @media (max-width: 990px) {
   .menu{
