@@ -32,12 +32,6 @@ table{
   color: black;
   cursor: pointer;
 }
-.game{
-  // background-image: url('bg.jpg');
-  // background-position: center 0;
-  // background-repeat: no-repeat;
-  // background-size: cover;
-}
 .aboutGame {
   width: 100%;
   overflow: hidden;
@@ -140,7 +134,10 @@ table{
   height: 574px;
 }
 .allani{
+  height: auto;
+  overflow: hidden;
   margin-left: calc(calc(100% - 1332px)/2);
+  margin-right: calc(calc(100% - 1332px)/2);
 }
 .toInvest{
   width: 40%;
@@ -213,7 +210,7 @@ table{
 .cost div, .cost2 div, .profitI, .costI, .costI2, .profitp{
   display: inline-block;
 }
-.cost2 div{
+.cost2 div, .youHave{
   font-size: 22px;
 }
 .cost2{
@@ -239,7 +236,7 @@ table{
   top: 7px;
   margin-right: 5px;
 }
-.coinfa, .coinfa2{
+.coinfa, .coinfa2, .ym{
   position: relative;
   top: 5px;
 }
@@ -269,51 +266,6 @@ width: 60px;
 height: 30px;
 padding-left: 20px;
 }
-
-// .quantity{
-//   position: relative;
-//   display: inline-block;
-// }
-// .q-nav{
-//   float: left;
-//   position: relative;
-//   height: 30px;
-// }
-// .q-button {
-//   position: relative;
-//   cursor: pointer;
-//   border-left: 1px solid #eee;
-//   width: 20px;
-//   text-align: center;
-//   color: black;
-//   font-size: 13px;
-//   // font-family: "Trebuchet MS", Helvetica, sans-serif !important;
-//   // line-height: 1.7;
-//   -webkit-transform: translateX(-100%);
-//   transform: translateX(-100%);
-//   -webkit-user-select: none;
-//   -moz-user-select: none;
-//   user-select: none;
-// }
-// .q-up {
-//   position: absolute;
-//   height: 50%;
-//   top: 0;
-//   border-bottom: 1px solid #eee;
-// }
-//
-// .q-down {
-//   position: absolute;
-//   bottom: -1px;
-//   height: 50%;
-// }
-// .coin {
-//   margin-top: 8px;
-//   height: 30px;
-//   float: left;
-//   margin-left: 181px;
-//   margin-top: -36px;
-// }
 .improveFood {
   border-radius: 5px;
   border: 2px solid black;
@@ -354,7 +306,7 @@ padding-left: 20px;
 .pers{
   float: left;
   margin-left: 160px;
-  margin-top: -46px;
+  margin-top: -42px;
   font-size: 28px;
 }
 .description{
@@ -371,12 +323,12 @@ padding-left: 20px;
 // ------------------------ADAPTIVE DESIGN-------------------------------------
 
 @media (max-width: 1348px) {
-  .gamer{
-    background-size: auto;
-  }
   .yourInf{
     height: 983px;
     margin-top: 75px;
+  }
+  .allani{
+    margin-right: 0;
   }
   .animal{
     width: 350px;
@@ -414,10 +366,10 @@ padding-left: 20px;
     margin: 0 0 15px calc(calc(100% - 214px)/2);
   }
   .button2{
-    margin: 35px 40px 35px 45px;
+    margin: 25px 40px 40px 45px;
   }
   .pickUp{
-    margin: 35px 28px;
+    margin: 33px 28px;
   }
   .buLa3, .buLa4{
     margin-left: 35px;
@@ -426,7 +378,7 @@ padding-left: 20px;
 
 @media (max-width: 1198px) {
   .food, .goldenEgg{
-    margin: 70px 41%;
+    margin: 70px 40%;
   }
   .tw{
     margin: 55px 0 70px 41%;
@@ -439,7 +391,6 @@ padding-left: 20px;
   }
   .num{
     font-size: 16px;
-    margin: 15px 0 15px 0;
   }
   .abgl{
     font-size: 22px;
@@ -448,22 +399,37 @@ padding-left: 20px;
 
 @media (max-width: 990px) {
   .tw{
-    margin: 55px 0 70px 43%;
+    margin: 55px 0 70px 45%;
   }
   .account, .store{
-    margin: 0 0 15px 50%;
+    margin: 0 0 15px 51%;
   }
-//   .Infbo{
-//     margin: 70px 0 85px 43%;
-//   }
-//   .yitd{
-//     width: 350px;
-//     clear: both;
-//     float: left;
-//   }
+  .animal, .food, .goldenEgg{
+    margin: 70px 0 70px 45%;
+  }
+  .allani{
+    height: 3501px;
+    overflow: unset;
+  }
+  .Infbo{
+    margin: 70px 0 85px 45%;
+  }
+  .yitd{
+    width: 350px;
+    clear: both;
+    float: left;
+  }
+  .yourInf{
+    overflow: hidden;
+    height: auto;
+  }
 }
 
 @media (max-width: 768px) {
+
+}
+
+@media (max-width: 713px) {
 
 }
 

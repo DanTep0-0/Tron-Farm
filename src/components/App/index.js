@@ -329,11 +329,11 @@ class App extends React.Component {
           </div>
           <div className = "game dnone">
             <ul className = "aboutGame">
-              <li className = "abgl">Your Address:<p className = "num">{this.state.Address}</p></li>
+              <li className = "abgl adf">Your Address:<p className = "num">{this.state.Address}</p></li>
               <li className = "abgl">Players:<p className = "num">{this.state.Players}</p></li>
               <li className = "abgl">Invested:<p className = "num">{this.state.Invested}</p></li>
-              <li className = "abgl">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
-              <li className = "abgl">Animals:<p className = "num">{this.state.Animals}</p></li>
+              <li className = "abgl ads">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
+              <li className = "abgl ads">Animals:<p className = "num">{this.state.Animals}</p></li>
             </ul>
             <div className = "yourInf">
               <div className = "account">Your Account</div>
@@ -347,8 +347,8 @@ class App extends React.Component {
                   <table className = "Infbo">
                     <tr className = "yourInftr1">
                       <td className = "yitd" ><div className = "top">Your Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" value = {this.state.allMoney} /></td>
-                      <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
-                      <td className = "yitd" ><div className = "top">Returned Money</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
+                      <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" value = {this.state.investedMoney}/></td>
+                      <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
                     </tr>
                   </table>
             </div>
