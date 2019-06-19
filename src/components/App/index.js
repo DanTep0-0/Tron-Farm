@@ -259,6 +259,8 @@ class App extends React.Component {
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
         document.querySelector('.game').classList.remove('dnone');
+        document.querySelector('.cover').classList.add('dnone');
+        document.querySelector('.divForLogo').classList.add('dnone');
       }
 
         this.fetchData();
