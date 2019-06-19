@@ -66,7 +66,7 @@ table{
   border-radius: 25px;
 }
 .buLa, .buLa2, .buLa3, .buLa4{
-  margin-top: 16px;
+  margin-top: 13px;
   float: left;
 }
 .buLa3, .buLa4 {
@@ -169,7 +169,7 @@ table{
   float: left;
 }
 .invest .about{
-  margin-top: 10px;
+  margin-top: 15px;
 }
 .name {
   width: 100%;
@@ -197,21 +197,27 @@ table{
   font-size: 26px;
   border: 2px solid white;
 }
-.youHave, .profit, .cost {
+.youHave, .profit, .cost, .cost2 {
   float: left;
-  margin: 1px 0 0 10px;
+  margin: 1px 0 0 15px;
 }
 .thisAnumber{
   width: 130px;
   height: 25px;
 }
-.cost div, .profitI, .costI, .profitp{
+.cost div, .cost2 div, .profitI, .costI, .costI2, .profitp{
   display: inline-block;
+}
+.cost2 div{
+  font-size: 22px;
+}
+.cost2{
+  margin-top: 15px;
 }
 .profit{
   font-size: 22px;
 }
-.profitI, .costI, .thisAnumber{
+.profitI, .costI, .costI2, .thisAnumber{
   padding-left: 10px;
   background: none;
   border: none;
@@ -220,7 +226,7 @@ table{
 .profitI{
   width: 50px;
 }
-.costI{
+.costI, .costI2{
   width: 75px;
 }
 .coinfp2, .coinfp1{
@@ -228,7 +234,7 @@ table{
   top: 7px;
   margin-right: 5px;
 }
-.coinfa{
+.coinfa, .coinfa2{
   position: relative;
   top: 5px;
 }
@@ -258,6 +264,7 @@ width: 60px;
 height: 30px;
 padding-left: 20px;
 }
+
 // .quantity{
 //   position: relative;
 //   display: inline-block;
@@ -322,7 +329,7 @@ padding-left: 20px;
   padding: 15px 30px;
 }
 .button2{
-  margin: 39px 25px 30px 25px;
+  margin: 35px 25px 35px 25px;
   position: relative;
   padding: 5px 30px;
   float: left
@@ -362,6 +369,9 @@ padding-left: 20px;
   body{
     background-position: 0 0;
   }
+  .yourInf{
+    height: 983px;
+  }
   .animal{
     width: 350px;
   }
@@ -376,11 +386,11 @@ padding-left: 20px;
     margin-left: 185px;
   }
   .Infbo{
-    margin: 70px 0 150px 22vw;
+    margin: 70px 0 85px 22vw;
     clear: both;
   }
   .tw{
-    margin: 70px 0 70px 37vw;
+    margin: 55px 0 70px 37vw;
   }
   .invest{
     width: auto;
@@ -410,5 +420,13 @@ padding-left: 20px;
 }
 
 @media (max-width: 920px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
 
 }
