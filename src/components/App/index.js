@@ -176,7 +176,7 @@ class App extends React.Component {
     }
     async fetchYourData(){
       var player = new Object();
-      await Utils.contract.collect(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
+      // await Utils.contract.collect(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
