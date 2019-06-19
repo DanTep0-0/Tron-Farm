@@ -160,6 +160,42 @@ class App extends React.Component {
 
     }
 
+    async ohrDop(){
+      var player = new Object();
+      player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
+      var animals = [];
+      animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
+      var result10 = player.time;
+      var contractTime = await Utils.contract.getTime().call();
+      var timePassed = contractTime - result10;
+      var hours = (timePassed / 3600) >> 0;
+      var result4 = animals[0];
+      var result5 = animals[1];
+      var result6 = animals[2];
+      var result7 = animals[3];
+      var result8 = animals[4];
+
+      var profit = [25, 50, 100, 250, 1250];
+      var hourlyProfit = 0;
+      for (var i = 0; i < 5; i++) {
+          hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
+      }
+      var allMoneyBefore = player.allCoins;
+      var returnedMoneyBefore = player.coinsReturned;
+      var newAllCoins = allMoneyBefore + (hourlyProfit*hours);
+      var newReturnedMoney = returnedMoneyBefore + (hourlyProfit*hours);
+      this.setState({
+        allCoins: newAllCoins,
+        returnedMoney: newReturnedMoney
+      });
+    }
+
+    oneHourReload(){
+      const timer = setInterval(() => {
+          this.ohrDop();
+        }, 3600000);
+    }
+
     async fetchData(){
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
       var result2 = (await Utils.contract.totalInvested().call()).toNumber() / 80;
@@ -186,7 +222,6 @@ class App extends React.Component {
       var contractTime = await Utils.contract.getTime().call();
       var timePassed = contractTime - result10;
       var hours = (timePassed / 3600) >> 0;
-      console.log(result1 + "  " + result2 + "  " + result3 + "  " + "coe:  " + result9);
       var animals = [];
       animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result4 = animals[0];
@@ -194,10 +229,7 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      console.log("animals: " + animals);
-
       var profit = [25, 50, 100, 250, 1250];
-
       var hourlyProfit = 0;
       for (var i = 0; i < 5; i++) {
           hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
@@ -206,7 +238,7 @@ class App extends React.Component {
       result3 = Number(result3);
       result1 = result1 + (hourlyProfit*hours);
       result3 = result3 + (hourlyProfit*hours);
-
+      var wait = (3600 - (timePassed - (hours*3600)))*1000;
       this.setState({allMoney: result1,
       investedMoney: result2,
       returnedMoney: result3,
@@ -218,12 +250,16 @@ class App extends React.Component {
       yourGoldenChickens: result8,
 
     });
+      const timer = setTimeout(() => {
+          this.oneHourReload();
+        }, wait);
   }
 
     play(){
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
-        document.querySelector('.game').classList.remove('dnone');}
+        document.querySelector('.game').classList.remove('dnone');
+      }
 
         this.fetchData();
         this.fetchYourData();
