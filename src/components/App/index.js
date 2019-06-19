@@ -1,7 +1,7 @@
 import React from 'react';
-import TronLinkGuide from 'components/TronLinkGuide';
+import TronLinkGuide from '../TronLinkGuide/index.js';
 import TronWeb from 'tronweb';
-import Utils from 'utils';
+import Utils from '../../utils/index.js';
 import Swal from 'sweetalert2';
 import Chick from './chick.png';
 import Pig from './pig.png';
@@ -16,8 +16,8 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////
-const contractAddress = 'TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8';   /// Add your contract address here TPffVQcdLNqMExcXTnuASPM5EYX4NpzVB5 deployed
-////////////////////////////////////////////////////////////////////////////////////
+const contractAddress = 'TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs';   /// Add your contract address here TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
 
 class App extends React.Component {
 
@@ -40,7 +40,7 @@ class App extends React.Component {
               ivco: '1',
               ivge: '1',
               ivper: '1',
-              improveFoodval: '1',
+              improveFoodval: '100',
               puv: '0',
               puvTRX: '0',
               valueDep: '0',
@@ -48,6 +48,7 @@ class App extends React.Component {
               allMoney: '0',
               investedMoney: '0',
               returnedMoney: '0',
+              yourCoe: '100',
               yourChicks: '0',
               yourPigs: '0',
               yourSheeps: '0',
@@ -179,7 +180,8 @@ class App extends React.Component {
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
       var result3 = player.coinsReturned;
-      console.log(result1 + "  " + result2 + "  " + result3 + "  ");
+      var result9 = player.coe;
+      console.log(result1 + "  " + result2 + "  " + result3 + "  " + "coe:  " + result9);
       var animals = [];
       animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result4 = animals[0];
@@ -191,6 +193,7 @@ class App extends React.Component {
       this.setState({allMoney: result1,
       investedMoney: result2,
       returnedMoney: result3,
+      yourCoe: result9,
       yourChicks: result4,
       yourPigs: result5,
       yourSheeps: result6,
@@ -216,7 +219,7 @@ class App extends React.Component {
           console.log('value > 0');
           await Utils.contract.deposit().send({
             shouldPollResponse: true,
-            callValue: value*1000000})
+            callValue: value*12500})
             .then(res => Swal({
                 title:'Transaction Successful',
                 type: 'success'
@@ -227,6 +230,7 @@ class App extends React.Component {
                      type: 'error'
                 }
             ));
+                        console.log("Utils:  " + !!Utils + "contract:  " + !!Utils.contract);
           this.fetchData();
           this.fetchYourData();
         // }
@@ -258,8 +262,6 @@ class App extends React.Component {
     async improveFood(per){
       console.log('in improveFood()');
       if(per > 0 && per <=5){
-        this.state.improveFoodval = this.state.improveFoodval + per;
-        if(this.state.improveFoodval + per <= 105){
         console.log('per > 0 and per <=5');
         await Utils.contract.setCoe(per).send({
             shouldPollResponse:true,
@@ -276,15 +278,6 @@ class App extends React.Component {
         ));
         console.log('maybe good');
       } else {
-        Swal(
-            {
-                 type: 'error',
-                 title: 'Oops...',
-                 text: 'Percent of money received from improving food must be < 106'
-            }
-        );
-      }
-     } else {
       Swal(
           {
                title:'Oops...',
@@ -347,13 +340,13 @@ class App extends React.Component {
               <div className = "animal tw bgcn "><div className = "invest"><div className = "about">You have to buy coins to grow animals</div><button className="improveFood button2" onClick={(event) => {event.preventDefault()
                 this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/><img className = "valCoins1" src = {Coin}/>
               <input className = "buLa2 wa" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/><div className = "TRX">TRX</div><div className = "about mt15 dop">1 TRX = 80
-                <img src = {Coin} className= "coin" /></div><p className = "about">You can pick up money that you've earned</p><input min="1" step="1" className = "buLa3 wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
+                <img src = {Coin} className= "coin" /></div><p className = "about">You can withdraw the money you've earned</p><input min="1" step="1" className = "buLa3 wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
                 <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
                     this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
 
                   <table className = "Infbo">
                     <tr className = "yourInftr1">
-                      <td className = "yitd" ><div className = "top">Your Money</div><input className = "bottom" value = {this.state.allMoney} /></td>
+                      <td className = "yitd" ><div className = "top">Your Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" value = {this.state.allMoney} /></td>
                       <td className = "yitd" ><div className = "top">Invested Money</div><input className = "bottom" value = {this.state.investedMoney}/></td>
                       <td className = "yitd" ><div className = "top">Returned Money</div><input className = "bottom" value = {this.state.returnedMoney}/></td>
                     </tr>
@@ -377,7 +370,7 @@ class App extends React.Component {
                                                                                                                     this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
                                                                                                                   <input min="1" step="1" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/><div className = "pers">%</div>
                                                                                                                 <p className = "description">If you improve nutrition, you will receive more profits. This can increase profits by up to 5 percent.</p><div className = "cost2"><div>Cost:</div>
-                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div></div>
+                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourCoe}/></div></div>
 
 
 

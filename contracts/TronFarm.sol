@@ -79,6 +79,7 @@ contract TronFarm {
     function collect(address _addr) internal {
         Player storage player = players[_addr];
         require(player.time > 0);
+        require(address(this).balance >= 0);
 
         uint hoursAdded = (now - player.time) / period;
         if (hoursAdded > 0) {
