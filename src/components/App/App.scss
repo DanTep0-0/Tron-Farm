@@ -26,6 +26,7 @@ table{
   border-radius: 100px 100px 100px 100px;
   -webkit-transition: background-color 2s, color 0.4s;
   transition: background-color 1s, color 0.4s;
+  margin: 80px 0;
 }
 .play:hover{
   background-color: #F4D03F;
@@ -40,6 +41,7 @@ table{
   -webkit-padding-start: 0;
   padding-inline-start: 0;
   margin-block-start: 0;
+  margin-top: 70px;
 }
 .abgl{
   width: 20%;
@@ -277,8 +279,7 @@ padding-left: 20px;
   background-color: #922B21;
   color: white;
   font-size: 22px;
-  position: absolute;
-  margin-top: 15px;
+  margin-top: 25px;
   transition: background-color 1s, color 0.4s;
 }
 .improveFood:hover{
@@ -287,17 +288,15 @@ padding-left: 20px;
   cursor: pointer;
 }
 .button1{
-  margin: 20px 33px 20px -115px;
   padding: 15px 30px;
 }
 .button2{
   margin: 35px 25px 35px 25px;
-  position: relative;
   padding: 5px 30px;
   float: left
 }
 .ifi {
-  margin-top: 100px;
+  margin-top: 30px;
   float: left;
   width: 300px;
   height: 50px;
@@ -438,7 +437,7 @@ padding-left: 20px;
     padding: 10px 40px;
   }
   .button1{
-    margin: 20px 33px 20px -115px;
+    margin: 30px 0;
   }
   .buy{
     height: 50px;
@@ -479,6 +478,7 @@ padding-left: 20px;
     width: 550px;
     font-size: 28px;
     height: 50px;
+    margin-top: 0;
   }
   .pers{
     margin-left: 305px;
@@ -584,9 +584,6 @@ padding-left: 20px;
     padding: 5px 20px;
     margin: 35px 25px;
     clear: none;
-  }
-  .button1{
-    margin: 20px 33px 20px -115px;
   }
   .button2{
     margin: 30px 25px 35px 40px;
