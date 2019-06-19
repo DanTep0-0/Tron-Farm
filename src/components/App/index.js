@@ -15,8 +15,8 @@ import './App.scss';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
-////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(1)
-const contractAddress = 'TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
+const contractAddress = 'TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
 ////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
 
 class App extends React.Component {
@@ -45,7 +45,7 @@ class App extends React.Component {
               puvTRX: '0',
               valueDep: '0',
               valueDepTRX: '0',
-              allMoney: '0',
+              allMoney: 0,
               investedMoney: '0',
               returnedMoney: '0',
               yourCoe: '100',
@@ -53,7 +53,8 @@ class App extends React.Component {
               yourPigs: '0',
               yourSheeps: '0',
               yourCows: '0',
-              yourGoldenChickens: '0'
+              yourGoldenChickens: '0',
+              yourTime: '0'
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -174,14 +175,17 @@ class App extends React.Component {
         Address: result5 + '...'
       });
     }
-    async fetchYourData(){
+    async fetchYourData() {
       var player = new Object();
-      await Utils.contract.collect(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
       var result3 = player.coinsReturned;
       var result9 = player.coe;
+      var result10 = player.time;
+      var contractTime = await Utils.contract.getTime().call();
+      var timePassed = contractTime - result10;
+      var hours = (timePassed / 3600) >> 0;
       console.log(result1 + "  " + result2 + "  " + result3 + "  " + "coe:  " + result9);
       var animals = [];
       animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
@@ -191,6 +195,18 @@ class App extends React.Component {
       var result7 = animals[3];
       var result8 = animals[4];
       console.log("animals: " + animals);
+
+      var profit = [25, 50, 100, 250, 1250];
+
+      var hourlyProfit = 0;
+      for (var i = 0; i < 5; i++) {
+          hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
+      }
+      result1 = Number(result1);
+      result3 = Number(result3);
+      result1 = result1 + (hourlyProfit*hours);
+      result3 = result3 + (hourlyProfit*hours);
+
       this.setState({allMoney: result1,
       investedMoney: result2,
       returnedMoney: result3,
@@ -199,9 +215,10 @@ class App extends React.Component {
       yourPigs: result5,
       yourSheeps: result6,
       yourCows: result7,
-      yourGoldenChickens: result8
-      });
-    }
+      yourGoldenChickens: result8,
+
+    });
+  }
 
     play(){
         if(!!window.tronWeb && window.tronWeb.ready){
