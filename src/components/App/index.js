@@ -347,9 +347,9 @@ class App extends React.Component {
               <div className = "animal tw bgcn "><div className = "invest"><button className="improveFood button2" onClick={(event) => {event.preventDefault()
                 this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/><img className = "valCoins1" src = {Coin}/>
               <input className = "buLa2 wa" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/><div className = "TRX">TRX</div><div className = "about">You have to buy coins to grow animals</div><div className = "about mt15 dop">1 TRX = 80
-                <img src = {Coin} className= "coin" /></div><input min="1" step="1" className = "wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
+                <img src = {Coin} className= "coin" /></div><input min="1" step="1" className = "buLa3 wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
                 <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
-                    this.pickUp(this.state.puv)}  }>Pick Up</button><input className = "wa buLa3" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
+                    this.pickUp(this.state.puv)}  }>Pick Up</button><input className = "wa buLa4" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div><p className = "about">You can pick up money that you've earned or that you haven't used</p></div></div>
 
                   <table className = "Infbo">
                     <tr className = "yourInftr1">

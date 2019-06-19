@@ -65,8 +65,19 @@ table{
   border: 2px solid black;
   border-radius: 25px;
 }
-.buLa{
-  margin-top: 50px;
+.buLa, .buLa2, .buLa3{
+  margin-top: 16px;
+  float: left;
+}
+.valCoins1, .valCoins2, .TRX{
+  float: left;
+  margin-left: 3px;
+}
+.valCoins1{
+  margin-top: 17px;
+}
+.TRX{
+  margin-top: 24px;
 }
 .pickUp{
   padding: 5px 30px;
@@ -75,7 +86,7 @@ table{
   background-color: #922B21;
   color: white;
   font-size: 22px;
-  position: relative;
+  float: right;
   margin: 20px 15px;
   transition: background-color 1s, color 0.4s;
 }
@@ -170,16 +181,16 @@ table{
   margin-top: 5px;
 }
 .about{
+  height: auto;
+  overflow: hidden;
   width: 100%;
-  height: 65px;
   font-size: 22px;
   text-align: center;
   padding: 5px;
   box-sizing: border-box;
 }
-.animal .about {
-  height: auto;
-  overflow: hidden;
+.mt15 {
+  font-size: 26px;
 }
 .youHave, .profit, .cost {
   float: left;
@@ -306,9 +317,10 @@ padding-left: 20px;
   padding: 15px 30px;
 }
 .button2{
-  margin: 20px 15px;
+  margin: 39px 25px 30px 25px;
   position: relative;
   padding: 5px 30px;
+  float: left
 }
 .ifi {
   margin-top: 100px;
