@@ -15,8 +15,8 @@ import './App.scss';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
-////////////////////////////////////////////////////////////////////////////////////
-const contractAddress = 'TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs';   /// Add your contract address here TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(1)
+const contractAddress = 'TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet
 ////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
 
 class App extends React.Component {
@@ -165,7 +165,7 @@ class App extends React.Component {
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
-      result5 = result5.slice(0, 10);
+      result5 = result5.slice(0, 12);
       this.setState({
         Players: result1,
         Invested: result2 + ' TRX',
@@ -332,9 +332,9 @@ class App extends React.Component {
             <ul className = "aboutGame">
               <li className = "abgl adm">Your Address:<p className = "num">{this.state.Address}</p></li>
               <li className = "abgl ads">Players:<p className = "num">{this.state.Players}</p></li>
+              <li className = "abgl ads">Animals:<p className = "num">{this.state.Animals}</p></li>
               <li className = "abgl adb">Invested:<p className = "num">{this.state.Invested}</p></li>
               <li className = "abgl adb">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
-              <li className = "abgl ads">Animals:<p className = "num">{this.state.Animals}</p></li>
             </ul>
             <div className = "yourInf">
               <div className = "account">Your Account</div>
