@@ -48,27 +48,6 @@ body{
 .list:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
-
-.forButton2{
-  width: 311px;
-  height: 98px;
-  margin: 0 auto 120px auto;
-}
-.play2{
-  padding: 15px 100px;
-  background: #922B21;
-  color: white;
-  font-size: 55px;
-  border-radius: 100px 100px 100px 100px;
-  -webkit-transition: background-color 2s, color 0.4s;
-  transition: background-color 1s, color 0.4s;
-}
-.play2:hover{
-  background-color: #F4D03F;
-  color: black;
-  cursor: pointer;
-}
-
 .sc {
   text-decoration: none;
   color: white;
