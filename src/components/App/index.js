@@ -54,7 +54,9 @@ class App extends React.Component {
               yourSheeps: '0',
               yourCows: '0',
               yourGoldenChickens: '0',
-              yourTime: '0'
+              yourTime: '0',
+              val: 0,
+              yourAddressMoney: 0
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -259,8 +261,22 @@ class App extends React.Component {
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
         document.querySelector('.game').classList.remove('dnone');
-        document.querySelector('.cover').classList.add('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
+        document.querySelector('.cover').classList.toggle('dnone');
+      }else{
+        if(!!window.rtonweb){
+        Swal({
+          title: "Oops...",
+          text: "You must install Tron Link",
+          type: "warning"
+        });
+      }else if(window.tronWeb.ready){
+        Swal({
+          title: "Oops...",
+          text: "TronLink is installed but you must first log in",
+          type: "warning"
+        });
+      }
       }
 
         this.fetchData();
@@ -268,71 +284,76 @@ class App extends React.Component {
     }
 
     async dep(value){
-      console.log(value);
       // if(Number.isInteger(value)){
-        console.log('in dep()');
         if(value > 0){
-          console.log('value > 0');
-          await Utils.contract.deposit().send({
-            shouldPollResponse: true,
-            callValue: value*12500})
-            .then(res => Swal({
-                title:'Transaction Successful',
-                type: 'success'
+          var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
 
-            })).catch(err => Swal(
-                {
-                     title:'Transaction Failed',
-                     type: 'error'
-                }
-            ));
-                        console.log("Utils:  " + !!Utils + "contract:  " + !!Utils.contract);
-          this.fetchData();
-          this.fetchYourData();
-        // }
-      }
+           yourBalance.then( async function(result) {
+            var totalBalance;
+            totalBalance = result;
+            if(totalBalance >= value*12500){
+            await Utils.contract.deposit().send({
+              shouldPollResponse: false,
+              callValue: value*12500});
+              Swal({
+                  title:'Transaction Send',
+                  type: 'success'
+
+              });
+
+          }else{
+          Swal({
+              title:'Make sure your value > 0',
+              type: 'error'
+
+          });
+        }
+          });
     }
+    this.fetchData();
+    this.fetchYourData();
+  }
 
     async buy(type, num){
 
         if (num > 0){
+
+          var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
+
+           yourBalance.then( async function(result) {
+
           await Utils.contract.buy(type, num).send({
-              shouldPollResponse:true,
+              shouldPollResponse:false,
               callValue:0
-          }).then(res => Swal({
-              title:'Transaction Successful',
+          });
+          Swal({
+              title:'Transaction Send',
               type: 'success'
 
-          })).catch(err => Swal(
-              {
-                   title:'Transaction Failed',
-                   type: 'error'
-              }
-          ));
-          this.fetchData();
-          this.fetchYourData();
-          console.log('type: ', type, '  num: ', num);
+          })
+          });
         }
+        this.fetchData();
+        this.fetchYourData();
     }
 
     async improveFood(per){
-      console.log('in improveFood()');
       if(per > 0 && per <=5){
-        console.log('per > 0 and per <=5');
+
+        var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
+
+         yourBalance.then( async function(result) {
+
         await Utils.contract.setCoe(per).send({
-            shouldPollResponse:true,
+            shouldPollResponse:false,
             callValue:0
-        }).then(res => Swal({
-            title:'Transaction Successful',
+        });
+        Swal({
+            title:'Transaction Send',
             type: 'success'
 
-        })).catch(err => Swal(
-            {
-                 title:'Transaction Failed',
-                 type: 'error'
-            }
-        ));
-        console.log('maybe good');
+        })
+        });
       } else {
       Swal(
           {
@@ -341,44 +362,55 @@ class App extends React.Component {
                type: 'error'
           }
        );
+
      }
      this.fetchYourData();
     }
 
     async pickUp(coins){
-      console.log(coins);
+
+      var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
+
+       yourBalance.then( async function(result) {
+
       if(coins > 0){
         await Utils.contract.withdraw(coins).send({
-          shouldPollResponse: true,
+          shouldPollResponse: false,
           callValue: 0
-        }).then(res => Swal({
-              title:'Transaction Successful',
-              type: 'success'
-            })).catch(err => Swal(
-              {
-                   title:'Transaction Failed',
-                   text: 'Make sure you pasted number of coins that you have',
-                   type: 'error'
-              }
-          ));
+        });
+        Swal({
+            title:'Transaction Send',
+            type: 'success'
+
+        })
 
       }
+
+});
+
       this.fetchYourData();
     }
 
-
-
+    visible(){
+      if(Number(this.state.val) == 0 ){
+      document.querySelector('.cover').classList.remove('dnone');
+    }
+      this.state.val = 5;
+    }
 
 
         render() {
-        if(!this.state.tronWeb.installed)
+        if(!this.state.tronWeb.installed){
+          document.querySelector('.cover').classList.add('dnone');
             return <TronLinkGuide />;
-
-        if(!this.state.tronWeb.loggedIn)
+        }
+        if(!this.state.tronWeb.loggedIn){
+          document.querySelector('.cover').classList.add('dnone');
             return <TronLinkGuide installed />;
-
+        }
         return (
           <div className = "allReact">
+            {this.visible()}
           <div className = "forButton">
             <button className="play" onClick={(event) => {event.preventDefault()
                                                                this.play()}  }>Play</button>

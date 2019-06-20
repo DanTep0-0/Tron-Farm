@@ -318,10 +318,7 @@ padding-left: 20px;
   float: left;
 }
 
-//////////////////////////////////////////////////////////////////////////
-.dnone{
-  display: none;
-}
+
 
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
@@ -662,4 +659,16 @@ padding-left: 20px;
   .animal, .Infbo {
     margin-left: 60%;
   }
+}
+.forQA{
+  overflow: hidden;
+}
+
+//////////////////////////////////////////////////////////////////////////
+.dnone{
+  display: none;
+}
+#dop{
+  height: 100%;
+  width: 100%;
 }
