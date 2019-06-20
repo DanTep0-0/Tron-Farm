@@ -11,13 +11,6 @@
   url('fonts/BigJohnPRO-Regular.woff') format('woff');
 }
 
-@font-face{
-  font-family: 'Rochester';
-  src: url('fonts/Rochester.woff') format('woff'),
-  url('fonts/Rochester.ttf') format('ttf'),
-  url('fonts/Rochester.eot') format('eot');
-}
-
 body{
   background-image: url('../bg.jpg');
   background-position: center 0;
@@ -25,11 +18,6 @@ body{
   background-size: cover;
   margin-top: 70px;
 }
-/* @media (max-width: 2400px) {
-  body{
-    background-size: auto;
-    }
-  } */
 
 
 
@@ -132,7 +120,7 @@ body{
   .qna, .aboutFarm{
     width: 85%;
     height: auto;
-    background: rgba(255, 248, 234, 0.6);
+    background: rgba(255, 255, 255, 0.6);
     margin: 0 auto;
     margin-bottom: 150px;
     box-sizing: border-box;
