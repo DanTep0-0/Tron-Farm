@@ -9,6 +9,7 @@ change(){
   document.querySelector('.cover').classList.remove('dnone');
   document.querySelector('.forButton').classList.remove('dnone');
   document.querySelector('.game').classList.add('dnone');
+  document.querySelector('.divForLogo').classList.remove('dnone');
 
 
 
@@ -27,6 +28,7 @@ change(){
   document.querySelector('.cover').classList.remove('dnone');
   document.querySelector('.forButton').classList.remove('dnone');
   document.querySelector('.game').classList.add('dnone');
+  document.querySelector('.divForLogo').classList.remove('dnone');
 
 
 
