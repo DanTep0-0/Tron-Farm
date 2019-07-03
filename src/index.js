@@ -9,6 +9,7 @@ change(){
   document.querySelector('.cover').classList.remove('dnone');
   document.querySelector('.forButton').classList.remove('dnone');
   document.querySelector('.game').classList.add('dnone');
+  document.querySelector('.divForLogo').classList.remove('dnone');
 
 
 
@@ -16,7 +17,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a class="sc" href="#">
+      this.change()}}><a className="sc" href="#">
       <p>Q&A</p></a></div>
     );
   }
@@ -27,6 +28,7 @@ change(){
   document.querySelector('.cover').classList.remove('dnone');
   document.querySelector('.forButton').classList.remove('dnone');
   document.querySelector('.game').classList.add('dnone');
+  document.querySelector('.divForLogo').classList.remove('dnone');
 
 
 
@@ -34,7 +36,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a class="sc" href="#"><p>About game</p></a></div>
+      this.change()}}><a className="sc" href="#"><p>About game</p></a></div>
     );
   }
 }
