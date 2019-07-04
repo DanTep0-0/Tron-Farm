@@ -670,7 +670,8 @@ padding-left: 20px;
   }
 }
 .forQA{
-  overflow: hidden;
+  height: 70px;
+  width: 100%;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -680,4 +681,10 @@ padding-left: 20px;
 #dop{
   height: 100%;
   width: 100%;
+}
+.sc{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 70px;
 }
