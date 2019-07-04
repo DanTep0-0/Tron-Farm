@@ -17,7 +17,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a class="sc" href="#">
+      this.change()}}><a className="sc" href="#">
       <p>Q&A</p></a></div>
     );
   }
@@ -36,7 +36,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a class="sc" href="#"><p>About game</p></a></div>
+      this.change()}}><a className="sc" href="#"><p>About game</p></a></div>
     );
   }
 }
