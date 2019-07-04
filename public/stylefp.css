@@ -15,14 +15,14 @@ html{
 }
 
 body{
-  /* background-image: url('../bg.jpg');
+  background-image: url('../bg.jpg');
   background-position: center 0;
   background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover;
 /* background: #922B2185;
 #743e0575 */
   margin-top: 70px;
-  background: #743e0566;
+  /* background: #743e0566; */
 }
 
 
@@ -53,8 +53,8 @@ body{
   list-style: none;
   position: relative;
 }
-.menuFixed .list:hover {
-  background-color: rgba(0,0,0,0.7);
+.menuFixed .list:hover, .menuBottom a:hover {
+  background-color: rgba(0,0,0,0.5);
 }
 .link{
   display: block;
@@ -138,9 +138,6 @@ body{
   height: 70px;
   background: rgba(0,0,0,0.5);
 }
-.menuBottom a:hover {
-  background-color: rgba(0,0,0,0.3);
-}
 .fab{
   color: white;
   font-size: 30px;
@@ -213,7 +210,7 @@ body{
   #qna, #aboutFarm{
     width: 85%;
     height: auto;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     margin: 0 auto;
     margin-bottom: 120px;
     box-sizing: border-box;

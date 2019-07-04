@@ -66,12 +66,13 @@ table{
   text-align: center;
   font-size: 24px;
   padding: 5px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.4);
   color: white;
   width: 200px;
   margin: 0 0 15px 557px;
   border: 2px solid black;
   border-radius: 25px;
+  font-family: "BigJohn";
 }
 .buLa, .buLa2, .buLa3, .buLa4{
   margin-top: 13px;
@@ -138,15 +139,15 @@ table{
   height: auto;
 }
 .yourInf{
-  margin-left: calc(calc(100% - 1332px)/2);
+  margin-left: calc(calc(100% - 1362px)/2);
   margin-top: 50px;
   height: auto;
 }
 .allani{
   height: auto;
   overflow: hidden;
-  margin-left: calc(calc(100% - 1332px)/2);
-  margin-right: calc(calc(100% - 1332px)/2);
+  margin-left: calc(calc(100% - 1362px)/2);
+  margin-right: calc(calc(100% - 1362px)/2);
   clear: both;
 }
 .toInvest{
@@ -166,9 +167,10 @@ table{
   height: 450px;
   width: 300px;
   margin: 70px 70px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   float: left;
-  border: 2px solid #ffffff;
+  // border: 2px solid #ffffff;
+  border: 6px solid #ffffff;
   text-align: center;
 }
 .goldenEgg{
@@ -210,7 +212,7 @@ table{
 }
 .mt15 {
   font-size: 26px;
-  border: 2px solid white;
+  border: 2px solid #919191;
 }
 .youHave, .profit, .cost, .cost2 {
   float: left;
@@ -308,7 +310,7 @@ padding-left: 20px;
   width: 300px;
   height: 50px;
   font-size: 28px;
-  border: 2px solid white;
+  border: 2px solid #919191;
   text-align: center;
   padding: 0;
   background: none;
@@ -440,6 +442,9 @@ padding-left: 20px;
   .animal, .food, .yitd {
     width: 550px;
   }
+  .animal{
+    background-color: rgba(255, 255, 255, 0.8);
+  }
   .about{
     padding: 5px 50px;
     width: 550px;
@@ -495,6 +500,9 @@ padding-left: 20px;
     font-size: 28px;
     height: 50px;
     margin-top: 0;
+  }
+  .ifi, .mt15{
+    border: 2px solid #922B21;
   }
   .pers{
     margin-left: 305px;
