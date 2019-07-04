@@ -457,7 +457,7 @@ class App extends React.Component {
                                                                                                                     this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
                                                                                                                   <input min="1" step="1" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/><div className = "pers">%</div>
                                                                                                                 <p className = "description">If you improve nutrition, you will receive more profits. This can increase profits by up to 5 percent.</p><div className = "cost2"><div>Cost:</div>
-                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourCoe}/>%</div></div>
+                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourCoe}/><p className = "Pers">%</p></div></div>
 
 
 
@@ -482,7 +482,7 @@ class App extends React.Component {
 class ButtonPlay extends React.Component {
   render(){return(
     <div className = "forButton inTop">
-      <button className="play" onClick={(event) => {event.preventDefault()
+      <button className="play play2" onClick={(event) => {event.preventDefault()
                                                          this.play()}  }>Play</button>
     </div>
     );
