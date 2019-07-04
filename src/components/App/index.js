@@ -58,7 +58,8 @@ class App extends React.Component {
               yourTime: '0',
               val: 0,
               yourAddressMoney: 0,
-              timer: ''
+              timer: '',
+              timer2: ''
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -164,13 +165,30 @@ class App extends React.Component {
         this.state.timer = setInterval(() => {
             this.checkForClick();
           }, 200);
+
     }
 
     checkForClick(){
       if(isClicked){
-        this.play();
         clearInterval(this.state.timer);
+        this.play();
+        const timer = setTimeout(() => {
+          this.state.timer2 = setInterval(() => {
+              this.checkForLogo();
+            }, 1000);
+          }, 300);
+
+	     }
       }
+
+    checkForLogo(){
+      if (!document.querySelector('.divForLogo').classList.contains('dnone')) {
+        clearInterval(this.state.timer2);
+        isClicked = false;
+        this.state.timer = setInterval(() => {
+            this.checkForClick();
+          }, 200);
+	     }
     }
 
     async ohrDop(){
@@ -406,6 +424,8 @@ class App extends React.Component {
     visible(){
       if(Number(this.state.val) == 0 ){
       document.querySelector('.cover').classList.remove('dnone');
+      document.querySelector('.BTP').classList.remove('dnone');
+      document.querySelector('.menuBottom').classList.remove('dnone');
     }
       this.state.val = 5;
     }
@@ -414,10 +434,14 @@ class App extends React.Component {
         render() {
         if(!this.state.tronWeb.installed){
           document.querySelector('.cover').classList.add('dnone');
+          document.querySelector('.BTP').classList.add('dnone');
+          document.querySelector('.menuBottom').classList.add('dnone');
             return <TronLinkGuide />;
         }
         if(!this.state.tronWeb.loggedIn){
           document.querySelector('.cover').classList.add('dnone');
+          document.querySelector('.BTP').classList.add('dnone');
+          document.querySelector('.menuBottom').classList.add('dnone');
             return <TronLinkGuide installed />;
         }
         return (

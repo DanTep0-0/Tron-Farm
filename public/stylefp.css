@@ -1,3 +1,6 @@
+html{
+  scroll-behavior: smooth;
+}
 *{
   font-family: sans-serif;
   margin: 0;
@@ -66,7 +69,7 @@ body{
 .sc:visited {
   color: white;
 }
-.menu p, .email{
+.menu p, #emailAdress{
   font-family: 'BigJohn';
 }
 .divForLogo{
