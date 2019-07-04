@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import Classes from './components/App';
 import './components/App/App.scss';
 
 class Dop extends React.Component {
@@ -41,8 +41,9 @@ change(){
   }
 }
 
+var App = Classes.App;
+var ButtonPlay = Classes.ButtonPlay;
 
-ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<Dop />, document.getElementById('dop'));
 ReactDOM.render(<Dop2 />, document.getElementById('dop2'));
