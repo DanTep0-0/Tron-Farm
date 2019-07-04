@@ -37,12 +37,12 @@ body{
   z-index: 1;
 }
 .menu {
-  width: 48vw;
+  width: 60vw;
   margin: 0 auto;
   overflow: hidden;
 }
 .list {
-  width: 16vw;
+  width: 20vw;
   height: 70px;
   float: left;
   text-align: center;
@@ -59,7 +59,7 @@ body{
   width: 100%;
 }
 
-.sc {
+.sc, .contact{
   text-decoration: none;
   color: white;
   font-size: 24px;
@@ -73,7 +73,7 @@ body{
 .divForLogo{
   height: auto;
   text-align: center;
-  margin: 100px auto 80px auto;
+  margin: 100px auto 20px auto;
   padding: 50px;
 }
 .divForLogo:hover{
@@ -134,6 +134,13 @@ body{
 .menuBottom .list:hover {
   background-color: rgba(0,0,0,0.3);
 }
+.fab{
+  color: white;
+  font-size: 30px;
+}
+.contact, .sc{
+  display: inline-block;
+}
 .buttonCopy{
   cursor: pointer;
   background-color: #339af0;
@@ -142,10 +149,12 @@ body{
   width: 30px;
   border: none;
   border-radius: 15px;
+  display: inline-block;
 }
 .buttonCopy:hover{
   background-color: #228be6;
 }
+
 
 
 /* ------------------------------DANYA'S PART------------------------------- */
@@ -154,12 +163,12 @@ body{
     height: auto;
     background: rgba(255, 255, 255, 0.6);
     margin: 0 auto;
-    margin-bottom: 150px;
+    margin-bottom: 120px;
     box-sizing: border-box;
     padding: 50px 0;
   }
   #scQna, #scAboutFarm{
-    height: 0;
+
   }
   .container, .qnaD, .tronFarmLogo{
     width: 800px;
@@ -223,15 +232,24 @@ hr{
 
 
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .menu{
-    width: 60vw;
+    width: 75vw;
   }
   .list{
-    width: 20vw;
+    width: 25vw;
   }
-  .sc{
-    font-size: 18px;
+}
+
+@media (max-width: 1050px) {
+  .menu{
+    width: 90vw;
+  }
+  .list{
+    width: 30vw;
+  }
+  .sc, .contact{
+    font-size: 22px;
   }
   .container, .qnaD, .tronFarmLogo{
     width: 500px;
@@ -262,18 +280,14 @@ hr{
   .aboutF img, .aboutS img, .textField, .textfield {
     clear:both;
   }
+  #qna, #aboutFarm{
+    margin-bottom: 50px;
+  }
 }
 
 @media (max-width: 700px) {
   .tronFarmLogo, .container, .qnaD{
     width: 350px;
-  }
-  .menu{
-    width: 75vw;
-  }
-  .list{
-    width: 25vw;
-    font-size: 20px;
   }
   .textField h1, .textfield h1, .Qname{
     font-size: 34px;
@@ -284,37 +298,24 @@ hr{
   .cyf, .es, .txt p, .answer{
     font-size: 24px;
   }
-  #qna, #aboutFarm{
-    margin-bottom: 120px;
-  }
 }
 
 @media (max-width: 550px) {
-  .menu{
-    width: 90vw;
-  }
-  .list{
-    width: 30vw;
+  .sc, .contact{
+    font-size: 18px;
   }
   .tronFarmLogo, .container, .qnaD{
     width: 250px;
   }
   .divForLogo{
-    padding: 50px 0 0 0;
+    padding: 50px 0 30px 0;
   }
   .cyf, .es, .txt p, .answer{
     font-size: 22px;
   }
-  #qna, #aboutFarm{
-    margin-bottom: 80px;
-  }
 }
 
 @media (max-width: 480px) {
-  .list{
-    font-size: 16px;
-  }
-}
-.dnone{
-  display: none;
+  .dnone{
+    display: none;
 }
