@@ -52,6 +52,12 @@ body{
 .list:hover {
   background-color: rgba(0,0,0,0.7);
 }
+.link{
+  display: block;
+  height: 70px;
+  width: 100%;
+}
+
 .sc {
   text-decoration: none;
   color: white;
@@ -126,6 +132,10 @@ body{
 }
 .menuBottom .list:hover {
   background-color: rgba(0,0,0,0.3);
+}
+.buttonCopy{
+  cursor: pointer;
+
 }
 
 
