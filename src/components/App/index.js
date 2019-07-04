@@ -18,6 +18,7 @@ const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
 const contractAddress = 'TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
 ////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
+var isClicked = false;
 
 class App extends React.Component {
 
@@ -56,7 +57,8 @@ class App extends React.Component {
               yourGoldenChickens: '0',
               yourTime: '0',
               val: 0,
-              yourAddressMoney: 0
+              yourAddressMoney: 0,
+              timer: ''
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -159,7 +161,16 @@ class App extends React.Component {
 
         await Utils.setTronWeb(window.tronWeb, contractAddress);
 
+        this.state.timer = setInterval(() => {
+            this.checkForClick();
+          }, 200);
+    }
 
+    checkForClick(){
+      if(isClicked){
+        this.play();
+        clearInterval(this.state.timer);
+      }
     }
 
     async ohrDop(){
@@ -260,11 +271,12 @@ class App extends React.Component {
     play(){
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
+        document.querySelector('.BTP').classList.add('dnone');
         document.querySelector('.game').classList.remove('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
         document.querySelector('.cover').classList.toggle('dnone');
       }else{
-        if(!!window.rtonweb){
+        if(!!window.tronweb){
         Swal({
           title: "Oops...",
           text: "You must install Tron Link",
@@ -457,7 +469,7 @@ class App extends React.Component {
                                                                                                                     this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
                                                                                                                   <input min="1" step="1" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/><div className = "pers">%</div>
                                                                                                                 <p className = "description">If you improve nutrition, you will receive more profits. This can increase profits by up to 5 percent.</p><div className = "cost2"><div>Cost:</div>
-                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourCoe}/>%</div></div>
+                                                                                                                <input className = "costI2" value = "3000" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourCoe}/><p className = "Pers">%</p></div></div>
 
 
 
@@ -480,10 +492,15 @@ class App extends React.Component {
 }
 
 class ButtonPlay extends React.Component {
+
+  click(){
+    isClicked = true;
+  }
+
   render(){return(
-    <div className = "forButton inTop">
-      <button className="play" onClick={(event) => {event.preventDefault()
-                                                         this.play()}  }>Play</button>
+    <div className = "forButton2">
+      <button className="play play2" onClick={(event) => {event.preventDefault()
+                                                         this.click()}  }>Play</button>
     </div>
     );
   }
