@@ -51,8 +51,9 @@ body{
   text-align: center;
   line-height: 70px;
   list-style: none;
+  position: relative;
 }
-.list:hover {
+.menuFixed .list:hover {
   background-color: rgba(0,0,0,0.7);
 }
 .link{
@@ -65,6 +66,7 @@ body{
   text-decoration: none;
   color: white;
   font-size: 24px;
+  cursor: pointer;
 }
 .sc:visited {
   color: white;
@@ -136,7 +138,7 @@ body{
   height: 70px;
   background: rgba(0,0,0,0.5);
 }
-.menuBottom .list:hover {
+.menuBottom a:hover {
   background-color: rgba(0,0,0,0.3);
 }
 .fab{
@@ -179,24 +181,25 @@ body{
   color: white;
   text-align: center;
   border-radius: 3px;
-  padding: 10px;
+  padding: 10px 15px;
   position: absolute;
   z-index: 1;
-  bottom: 60px;
-  right: 23.5vw;
+  bottom: 17px;
+  right: 40%;
   opacity: 0;
   transition: opacity 0.5s;
   font-size: 14px;
+  width: 120px;
 }
 
 .toolTipText::after {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 80%;
-  border-width: 5px;
+  top: 35%;
+  left: 100%;
+  border-width: 8px;
   border-style: solid;
-  border-color: #333 transparent transparent transparent;
+  border-color: transparent transparent transparent #333;
 }
 
 .buttonCopy:hover .toolTipText{
@@ -291,13 +294,13 @@ hr{
 
 @media (max-width: 1550px) {
   #emailAdress{
-  font-size: 16px;
-  width: auto;
+    font-size: 16px;
+    width: 200px;
   }
 }
 @media (max-width: 1300px) {
   #emailAdress{
-  font-size: 14px;
+    width: 175px;
   }
 }
 @media (max-width: 1200px) {
@@ -308,7 +311,8 @@ hr{
     width: 25vw;
   }
   #emailAdress{
-  font-size: 16px;
+    font-size: 16px;
+    width: 200px;
   }
 }
 @media (max-width: 1050px) {
@@ -354,12 +358,12 @@ hr{
     margin-bottom: 50px;
   }
   #emailAdress{
-  font-size: 18px;
+    font-size: 18px;
   }
 }
 @media (max-width: 950px) {
   #emailAdress{
-  font-size: 16px;
+    width: 180px;
   }
 }
 @media (max-width: 800px) {
