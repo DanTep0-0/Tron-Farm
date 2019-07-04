@@ -48,6 +48,7 @@ body{
   text-align: center;
   line-height: 70px;
   list-style: none;
+  position: relative;
 }
 .list:hover {
   background-color: rgba(0,0,0,0.7);
@@ -135,7 +136,16 @@ body{
 }
 .buttonCopy{
   cursor: pointer;
-
+  background-color: #339af0;
+  color: white;
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 15px;
+  font-family: fontawesome;
+}
+.buttonCopy:hover{
+  background-color: #228be6;
 }
 
 
@@ -148,6 +158,9 @@ body{
     margin-bottom: 150px;
     box-sizing: border-box;
     padding: 50px 0;
+  }
+  .scQna, .scAboutFarm{
+    height: 0;
   }
   .container, .qnaD, .tronFarmLogo{
     width: 800px;
