@@ -44,6 +44,7 @@ change(){
 var App = Classes.App;
 var ButtonPlay = Classes.ButtonPlay;
 
+ReactDOM.render(<ButtonPlay />, document.getElementById('ButtonPlay'));
 ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(<Dop />, document.getElementById('dop'));
 ReactDOM.render(<Dop2 />, document.getElementById('dop2'));

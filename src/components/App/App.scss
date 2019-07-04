@@ -16,6 +16,11 @@ table{
   height: 150px;
   margin: 30px auto 130px auto;
 }
+.forButton2{
+  width: 320px;
+  height: 150px;
+  margin: 30px auto 40px auto;
+}
 .play{
   padding: 15px 100px;
   background: #922B21;
@@ -24,6 +29,9 @@ table{
   border-radius: 100px 100px 100px 100px;
   -webkit-transition: background-color 2s, color 0.4s;
   transition: background-color 1s, color 0.4s;
+}
+.play2{
+  padding: 10px 80px;
 }
 .play:hover{
   background-color: #F4D03F;
