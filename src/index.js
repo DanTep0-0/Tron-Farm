@@ -17,7 +17,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a className="sc" href="#">
+      this.change()}}><a className="sc" href="">
       <p>Q&A</p></a></div>
     );
   }

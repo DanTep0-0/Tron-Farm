@@ -1,7 +1,7 @@
 .game{
-  background: url('bg.jpg');
-  background-position: center 0;
-  background-size: cover;
+  // background: url('bg.jpg');
+  // background-position: center 0;
+  // background-size: cover;
 }
 p{
   padding: 0;
@@ -14,7 +14,7 @@ table{
 .forButton{
   width: 360px;
   height: 150px;
-  margin: 30px auto 200px auto;
+  margin: 30px auto 130px auto;
 }
 .forButton2{
   width: 320px;
@@ -171,6 +171,9 @@ table{
   float: left;
   border: 2px solid #ffffff;
   text-align: center;
+}
+.goldenEgg{
+  margin-bottom: 140px;
 }
 .tw{
   margin: 35px 70px 45px 70px;
