@@ -142,7 +142,6 @@ body{
   width: 30px;
   border: none;
   border-radius: 15px;
-  font-family: fontawesome;
 }
 .buttonCopy:hover{
   background-color: #228be6;
@@ -159,7 +158,7 @@ body{
     box-sizing: border-box;
     padding: 50px 0;
   }
-  .scQna, .scAboutFarm{
+  #scQna, #scAboutFarm{
     height: 0;
   }
   .container, .qnaD, .tronFarmLogo{
