@@ -18,6 +18,7 @@ const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
 const contractAddress = 'TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
 ////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
+var isClicked = false;
 
 class App extends React.Component {
 
@@ -56,7 +57,8 @@ class App extends React.Component {
               yourGoldenChickens: '0',
               yourTime: '0',
               val: 0,
-              yourAddressMoney: 0
+              yourAddressMoney: 0,
+              timer: ''
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -159,7 +161,16 @@ class App extends React.Component {
 
         await Utils.setTronWeb(window.tronWeb, contractAddress);
 
+        this.state.timer = setInterval(() => {
+            this.checkForClick();
+          }, 200);
+    }
 
+    checkForClick(){
+      if(isClicked){
+        this.play();
+        clearInterval(this.state.timer);
+      }
     }
 
     async ohrDop(){
@@ -260,11 +271,12 @@ class App extends React.Component {
     play(){
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
+        document.querySelector('.BTP').classList.add('dnone');
         document.querySelector('.game').classList.remove('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
         document.querySelector('.cover').classList.toggle('dnone');
       }else{
-        if(!!window.rtonweb){
+        if(!!window.tronweb){
         Swal({
           title: "Oops...",
           text: "You must install Tron Link",
@@ -480,10 +492,15 @@ class App extends React.Component {
 }
 
 class ButtonPlay extends React.Component {
+
+  click(){
+    isClicked = true;
+  }
+
   render(){return(
-    <div className = "forButton inTop">
+    <div className = "forButton2">
       <button className="play play2" onClick={(event) => {event.preventDefault()
-                                                         this.play()}  }>Play</button>
+                                                         this.click()}  }>Play</button>
     </div>
     );
   }
