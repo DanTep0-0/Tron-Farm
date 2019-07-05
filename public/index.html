@@ -118,6 +118,8 @@
       </div>
     </div>
 
+    <div class="bottomDiv">
+
       <div id="root"></div>
 
       <div class="menuBottom">
@@ -127,11 +129,19 @@
           <li class="list"><a class="sc" href="https://tronscan.org/#/contract/TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN">
             <p>Smart-contract</p></a></li>
           <li class="list">
-            <p class="contact" id="emailAdress">Gmail adress&nbsp;</p>
-            <button onclick="copyFunction()" class="buttonCopy"><i class="fas fa-clipboard"></i></button>
+            <input type="text" id="emailAdress" value="sofiia.teplova@gmail.com">
+
+            <div class="toolTip">
+              <button onclick="copyFunction()" class="buttonCopy" onmouseout="outFunction()">
+                <span class="toolTipText" id="myToolTip">Copy email adress</span>
+                <i class="fas fa-clipboard"></i>
+              </button>
+            </div>
           </li>
         </ul>
       </div>
-      <script type="text/javascript"></script>
+    </div>
+
+    <script type="text/javascript"></script>
   </body>
 </html>

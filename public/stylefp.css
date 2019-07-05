@@ -15,14 +15,14 @@ html{
 }
 
 body{
-  /* background-image: url('../bg.jpg');
+  background-image: url('../bg.jpg');
   background-position: center 0;
   background-repeat: no-repeat;
-  background-size: cover; */
+  background-size: cover;
 /* background: #922B2185;
 #743e0575 */
   margin-top: 70px;
-  background: #743e0566;
+  /* background: #743e0566; */
 }
 
 
@@ -52,10 +52,9 @@ body{
   line-height: 70px;
   list-style: none;
   position: relative;
-  cursor: pointer;
 }
-.list:hover {
-  background-color: rgba(0,0,0,0.7);
+.menuFixed .list:hover, .menuBottom a:hover {
+  background-color: rgba(0,0,0,0.5);
 }
 .link{
   display: block;
@@ -67,11 +66,12 @@ body{
   text-decoration: none;
   color: white;
   font-size: 24px;
+  cursor: pointer;
 }
 .sc:visited {
   color: white;
 }
-.menu p{
+.menu p, #emailAdress{
   font-family: 'BigJohn';
 }
 .divForLogo{
@@ -130,13 +130,13 @@ body{
   font-size: 24px;
   color: #6D251D;
 }
+.bottomDiv{
+  position: relative;
+}
 .menuBottom{
   width: 100%;
   height: 70px;
   background: rgba(0,0,0,0.5);
-}
-.menuBottom .list:hover {
-  background-color: rgba(0,0,0,0.3);
 }
 .fab{
   color: white;
@@ -144,6 +144,14 @@ body{
 }
 .contact, .sc{
   display: inline-block;
+}
+#emailAdress{
+  font-size: 18px;
+  border-radius: 3px;
+  border: none;
+  padding: 5px;
+  width: 250px;
+  /* background: rgba(0, 0, 0, 0); */
 }
 .buttonCopy{
   cursor: pointer;
@@ -158,14 +166,51 @@ body{
 .buttonCopy:hover{
   background-color: #228be6;
 }
+.buttonCopy:focus{
+  outline: 0px;
+}
+.toolTip{
+  display: inline-block;
+}
+.toolTipText{
+  visibility: hidden;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  border-radius: 3px;
+  padding: 10px 15px;
+  position: absolute;
+  z-index: 1;
+  bottom: 17px;
+  right: 40%;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-size: 14px;
+  width: 120px;
+}
 
+.toolTipText::after {
+  content: "";
+  position: absolute;
+  top: 35%;
+  left: 100%;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}
+
+.buttonCopy:hover .toolTipText{
+  opacity: 1;
+  visibility: visible;
+}
 
 
 /* ------------------------------DANYA'S PART------------------------------- */
+
   #qna, #aboutFarm{
     width: 85%;
     height: auto;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.8);
     margin: 0 auto;
     margin-bottom: 120px;
     box-sizing: border-box;
@@ -233,9 +278,28 @@ hr{
 
 
 /* ---------------------------RESPONSIVE------------------------------- */
+/* @media (max-width: 2350px) {
+  .toolTipText{
+    right: 23vw;
+  }
+}
+@media (max-width: 2100px) {
+  .toolTipText{
+    right: 22.5vw;
+  }
+} */
 
-
-
+@media (max-width: 1550px) {
+  #emailAdress{
+    font-size: 16px;
+    width: 200px;
+  }
+}
+@media (max-width: 1300px) {
+  #emailAdress{
+    width: 175px;
+  }
+}
 @media (max-width: 1200px) {
   .menu{
     width: 75vw;
@@ -243,8 +307,11 @@ hr{
   .list{
     width: 25vw;
   }
+  #emailAdress{
+    font-size: 16px;
+    width: 200px;
+  }
 }
-
 @media (max-width: 1050px) {
   .menu{
     width: 90vw;
@@ -287,8 +354,20 @@ hr{
   #qna, #aboutFarm{
     margin-bottom: 50px;
   }
+  #emailAdress{
+    font-size: 18px;
+  }
 }
-
+@media (max-width: 950px) {
+  #emailAdress{
+    width: 180px;
+  }
+}
+@media (max-width: 800px) {
+  #emailAdress{
+  width: 150px;
+  }
+}
 @media (max-width: 700px) {
   .tronFarmLogo, .container, .qnaD{
     width: 350px;
@@ -301,6 +380,9 @@ hr{
   }
   .cyf, .es, .txt p, .answer{
     font-size: 24px;
+  }
+  #emailAdress{
+  width: 110px;
   }
 }
 
@@ -316,6 +398,9 @@ hr{
   }
   .cyf, .es, .txt p, .answer{
     font-size: 22px;
+  }
+  #emailAdress{
+  width: 90px;
   }
 }
 
