@@ -59,7 +59,8 @@ class App extends React.Component {
               val: 0,
               yourAddressMoney: 0,
               timer: '',
-              timer2: ''
+              timer2: '',
+              TronLinkValue: ''
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -81,6 +82,9 @@ class App extends React.Component {
                 //
                 // <button className="btn-roll" onClick={(event) => {event.preventDefault()
                 //                     this.roll()}  }><i className="fas fa-dice fa-5x"></i></button>
+                this.state.timer = setInterval(() => {
+                    this.checkForClick();
+                  }, 200);
     }
 
     async componentDidMount() {
@@ -161,17 +165,19 @@ class App extends React.Component {
         }
 
         await Utils.setTronWeb(window.tronWeb, contractAddress);
-
-        this.state.timer = setInterval(() => {
-            this.checkForClick();
-          }, 200);
-
     }
 
     checkForClick(){
       if(isClicked){
         clearInterval(this.state.timer);
-        this.play();
+        if(this.state.TronLinkValue == 1 || this.state.TronLinkValue == 2){
+          if(!!window.tronWeb && window.tronWeb.ready){
+            this.setState({TronLinkValue: 0});
+              this.play();
+          }
+        }else{
+          this.play();
+        }
         const timer = setTimeout(() => {
           this.state.timer2 = setInterval(() => {
               this.checkForLogo();
@@ -184,7 +190,7 @@ class App extends React.Component {
     checkForLogo(){
       if (!document.querySelector('.divForLogo').classList.contains('dnone')) {
         clearInterval(this.state.timer2);
-        isClicked = false;
+        if(!this.state.TronLinkValue == 1 || !this.state.TronLinkValue == 2){isClicked = false;}
         this.state.timer = setInterval(() => {
             this.checkForClick();
           }, 200);
@@ -292,25 +298,22 @@ class App extends React.Component {
         document.querySelector('.BTP').classList.add('dnone');
         document.querySelector('.game').classList.remove('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
-        document.querySelector('.cover').classList.toggle('dnone');
+        document.querySelector('.cover').classList.add('dnone');
       }else{
-        if(!!window.tronweb){
-        Swal({
-          title: "Oops...",
-          text: "You must install Tron Link",
-          type: "warning"
-        });
-      }else if(window.tronWeb.ready){
-        Swal({
-          title: "Oops...",
-          text: "TronLink is installed but you must first log in",
-          type: "warning"
-        });
+        if(!!window.tronWeb){
+          this.setState({TronLinkValue: 2});
+          isClicked = true;
+          return;
+      }else {
+        this.setState({TronLinkValue: 1});
+        isClicked = true;
+        return;
       }
       }
 
         this.fetchData();
         this.fetchYourData();
+        isClicked = true;
     }
 
     async dep(value){
@@ -432,13 +435,13 @@ class App extends React.Component {
 
 
         render() {
-        if(!this.state.tronWeb.installed){
+        if(Number(this.state.TronLinkValue) === 1){
           document.querySelector('.cover').classList.add('dnone');
           document.querySelector('.BTP').classList.add('dnone');
           document.querySelector('.menuBottom').classList.add('dnone');
             return <TronLinkGuide />;
         }
-        if(!this.state.tronWeb.loggedIn){
+        if(Number(this.state.TronLinkValue) === 2){
           document.querySelector('.cover').classList.add('dnone');
           document.querySelector('.BTP').classList.add('dnone');
           document.querySelector('.menuBottom').classList.add('dnone');
