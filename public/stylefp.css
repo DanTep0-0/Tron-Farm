@@ -19,9 +19,8 @@ body{
   background-position: center 0;
   background-repeat: no-repeat;
   background-size: cover;
-/* background: #922B2185;
-#743e0575 */
   margin-top: 70px;
+  min-height: 87vh;
   /* background: #743e0566; */
 }
 
@@ -55,6 +54,7 @@ body{
 }
 .menuFixed .list:hover, .menuBottom a:hover {
   background-color: rgba(0,0,0,0.5);
+  transform: translateY(-2px);
 }
 .link{
   display: block;
@@ -79,10 +79,14 @@ body{
   text-align: center;
   margin: 100px auto 20px auto;
   padding: 50px;
+  transition: transform 0.5s;
 }
 .divForLogo:hover{
-  -webkit-transform: scale(.96);
-  transform: scale(.96);
+  /* -webkit-transform: scale(.96);
+  transform: scale(.96); */
+  -webkit-transform: scale(0.96);
+  -ms-transform: scale(0.96);
+  transform: scale(0.96);
 }
 .aboutF, .aboutS{
   width: 100%;
@@ -150,15 +154,20 @@ body{
   border-radius: 3px;
   border: none;
   padding: 5px;
-  width: 250px;
-  /* background: rgba(0, 0, 0, 0); */
+  padding-left: 15px;
+  width: 210px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+#emailAdress:focus{
+  outline: none;
 }
 .buttonCopy{
   cursor: pointer;
   background-color: #339af0;
   color: white;
   height: 30px;
-  width: 30px;
+  width: 65px;
   border: none;
   border-radius: 15px;
   display: inline-block;
@@ -171,22 +180,23 @@ body{
 }
 .toolTip{
   display: inline-block;
+  margin-left: 3px;
 }
 .toolTipText{
   visibility: hidden;
-  background-color: #333;
-  color: white;
+  background-color: #ddd;
+  color: black;
   text-align: center;
   border-radius: 3px;
   padding: 10px 15px;
   position: absolute;
   z-index: 1;
-  bottom: 17px;
-  right: 40%;
+  bottom: 18px;
+  right: 33%;
   opacity: 0;
   transition: opacity 0.5s;
   font-size: 14px;
-  width: 120px;
+  width: 125px;
 }
 
 .toolTipText::after {
@@ -196,7 +206,7 @@ body{
   left: 100%;
   border-width: 8px;
   border-style: solid;
-  border-color: transparent transparent transparent #333;
+  border-color: transparent transparent transparent #ddd;
 }
 
 .buttonCopy:hover .toolTipText{
@@ -292,12 +302,13 @@ hr{
 @media (max-width: 1550px) {
   #emailAdress{
     font-size: 16px;
-    width: 200px;
+    width: 165px;
+    padding-left: 5px;
   }
 }
 @media (max-width: 1300px) {
   #emailAdress{
-    width: 175px;
+    width: 150px;
   }
 }
 @media (max-width: 1200px) {
@@ -309,7 +320,7 @@ hr{
   }
   #emailAdress{
     font-size: 16px;
-    width: 200px;
+    width: 170px;
   }
 }
 @media (max-width: 1050px) {
@@ -360,12 +371,12 @@ hr{
 }
 @media (max-width: 950px) {
   #emailAdress{
-    width: 180px;
+    width: 150px;
   }
 }
 @media (max-width: 800px) {
   #emailAdress{
-  width: 150px;
+  width: 120px;
   }
 }
 @media (max-width: 700px) {
@@ -382,7 +393,7 @@ hr{
     font-size: 24px;
   }
   #emailAdress{
-  width: 110px;
+  width: 75px;
   }
 }
 
@@ -400,7 +411,7 @@ hr{
     font-size: 22px;
   }
   #emailAdress{
-  width: 90px;
+  width: 60px;
   }
 }
 
