@@ -5,6 +5,9 @@ function copyFunction() {
 
   var toolTip = document.getElementById("myToolTip");
   toolTip.innerHTML = "Copied!";
+  // var timer = setTimeout(,2000);
+  // clearTimeout(timer);
+
 }
 
 function outFunction() {

@@ -17,16 +17,16 @@ const TronLinkGuide = props => {
     if(!installed) {
         return (
             <div className='tronLink' onClick={ openTronLink }>
-                                <h1 className = "unin">TronLink Required</h1>
-              <img className = "logo" src={ TronLinkLogo } alt='TronLink logo' />
+              <h1 className = "unin">TronLink Required</h1>
+              <img className = "logo2" src={ TronLinkLogo } alt='TronLink logo' />
                 <div className='info'>
                     <p className = "text">
-                      To create a post or tip others you must install TronLink. TronLink is a TRON wallet for the browser
-                      that can be <a className = "a" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>installed from the Chrome Webstore</a>.
-                      Once installed, return back and refresh the page.
-                    </p>
-                    <p className = "warning">
-                      Otherwise, game won't work!!!
+                      To play an economic strategy Tron Farm you must install
+                      a TronLink browser extention which is the most popular
+                      TRON wallet for the browsers. You can download it from
+                      the Chrome Store using the link below. Once installed, return back
+                      and refresh the page.
+                      <a className = "a" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Download TronLink</a>
                     </p>
                 </div>
             </div>
@@ -35,12 +35,13 @@ const TronLinkGuide = props => {
 
     return (
         <div className='tronLink' title = "You must log in" onClick={ openTronLink } >
-                            <h1>Log In Required</h1>
+          <h1>Log In Required</h1>
           <img className = "logo" src={ TronLinkLogo } alt='TronLink logo' />
             <div className='info'>
                 <p className = "text">
-                    TronLink is installed but you must first log in. Open TronLink from the browser bar and set up your
-                    first wallet or decrypt a previously-created wallet.
+                    TronLink is installed but you must first sign up/log in. Open TronLink
+                    from the browser bar and set up your first wallet or decrypt
+                    a previously-created one.
                 </p>
                 <p className = "warning">
                   Otherwise, game won't work!!!
