@@ -1,7 +1,14 @@
 .game{
-  // background: url('bg.jpg');
-  // background-position: center 0;
+  // background-image: url('bg.jpg');
+  // position: fixed;
+  // height: 100%;
+  // width: 100%;
+  // top: 0;
+  // left: 0;
   // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center center;
+  // opacity: 1;
 }
 p{
   padding: 0;
@@ -144,6 +151,9 @@ table{
   margin-left: calc(calc(100% - 1362px)/2);
   margin-top: 50px;
   height: auto;
+  animation-delay: 0.65s;
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
 }
 .allani{
   height: auto;

@@ -20,7 +20,7 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 70px;
-  min-height: 87vh;
+  min-height: 100vh;
   /* background: #743e0566; */
 }
 
@@ -281,6 +281,7 @@ hr{
   border: none;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
+  clear: both;
 
   /* height: 4px;
   border: none;
@@ -356,8 +357,8 @@ hr{
   .buttonCopy{
     background-color: #ddd;
     color: black;
-    font-size: 18px;
-    width: 150px;
+    font-size: 24px;
+    width: 200px;
   }
   .buttonCopy:hover{
     background-color: #bbb;
@@ -388,6 +389,10 @@ hr{
   }
   .Qname{
     font-size: 38px;
+  }
+  .question{
+    float: left;
+    margin: 15px 0;
   }
   .textField, .textfield{
     width: 100%;
