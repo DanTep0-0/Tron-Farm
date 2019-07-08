@@ -7,7 +7,7 @@ import Chick from './chick.png';
 import Pig from './pig.png';
 import Sheep from './sheep.png';
 import Cow from './cow.png';
-import GoldenChicken from './horse.png';
+import Horse from './horse.png';
 import Coin from './coin.png';
 
 
@@ -16,8 +16,8 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
+const contractAddress = 'TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -trstnet(now)
 var isClicked = false;
 
 class App extends React.Component {
@@ -54,13 +54,14 @@ class App extends React.Component {
               yourPigs: '0',
               yourSheeps: '0',
               yourCows: '0',
-              yourGoldenChickens: '0',
+              yourHorses: '0',
               yourTime: '0',
               val: 0,
               yourAddressMoney: 0,
               timer: '',
               timer2: '',
-              TronLinkValue: ''
+              TronLinkValue: '',
+              FYDB: true
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -183,7 +184,6 @@ class App extends React.Component {
               this.checkForLogo();
             }, 1000);
           }, 300);
-
 	     }
       }
 
@@ -256,9 +256,11 @@ class App extends React.Component {
       var result3 = player.coinsReturned;
       var result9 = player.coe;
       var result10 = player.time;
-      var contractTime = await Utils.contract.getTime().call();
-      var timePassed = contractTime - result10;
-      var hours = (timePassed / 3600) >> 0;
+      // var contractBalance = window.tronWeb.trx.getBalance(contractAddress);
+      // var contractTime = new Date();
+      // contractTime = contractTime.getTime()/1000 >> 0;
+      // var timePassed = contractTime - result10;
+      // var 2minutes = ((timePassed / 3600)/30) >> 0;
       var animals = [];
       animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result4 = animals[0];
@@ -266,17 +268,19 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      var profit = [25, 50, 100, 250, 1250];
-      var hourlyProfit = 0;
-      for (var i = 0; i < 5; i++) {
-          hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
-      }
-      result1 = Number(result1);
-      result3 = Number(result3);
-      result1 = result1 + (hourlyProfit*hours);
-      result3 = result3 + (hourlyProfit*hours);
-      var wait = (3600 - (timePassed - (hours*3600)))*1000;
-      this.setState({allMoney: result1,
+      // var profit = [25, 50, 100, 250, 1250];
+      // var hourlyProfit = 0;
+      // for (var i = 0; i < 5; i++) {
+      //     hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
+      // }
+      // result1 = Number(result1);
+      // result3 = Number(result3);
+      // result1 = result1 + (hourlyProfit*2minutes);
+      // result3 = result3 + (hourlyProfit*2minutes);
+
+      // var wait = (3600 - (timePassed - (hours*3600)))*1000;
+      this.setState({
+      allMoney: result1,
       investedMoney: result2,
       returnedMoney: result3,
       yourCoe: result9,
@@ -284,12 +288,33 @@ class App extends React.Component {
       yourPigs: result5,
       yourSheeps: result6,
       yourCows: result7,
-      yourGoldenChickens: result8,
+      yourHorses: result8,
 
     });
-      const timer = setTimeout(() => {
-          this.oneHourReload();
-        }, wait);
+      // const timer = setTimeout(() => {
+      //     this.oneHourReload();
+      //   }, wait);
+      await this.calcMoney(this.state.FYDB);
+      this.state.FYDB = false;
+  }
+
+  async calcMoney(b){
+    var allPlayers = await Utils.contract.getAllPlayers().call();
+    var allProfit;
+    for(var i=0; i<allPlayers.length; i++){
+      var player = await Utils.contract.players(allPlayers[i]).call();
+      var playerCoe = player.coe;
+      var playerAnimals = player.Animals;
+      var profitOfPlayer;
+      var profit = [25, 50, 100, 250, 1250];
+      // for(var f=0; f<5;f++){
+      //   profitOfPlayer = playerAnimals[f]*profit[f];
+      // }
+    }
+    if(b){
+
+    }
+
   }
 
     play(){
@@ -299,6 +324,7 @@ class App extends React.Component {
         document.querySelector('.game').classList.remove('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
         document.querySelector('.cover').classList.add('dnone');
+        document.querySelector('.menuBottom').classList.remove('dnone');
       }else{
         if(!!window.tronWeb){
           this.setState({TronLinkValue: 2});
@@ -509,7 +535,7 @@ class App extends React.Component {
                                                                <input className = "costI" value = "61200" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" value = "250" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(3, this.state.ivco)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
 
-                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = {GoldenChicken}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourGoldenChickens}/></div><div className = "cost"><div>Cost:</div>
+                                                               <div className = "animal horse"><div className = "name">Horse</div><img className = "image" src = {Horse}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourHorses}/></div><div className = "cost"><div>Cost:</div>
                                                                <input className = "costI" value = "312000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" value = "1250" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </form>
