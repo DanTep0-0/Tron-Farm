@@ -61,7 +61,42 @@ body{
   height: 70px;
   width: 100%;
 }
-
+.hidden{
+  text-align: center;
+  display: none;
+}
+.menuButton{
+  background-color: black;
+  border: none;
+  font-size: 35px;
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+}
+.menuDropdown{
+  display: none;
+  background-color: white;
+  min-width: 200px;
+  width: 100%;
+  height: 216px;
+  position: absolute;
+}
+.dropdownChild{
+  color: black;
+  text-decoration: none;
+  display: block;
+  line-height: 70px;
+  font-size: 24px;
+  font-family: 'BigJohn';
+  border-bottom: 2px solid #eee;
+}
+.dropdownChild:hover{
+  background-color: #eee;
+  transform: translateY(-2px);
+}
+.hidden:hover .menuDropdown{
+  display: block;
+}
 .sc, .contact{
   text-decoration: none;
   color: white;
@@ -354,6 +389,15 @@ hr{
     font-size: 35px;
     margin: 15px;
   }
+  .menuFixed .fas{
+    font-size: inherit;
+  }
+  .main{
+    display: none;
+  }
+  .hidden{
+    display: inline-block;
+  }
   .buttonCopy{
     background-color: #ddd;
     color: black;
@@ -394,6 +438,9 @@ hr{
     float: left;
     margin: 15px 0;
   }
+  .answer{
+    color: #555;
+  }
   .textField, .textfield{
     width: 100%;
   }
@@ -407,8 +454,9 @@ hr{
     overflow: hidden;
   }
   .aboutF img, .aboutS img{
-    width: 100%;
-    margin: 60px 0;
+    width: 60%;
+    margin: 30px 20% 0 20%;
+    float: none;
   }
   .aboutF img, .aboutS img, .textField, .textfield {
     clear:both;

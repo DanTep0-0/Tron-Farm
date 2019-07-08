@@ -454,6 +454,7 @@ class App extends React.Component {
             <button className="play" onClick={(event) => {event.preventDefault()
                                                                this.play()}  }>Play</button>
           </div>
+          <div className="fixed-bg"></div>
           <div className = "game dnone">
             <ul className = "aboutGame">
               <li className = "abgl adm">Your Address:<p className = "num">{this.state.Address}</p></li>

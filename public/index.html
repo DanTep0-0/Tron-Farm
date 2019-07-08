@@ -8,13 +8,23 @@
     <script src="https://kit.fontawesome.com/4731f5d3bc.js"></script>
   </head>
   <body>
-    <div class="menuFixed">
+    <nav class="menuFixed main">
       <ul class="menu">
         <li class="list"><a class="sc" href="https://tronscan.org/#/contract/TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN">
-          <p>Smart-contract</p></a></li>
-        <li class="list"><div id = "dop"></div></li>
-        <li class="list"><div id = "dop2"></div></li>
+          <i class="fas fa-link"></i><p>&nbsp;Smart-contract</p></a></li>
+        <li class="list"><div id="dop"></div></li>
+        <li class="list"><div id="dop2"></div></li>
       </ul>
+    </nav>
+    <div class="menuFixed hidden">
+      <button class="menuButton"><i class="fas fa-bars"></i></button>
+      <div class="menuDropdown">
+        <a href="#" class="dropdownChild"><i class="fas fa-link"></i>&nbsp;Smart-contract</a>
+        <div id="dop"></div>
+        <div id="dop2"></div>
+        <!-- <a href="#qna" class="dropdownChild">Q&A</a>
+        <a href="#aboutFarm" class="dropdownChild">About game</a> -->
+      </div>
     </div>
     <div class="divForLogo">
       <img class="tronFarmLogo" src="logo.png">
