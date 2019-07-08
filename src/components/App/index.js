@@ -7,7 +7,7 @@ import Chick from './chick.png';
 import Pig from './pig.png';
 import Sheep from './sheep.png';
 import Cow from './cow.png';
-import GoldenChicken from './goldenChicken.png';
+import GoldenChicken from './horse.png';
 import Coin from './coin.png';
 
 
