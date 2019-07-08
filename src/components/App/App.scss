@@ -11,7 +11,7 @@
   // opacity: 1;
 }
 .fixed-bg{
-  background-image: url('fixed-bg.jpg');
+  background-image: url('bg.jpg');
   position: fixed;
   height: 100%;
   width: 100%;
@@ -82,7 +82,7 @@ table{
   float: left;
   font-size: 24px;
   text-align: center;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   box-sizing: border-box;
   font-family: "BigJohn";
   background-color: white;
@@ -253,7 +253,6 @@ table{
 }
 .mt15 {
   font-size: 26px;
-  border: 2px solid #919191;
 }
 .youHave, .profit, .cost, .cost2 {
   float: left;
@@ -313,18 +312,21 @@ table{
   font-weight: bold;
   cursor: pointer;
 }
-.wa::-webkit-outer-spin-button,
-.wa::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 .wa{
-  -moz-appearance: textfield;
+  width: 80px;
+  height: 30px;
+  padding-left: 20px;
+  box-sizing: border-box;
 }
-.wa{
-width: 60px;
-height: 30px;
-padding-left: 20px;
+.wa:focus{
+  outline: none;
+}
+.chick .wa,
+.pig .wa,
+.sheep .wa,
+.cow .wa,
+.horse .wa{
+  margin-left: 10px;
 }
 .improveFood {
   border-radius: 5px;
@@ -353,11 +355,15 @@ padding-left: 20px;
   width: 300px;
   height: 50px;
   font-size: 28px;
-  border: 2px solid #919191;
   text-align: center;
   padding: 0;
   background: none;
   box-sizing: border-box;
+}
+.ifi, .mt15{
+  border: 3px solid #aaa;
+  border-left: none;
+  border-right: none;
 }
 .pers{
   float: left;
@@ -376,6 +382,7 @@ padding-left: 20px;
 .Pers{
   display: inline-block;
 }
+
 
 
 
@@ -523,9 +530,8 @@ padding-left: 20px;
     font-size: 24px;
   }
   .wa{
-    width: 60px;
-    height: 35px;
-    padding-left: 30px;
+    width: 120px;
+    height: 40px;
     font-size: 24px;
     border: 3px solid #ccc;
   }
@@ -540,7 +546,7 @@ padding-left: 20px;
     margin-left: 20px;
   }
   .buLa3, .buLa4{
-    margin-left: 85px;
+    margin-left: 70px;
   }
   .valCoins1, .valCoins2{
     margin-top: 35px;
