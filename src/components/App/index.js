@@ -7,7 +7,7 @@ import Chick from './chick.png';
 import Pig from './pig.png';
 import Sheep from './sheep.png';
 import Cow from './cow.png';
-import GoldenChicken from './goldenChicken.png';
+import Horse from './horse.png';
 import Coin from './coin.png';
 
 
@@ -54,7 +54,7 @@ class App extends React.Component {
               yourPigs: '0',
               yourSheeps: '0',
               yourCows: '0',
-              yourGoldenChickens: '0',
+              yourHorses: '0',
               yourTime: '0',
               val: 0,
               yourAddressMoney: 0,
@@ -288,7 +288,7 @@ class App extends React.Component {
       yourPigs: result5,
       yourSheeps: result6,
       yourCows: result7,
-      yourGoldenChickens: result8,
+      yourHorses: result8,
 
     });
       // const timer = setTimeout(() => {
@@ -535,7 +535,7 @@ class App extends React.Component {
                                                                <input className = "costI" value = "61200" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" value = "250" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(3, this.state.ivco)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
 
-                                                               <div className = "animal goldenEgg"><div className = "name">Golden Chicken</div><img className = "image" src = {GoldenChicken}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourGoldenChickens}/></div><div className = "cost"><div>Cost:</div>
+                                                               <div className = "animal horse"><div className = "name">Horse</div><img className = "image" src = {Horse}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" value = {this.state.yourHorses}/></div><div className = "cost"><div>Cost:</div>
                                                                <input className = "costI" value = "312000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" value = "1250" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </form>

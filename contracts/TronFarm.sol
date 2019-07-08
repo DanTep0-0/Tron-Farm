@@ -6,9 +6,9 @@ contract TronFarm {
     uint constant animals = 5;
     uint constant period = 2 minutes;
 
-    uint[animals] prices = [5760, 11760, 24000, 61200, 312000];
-    uint[animals] profit = [25, 50, 100, 250, 1250];
-    uint perPrice = 1;
+    uint[animals] prices = [8800, 30000, 100000, 230400, 458800];
+    uint[animals] profit = [23, 80, 272, 640, 1300];
+    uint perPrice = 4500;
     uint startCoe = 100;
 
     uint public totalPlayers;
