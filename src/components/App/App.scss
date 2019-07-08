@@ -23,6 +23,19 @@
   opacity: 1;
   z-index: -1;
 }
+.dropdownChild{
+  color: black;
+  text-decoration: none;
+  display: block;
+  line-height: 70px;
+  font-size: 24px;
+  font-family: 'BigJohn';
+  border-bottom: 2px solid #eee;
+}
+.dropdownChild:hover{
+  background-color: #eee;
+  transform: translateY(-2px);
+}
 p{
   padding: 0;
   margin: 0;
