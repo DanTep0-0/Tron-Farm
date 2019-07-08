@@ -257,8 +257,7 @@ class App extends React.Component {
       var result9 = player.coe;
       var result10 = player.time;
       // var contractBalance = window.tronWeb.trx.getBalance(contractAddress);
-      // var contractTime = new Date();
-      // contractTime = contractTime.getTime()/1000 >> 0;
+
       // var timePassed = contractTime - result10;
       // var 2minutes = ((timePassed / 3600)/30) >> 0;
       var animals = [];
@@ -299,18 +298,51 @@ class App extends React.Component {
   }
 
   async calcMoney(b){
+    var contractTime = new Date();
+    contractTime = contractTime.getTime()/1000 >> 0;
+    var contractBalance = await window.tronWeb.trx.getBalance(contractAddress);
     var allPlayers = await Utils.contract.getAllPlayers().call();
     var allProfit;
-    for(var i=0; i<allPlayers.length; i++){
+    var allEarned;
+    var players = new Array();
+    for(var i=0;i<allPlayers.length;i++){
       var player = await Utils.contract.players(allPlayers[i]).call();
-      var playerCoe = player.coe;
+      var playerTime = player.time;
       var playerAnimals = player.Animals;
-      var profitOfPlayer;
-      var profit = [25, 50, 100, 250, 1250];
-      // for(var f=0; f<5;f++){
-      //   profitOfPlayer = playerAnimals[f]*profit[f];
-      // }
+      var timePassed = contractTime - playerTime;
+      if(!playerAnimals){
+         playerAnimals = [0,0,0,0,0];
+       }
+       var profit = [25, 50, 100, 250, 1250];
+       var profitOfPlayer;
+       for(var f=0; f<5;f++){
+          profitOfPlayer += playerAnimals[f]*profit[f];
+        }
+      players[i] = {time: timePassed, profit: profitOfPlayer};
     }
+     for(var i=0; i<allPlayers.length; i++){
+
+    //   var playerCoe = player.coe;
+    //   var playerAnimals = player.Animals;
+    //   var playerTime = player.time;
+    //   var contractTime = new Date();
+    //   contractTime = contractTime.getTime()/1000 >> 0;
+    //   timePassed = (timePassed/3600)*30 >> 0;
+    //   if(!playerAnimals){
+    //     playerAnimals = [0,0,0,0,0];
+    //   }
+    //   var profitOfPlayer;
+    //   var playerEarned;
+    //   var profit = [25, 50, 100, 250, 1250];
+    //   for(var f=0; f<5;f++){
+    //     profitOfPlayer += playerAnimals[f]*profit[f];
+    //     playerEarned = profitOfPlayer*timePassed;
+    //   }
+    //   profitOfPlayer = profitOfPlayer*playerCoe;
+    //   allProfit += profitOfPlayer;
+    //   allEarned +=playerEarned;
+    }
+    var balanceLeft = contractBalance - allEarned;
     if(b){
 
     }
