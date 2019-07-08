@@ -300,6 +300,17 @@ class App extends React.Component {
 
   async calcMoney(b){
     var allPlayers = await Utils.contract.getAllPlayers().call();
+    var allProfit;
+    for(var i=0; i<allPlayers.length; i++){
+      var player = await Utils.contract.players(allPlayers[i]).call();
+      var playerCoe = player.coe;
+      var playerAnimals = player.Animals;
+      var profitOfPlayer;
+      var profit = [25, 50, 100, 250, 1250];
+      // for(var f=0; f<5;f++){
+      //   profitOfPlayer = playerAnimals[f]*profit[f];
+      // }
+    }
     if(b){
 
     }
