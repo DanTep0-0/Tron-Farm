@@ -2,12 +2,12 @@ pragma solidity ^0.4.23;
 
 contract TronFarm {
 
-    uint constant coinPrice = 125;
+    uint constant coinPrice = 12500;
     uint constant animals = 5;
-    uint constant period = 1 minutes;
+    uint constant period = 2 minutes;
 
-    uint[animals] prices = [1, 2, 3, 4, 5];
-    uint[animals] profit = [1, 1, 1, 1, 1];
+    uint[animals] prices = [5760, 11760, 24000, 61200, 312000];
+    uint[animals] profit = [25, 50, 100, 250, 1250];
     uint perPrice = 1;
     uint startCoe = 100;
 
@@ -15,6 +15,7 @@ contract TronFarm {
     uint public totalInvested;
     uint public totalAnimals;
     uint public totalPayout;
+    address[] public allPlayers;
 
      address owner;
 
@@ -44,6 +45,7 @@ contract TronFarm {
             player.time = now;
             totalPlayers++;
             player.coe = startCoe;
+            allPlayers.push(address(msg.sender));
         }
         return true;
     }
@@ -77,7 +79,7 @@ contract TronFarm {
         return true;
      }
 
-    function collect(address _addr) public {
+    function collect(address _addr) internal {
         Player storage player = players[_addr];
         require(player.time > 0);
         require(address(this).balance >= 0);
@@ -104,6 +106,10 @@ contract TronFarm {
                 return true;
             }
         }
+    }
+
+    function getAllPlayers()public view returns(address[]){
+        return allPlayers;
     }
 
     function animalsOf(address _addr) public view returns (uint [animals]) {

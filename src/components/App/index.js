@@ -16,8 +16,8 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet
+const contractAddress = 'TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -trstnet(now)
 var isClicked = false;
 
 class App extends React.Component {
@@ -183,7 +183,6 @@ class App extends React.Component {
               this.checkForLogo();
             }, 1000);
           }, 300);
-
 	     }
       }
 
@@ -251,14 +250,16 @@ class App extends React.Component {
     async fetchYourData() {
       var player = new Object();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
-      var result1 = player.allCoins;
+      // var result1 = player.allCoins;
       var result2 = player.usedCoins;
-      var result3 = player.coinsReturned;
+      // var result3 = player.coinsReturned;
       var result9 = player.coe;
       var result10 = player.time;
-      var contractTime = await Utils.contract.getTime().call();
-      var timePassed = contractTime - result10;
-      var hours = (timePassed / 3600) >> 0;
+      // var contractBalance = window.tronWeb.trx.getBalance(contractAddress);
+      // var contractTime = new Date();
+      // contractTime = contractTime.getTime()/1000 >> 0;
+      // var timePassed = contractTime - result10;
+      // var 2minutes = ((timePassed / 3600)/30) >> 0;
       var animals = [];
       animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result4 = animals[0];
@@ -266,19 +267,21 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      var profit = [25, 50, 100, 250, 1250];
-      var hourlyProfit = 0;
-      for (var i = 0; i < 5; i++) {
-          hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
-      }
-      result1 = Number(result1);
-      result3 = Number(result3);
-      result1 = result1 + (hourlyProfit*hours);
-      result3 = result3 + (hourlyProfit*hours);
-      var wait = (3600 - (timePassed - (hours*3600)))*1000;
-      this.setState({allMoney: result1,
+      // var profit = [25, 50, 100, 250, 1250];
+      // var hourlyProfit = 0;
+      // for (var i = 0; i < 5; i++) {
+      //     hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
+      // }
+      // result1 = Number(result1);
+      // result3 = Number(result3);
+      // result1 = result1 + (hourlyProfit*2minutes);
+      // result3 = result3 + (hourlyProfit*2minutes);
+
+      // var wait = (3600 - (timePassed - (hours*3600)))*1000;
+      this.setState({
+      // allMoney: result1,
       investedMoney: result2,
-      returnedMoney: result3,
+      // returnedMoney: result3,
       yourCoe: result9,
       yourChicks: result4,
       yourPigs: result5,
@@ -287,9 +290,10 @@ class App extends React.Component {
       yourGoldenChickens: result8,
 
     });
-      const timer = setTimeout(() => {
-          this.oneHourReload();
-        }, wait);
+      // const timer = setTimeout(() => {
+      //     this.oneHourReload();
+      //   }, wait);
+
   }
 
     play(){
@@ -299,6 +303,7 @@ class App extends React.Component {
         document.querySelector('.game').classList.remove('dnone');
         document.querySelector('.divForLogo').classList.add('dnone');
         document.querySelector('.cover').classList.add('dnone');
+        document.querySelector('.menuBottom').classList.remove('dnone');
       }else{
         if(!!window.tronWeb){
           this.setState({TronLinkValue: 2});
