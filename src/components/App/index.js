@@ -60,7 +60,8 @@ class App extends React.Component {
               yourAddressMoney: 0,
               timer: '',
               timer2: '',
-              TronLinkValue: ''
+              TronLinkValue: '',
+              FYDB: true
 
             }
         // this.changeSide = this.changeSide.bind(this)
@@ -250,9 +251,9 @@ class App extends React.Component {
     async fetchYourData() {
       var player = new Object();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
-      // var result1 = player.allCoins;
+      var result1 = player.allCoins;
       var result2 = player.usedCoins;
-      // var result3 = player.coinsReturned;
+      var result3 = player.coinsReturned;
       var result9 = player.coe;
       var result10 = player.time;
       // var contractBalance = window.tronWeb.trx.getBalance(contractAddress);
@@ -279,9 +280,9 @@ class App extends React.Component {
 
       // var wait = (3600 - (timePassed - (hours*3600)))*1000;
       this.setState({
-      // allMoney: result1,
+      allMoney: result1,
       investedMoney: result2,
-      // returnedMoney: result3,
+      returnedMoney: result3,
       yourCoe: result9,
       yourChicks: result4,
       yourPigs: result5,
@@ -293,6 +294,15 @@ class App extends React.Component {
       // const timer = setTimeout(() => {
       //     this.oneHourReload();
       //   }, wait);
+      await this.calcMoney(this.state.FYDB);
+      this.state.FYDB = false;
+  }
+
+  async calcMoney(b){
+    var allPlayers = await Utils.contract.getAllPlayers().call();
+    if(b){
+
+    }
 
   }
 
