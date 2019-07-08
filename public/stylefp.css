@@ -70,7 +70,7 @@ body{
   border: none;
   font-size: 35px;
   color: white;
-  padding: 15px;
+  padding: 14px;
   cursor: pointer;
 }
 .menuDropdown{
@@ -81,18 +81,24 @@ body{
   height: 216px;
   position: absolute;
 }
-.dropdownChild{
+.dropdownChild, .hidden .sc{
   color: black;
   text-decoration: none;
   display: block;
   line-height: 70px;
   font-size: 24px;
   font-family: 'BigJohn';
-  border-bottom: 2px solid #eee;
+  border-bottom: 3px solid #eee;
 }
-.dropdownChild:hover{
+.hidden .sc p{
+  font-family: 'BigJohn';
+}
+.dropdownChild:hover, .hidden .sc:hover{
   background-color: #eee;
   transform: translateY(-2px);
+}
+.hidden #dop, .hidden #dop2{
+  height: 70px;
 }
 .hidden:hover .menuDropdown{
   display: block;
@@ -398,8 +404,11 @@ hr{
   .hidden{
     display: inline-block;
   }
+    #qna, #aboutFarm{
+      color: #333;
+    }
   .buttonCopy{
-    background-color: #ddd;
+    background-color: #eee;
     color: black;
     font-size: 24px;
     width: 200px;
@@ -438,9 +447,9 @@ hr{
     float: left;
     margin: 15px 0;
   }
-  .answer{
+  /* .answer{
     color: #555;
-  }
+  } */
   .textField, .textfield{
     width: 100%;
   }
