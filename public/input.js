@@ -1,12 +1,28 @@
-function copyFunction() {
-  var copyText = document.getElementById("emailAdress");
-  copyText.select();
-  document.execCommand("copy");
+// function copyFunction() {
+//   var copyText = document.getElementById("emailAdress");
+//   copyText.select();
+//   document.execCommand("copy");
+//
+//   var toolTip = document.getElementById("myToolTip");
+//   toolTip.innerHTML = "Copied!";
+// }
 
+function copyFunction(text){
+  var input = document.createElement('input');
+  input.value = text;
+  document.body.appendChild(input);
+  input.select();
+
+  try {
+    var success = document.execCommand('copy');
+    var msg = success ? 'successful!' : 'not successful';
+    console.log("Copying text command was " + msg);
+  } catch (err) {
+    console.error("Unable to copy", err);
+  }
+  document.body.removeChild(input);
   var toolTip = document.getElementById("myToolTip");
   toolTip.innerHTML = "Copied!";
-  // var timer = setTimeout(,2000);
-  // clearTimeout(timer);
 }
 
 function outFunction() {
@@ -15,10 +31,6 @@ function outFunction() {
 }
 
 
-
-  // var menu = document.getElementById('menu');
-  // var button = menu.querySelector('.menuButton');
-  //
-  // button.onclick = function() {
-  //   menu.classList.toggle('open');
-  // };
+document.getElementById('button').addEventListener('click', function(){
+  copyFunction("tron.farm@gmail.com")
+})
