@@ -157,8 +157,9 @@ body{
 }
 .aboutF img{
   float: right;
-  width: 38%;
+  width: 30%;
   margin-top: 3%;
+  margin-right: 7%;
 }
 .aboutS{
   padding-top: 30px;
@@ -462,9 +463,14 @@ hr{
   .aboutF, .aboutS{
     overflow: hidden;
   }
-  .aboutF img, .aboutS img{
+  .aboutS img{
     width: 60%;
     margin: 30px 20% 0 20%;
+    float: none;
+  }
+  .aboutF img{
+    width: 40%;
+    margin: 30px 30% 0 30%;
     float: none;
   }
   .aboutF img, .aboutS img, .textField, .textfield {
