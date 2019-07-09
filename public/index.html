@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Tron Farm</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="./stylefp.css">
-    <script src="input.js"></script>
     <script src="https://kit.fontawesome.com/4731f5d3bc.js"></script>
   </head>
   <body>
@@ -156,7 +156,7 @@
             <input type="text" id="emailAdress" value="tron.farm@gmail.com">
 
             <div class="toolTip">
-              <button onclick="copyFunction()" class="buttonCopy" onmouseout="outFunction()">
+              <button id="button" class="buttonCopy" onmouseout="outFunction()">
                 <span class="toolTipText" id="myToolTip">Copy email adress</span>
                 <i class="fas fa-clipboard"></i><p class="btnText1">&nbsp;Copy</p><p class="btnText2">&nbsp;Email address</p>
               </button>
@@ -166,10 +166,9 @@
       </footer>
     </div>
 
+
+    <script src="input.js"></script>
     <script type="text/javascript"></script>
-    <script src="./src/bootstrap-input-spinner.js"></script>
-    <!-- <script>
-      $("input[type='number']").inputSpinner()
-    </script> -->
+    <!-- <script src=".bootstrap-input-spinner.js"></script> -->
   </body>
 </html>
