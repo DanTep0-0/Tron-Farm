@@ -17,7 +17,7 @@ const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
 const contractAddress = 'TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -trstnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(now)
 var isClicked = false;
 var period = 120;
 
@@ -175,43 +175,7 @@ class App extends React.Component {
 	     }
     }
 
-    async ohrDop(){
-      var player = new Object();
-      player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
-      var animals = [];
-      animals = await Utils.contract.animalsOf(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
-      var result10 = player.time;
-      var contractTime = await Utils.contract.getTime().call();
-      var timePassed = contractTime - result10;
-      var hours = (timePassed / 3600) >> 0;
-      var result4 = animals[0];
-      var result5 = animals[1];
-      var result6 = animals[2];
-      var result7 = animals[3];
-      var result8 = animals[4];
-
-      var profit = [25, 50, 100, 250, 1250];
-      var hourlyProfit = 0;
-      for (var i = 0; i < 5; i++) {
-          hourlyProfit = hourlyProfit + (animals[i] * profit[i]);
-      }
-      var allMoneyBefore = player.allCoins;
-      var returnedMoneyBefore = player.coinsReturned;
-      var newAllCoins = allMoneyBefore + (hourlyProfit*hours);
-      var newReturnedMoney = returnedMoneyBefore + (hourlyProfit*hours);
-      this.setState({
-        allCoins: newAllCoins,
-        returnedMoney: newReturnedMoney
-      });
-    }
-
-    oneHourReload(){
-      const timer = setInterval(() => {
-          this.ohrDop();
-        }, 3600000);
-    }
-
-    async fetchData(){
+      async fetchData(){
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
       var result2 = (await Utils.contract.totalInvested().call()).toNumber() / 80;
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
@@ -241,7 +205,6 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      // var wait = (3600 - (timePassed - (hours*3600)))*1000;
       this.setState({
       allMoney: result1,
       investedMoney: result2,
@@ -252,11 +215,9 @@ class App extends React.Component {
       yourSheeps: result6,
       yourCows: result7,
       yourHorses: result8,
+      yourTime: result10
 
     });
-      // const timer = setTimeout(() => {
-      //     this.oneHourReload();
-      //   }, wait);
       await this.calcMoney();
   }
 
@@ -265,13 +226,12 @@ class App extends React.Component {
     contractTime = contractTime.getTime()/1000 >> 0;
     var contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
     var allPlayers = await Utils.contract.getAllPlayers().call();
-    var allProfit;
     var players = new Array();
-    var I = false;
     for(var i=0;i<allPlayers.length;i++){
+      var Im = false;
       var player = await Utils.contract.players(allPlayers[i]).call();
-      if (allPlayers[i] == Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())){
-        I = true;
+      if (Utils.tronWeb.address.fromHex(allPlayers[i]) == Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())){
+        Im = true;
       }
       var playerTime = player.time;
       var playerAnimals = player.Animals;
@@ -279,13 +239,13 @@ class App extends React.Component {
       if(!playerAnimals){
          playerAnimals = [0,0,0,0,0];
        }
-       var profit = [25, 50, 100, 250, 1250];
+       var profit = [23, 80, 272, 640, 1300];
        var profitOfPlayer;
        for(var f=0; f<5;f++){
           profitOfPlayer += playerAnimals[f]*profit[f];
         }
         profitOfPlayer = profitOfPlayer*(player.coe)/100;
-      players[i] = {time: timePassed, profit: profitOfPlayer, I: I};
+      players[i] = {time: timePassed, profit: profitOfPlayer, I: Im};
       players.sort(function(a,b){
         if(a.time>b.time){
           return 1;
@@ -296,47 +256,43 @@ class App extends React.Component {
         return 0;
       });
     }
-    var CB = true;
-    for(var i=0; i<allPlayers.length; i++){
-      allProfit += players[players.length-1-i].profit;
- }
-    while(players.length != 0){
+    first: while(players.length != 0){
       if(contractBalance>0){
-     for(var i=0; i<allPlayers.length; i++){
-       var p
-       players[players.length-1-i].time -=period;
-       contractBalance -= players[players.length-1-i].profit;
-       if(players[players.length-1-i].I){
-         var allMoney = this.state.allMoney;
-         allMoney = Number(allMoney);
-         allMoney += players[players.length-1-i].profit;
-         var returnedMoney = this.state.allMoney;
-         returnedMoney = Number(returnedMoney);
-         returnedMoney += players[players.length-1-i].profit;
-         this.setState({
-         allMoney: allMoney,
-         returnedMoney: returnedMoney
-       })}
+     for(var i=0; i<players.length; i++){
+       var player = players[players.length-1-i];
+       if(player.time>=period && player.profit>0){
+         players[players.length-1-i].time -=period;
+         contractBalance -= player.profit;
+         if(contractBalance<=0){continue first;}
+         if(player.I){
+         this.setState({allMoney: Number(this.state.allMoney)+player.profit,
+         returnedMoney: Number(this.state.returnedMoney)+player.profit})
+       }
+     }else{
+       players.splice(players.length-1-i,1);
+       if(player.I){break first;}
+     }
      }
    }else {
+     if(contractBalance<0){
      contractBalance += players[players.length-i].profit;
      if(players[players.length-i].I){
-       var allMoney = this.state.allMoney;
-       allMoney = Number(allMoney);
-       allMoney += contractBalance;
-       var returnedMoney = this.state.allMoney;
-       returnedMoney = Number(returnedMoney);
-       returnedMoney += contractBalance;
-       this.setState({
-       allMoney: allMoney,
-       returnedMoney: returnedMoney
-     })}
-     break;
+       this.setState({allMoney: Number(this.state.allMoney)+contractBalance,
+       returnedMoney: Number(this.state.returnedMoney)+contractBalance})
+       contractBalance = 0;
    }
+       break first;
+ }else{break first;}
   }
 }
+      var timePassed = contractTime-Number(this.state.yourTime);
+      var wait = (period - (timePassed - (timePassed/period >> 0)))*1000;
+      const timer = setTimeout(() => {
+          this.calcMoney();
+        }, wait);
+}
 
-    play(){
+    async play(){
         if(!!window.tronWeb && window.tronWeb.ready){
         document.querySelector('.forButton').classList.add('dnone');
         document.querySelector('.BTP').classList.add('dnone');
@@ -345,16 +301,18 @@ class App extends React.Component {
         document.querySelector('.cover').classList.add('dnone');
         document.querySelector('.menuBottom').classList.remove('dnone');
       }else{
-        if(!!window.tronWeb){
-          this.setState({TronLinkValue: 2});
+        if(!(await window.tronWeb)){
+          this.setState({TronLinkValue: 1});
           isClicked = true;
           return;
       }else {
-        this.setState({TronLinkValue: 1});
+        if(!(await window.tronWeb.ready)){
+        this.setState({TronLinkValue: 2});
         isClicked = true;
         return;
       }
       }
+    }
 
         this.fetchData();
         this.fetchYourData();
