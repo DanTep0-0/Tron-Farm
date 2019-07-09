@@ -229,9 +229,13 @@ class App extends React.Component {
     var players = new Array();
     for(var i=0;i<allPlayers.length;i++){
       var Im = false;
+      var isOwner = false;
       var player = await Utils.contract.players(allPlayers[i]).call();
       if (Utils.tronWeb.address.fromHex(allPlayers[i]) == Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())){
         Im = true;
+      }
+      if (Utils.tronWeb.address.fromHex(allPlayers[i]) =="TXDDoGsykp5XB5m46yXxsuvEosb3grFGxB"){
+        isOwner = true;
       }
       var playerTime = player.time;
       var playerAnimals = player.Animals;
@@ -245,7 +249,7 @@ class App extends React.Component {
           profitOfPlayer += playerAnimals[f]*profit[f];
         }
         profitOfPlayer = profitOfPlayer*(player.coe)/100;
-      players[i] = {time: timePassed, profit: profitOfPlayer, I: Im};
+      players[i] = {time: timePassed, profit: profitOfPlayer,allCoins: Number(this.state.allMoney), I: Im,owner:isOwner};
       players.sort(function(a,b){
         if(a.time>b.time){
           return 1;
@@ -256,12 +260,19 @@ class App extends React.Component {
         return 0;
       });
     }
+    for(var o = 0; o<players.length;o++){
+      var player = players[players.length-1-o];
+      if(!player.owner){
+      contractBalance -= player.allCoins;
+      if(contractBalance<=0){return;}
+    }
+    }
     first: while(players.length != 0){
       if(contractBalance>0){
-     for(var i=0; i<players.length; i++){
-       var player = players[players.length-1-i];
+     for(;;){
+       player = players[players.length-1];
        if(player.time>=period && player.profit>0){
-         players[players.length-1-i].time -=period;
+         players[players.length-1].time -=period;
          contractBalance -= player.profit;
          if(contractBalance<=0){continue first;}
          if(player.I){
@@ -269,14 +280,23 @@ class App extends React.Component {
          returnedMoney: Number(this.state.returnedMoney)+player.profit})
        }
      }else{
-       players.splice(players.length-1-i,1);
+       players.splice(players.length-1,1);
        if(player.I){break first;}
      }
+     players.sort(function(a,b){
+       if(a.time>b.time){
+         return 1;
+       }
+       if(a.time<b.time){
+         return -1;
+       }
+       return 0;
+     });
      }
    }else {
      if(contractBalance<0){
-     contractBalance += players[players.length-i].profit;
-     if(players[players.length-i].I){
+     contractBalance += players[players.length-1].profit;
+     if(players[players.length-1].I){
        this.setState({allMoney: Number(this.state.allMoney)+contractBalance,
        returnedMoney: Number(this.state.returnedMoney)+contractBalance})
        contractBalance = 0;
@@ -286,7 +306,7 @@ class App extends React.Component {
   }
 }
       var timePassed = contractTime-Number(this.state.yourTime);
-      var wait = (period - (timePassed - (timePassed/period >> 0)))*1000;
+      var wait = (period - (timePassed % period))*1000;
       const timer = setTimeout(() => {
           this.calcMoney();
         }, wait);
@@ -472,7 +492,7 @@ class App extends React.Component {
               <input min="0" className = "buLa2 wa" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/><div className = "TRX">TRX</div><div className = "about mt15 dop">1 TRX = 80
                 <img src = {Coin} className= "coin" /></div><p className = "about">You can withdraw money you've earned</p><input min="1" step="1" className = "buLa3 wa" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
                 <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
-                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
+                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
 
                   <table className = "Infbo">
                     <tr className = "yourInftr1">
