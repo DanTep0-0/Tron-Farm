@@ -305,6 +305,13 @@ body{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
   }
+  .telegram{
+    color: #00affe;
+    transition: 0.3s;
+  }
+  .telegram:hover{
+    color: #0084fe;
+  }
 
 /* --------------------^^^COMMON^^^----------------------------- */
 
