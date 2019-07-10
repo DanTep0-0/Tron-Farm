@@ -16,8 +16,8 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TBizKJHgb2uFBfpenfooZZDKLvBZdYELsb';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TBizKJHgb2uFBfpenfooZZDKLvBZdYELsb - testnet(now)
+const contractAddress = 'THFUQ4gEG2BZjN1wjE1kJ5ri1d6AK7pyLh';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) THFUQ4gEG2BZjN1wjE1kJ5ri1d6AK7pyLh - testnet(now)
 var isClicked = false;
 var period = 120;
 var contractBalance;
@@ -212,7 +212,6 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      console.log(contractBalance);
       if(contractBalance>0){
       this.setState({
       allMoney: result1,
@@ -262,7 +261,6 @@ class App extends React.Component {
                   profitOfPlayer += animals[f]*profit[f];
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
-                console.log(profitOfPlayer);
                 if(!profitOfPlayer){profitOfPlayer=0;}
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
@@ -270,7 +268,7 @@ class App extends React.Component {
                   Added = contractBalance
                 }
                 this.setState({allMoney: Number(playerAllCoins)+Added});
-        }else if(contractBalance==playerAllCoins){console.log("Added");}
+        }else if(contractBalance==playerAllCoins){}
         else if(contractBalance<playerAllCoins){
 
           this.setState({allMoney: contractBalance});
@@ -279,7 +277,6 @@ class App extends React.Component {
             const timer = setTimeout(() => {
                 this.calcMoney();
               }, wait);
-              console.log(wait/1000);
 }
 
     async play(){
