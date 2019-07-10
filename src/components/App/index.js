@@ -307,6 +307,7 @@ class App extends React.Component {
     }
 
     async dep(value){
+      this.setState({valueDep: '0',valueDepTRX: '0',});
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
             var totalBalance;
@@ -317,64 +318,75 @@ class App extends React.Component {
               shouldPollResponse: false,
               callValue: value*12500});
               Swal({
-                  title:'Transaction Send',
+                  title:'Transaction Sent',
                   type: 'success'
 
               });
           }else{
           Swal({
-              title:'Make sure you have enough money',
+              title: 'Oops...',
+              text: 'Make sure you have enough money in your wallet',
               type: 'error'
 
           });
         }
           });
-          const timer = setTimeout(() => this.fetchData(), 5000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 5000);
+          const timer = setTimeout(() => this.fetchData(), 6000);
+          const timer2 = setTimeout(() => this.fetchYourData(), 6000);
     }
   }
 
     async buy(type, num){
-
+        this.setState({ivch: '1',ivpg: '1',ivsh: '1',ivco: '1',ivge: '1'});
         if (num > 0){
+          if(Number(this.state.allMoney)>=prices[Number(type)]*num){
           await Utils.contract.buy(type, num).send({
               shouldPollResponse:false,
               callValue:0
           });
           Swal({
-              title:'Transaction Send',
+              title:'Transaction Sent',
               type: 'success'
           });
-            this.setState({allMoney: Number(this.state.allMoney)-(num*prices[type]),
-            Animals: Number(this.state.Animals)+Number(num)
-          });
-          if(Number(type)==0){this.setState({yourChicks:Number(this.state.yourChicks)+Number(num)});}
-          if(Number(type)==1){this.setState({yourPigs:Number(this.state.yourPigs)+Number(num)});}
-          if(Number(type)==2){this.setState({yourSheeps:Number(this.state.yourSheeps)+Number(num)});}
-          if(Number(type)==3){this.setState({yourCows:Number(this.state.yourCows)+Number(num)});}
-          if(Number(type)==4){this.setState({yourHorses:Number(this.state.yourHorses)+Number(num)});}
+          const timer = setTimeout(() => this.fetchData(), 6000);
+          const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+        }else{
+          Swal({
+              title:'Oops...',
+              text: 'Make sure you have enough money in your account',
+              type: 'error'
+
+          })
+        }
     }
 }
     async improveFood(per){
+      this.setState({ivper:1});
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
-
+        if(Number(per)*4500<=Number(this.state.allMoney)){
         await Utils.contract.setCoe(per).send({
             shouldPollResponse:false,
             callValue:0
         });
         Swal({
-            title:'Transaction Send',
+            title:'Transaction Sent',
             type: 'success'
 
         })
-        this.setState({yourCoe: Number(this.state.yourCoe)+Number(per),
-          allMoney: Number(this.state.allMoney)-Number(per)*4500
-        });
+        const timer = setTimeout(() => this.fetchData(), 6000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+      }else{
+        Swal({
+                 title:'Oops...',
+                 text: 'Make sure you have enough money in your account',
+                 type: 'error'
+            });
+      }
       } else {
       Swal(
           {
                title:'Oops...',
-               text: 'Make sure your final percentage < 106 ',
+               text: 'Make sure the final percentage is less than 106%',
                type: 'error'
           }
        );
@@ -383,22 +395,26 @@ class App extends React.Component {
     }
 
     async pickUp(coins){
-
+      this.setState({puv: 0,puvTRX: 0});
       if(coins > 0){
+        if(Number(coins)<=Number(this.state.allMoney)){
         await Utils.contract.withdraw(coins).send({
           shouldPollResponse: false,
           callValue: 0
         });
         Swal({
-            title:'Transaction Send',
+            title:'Transaction Sent',
             type: 'success'
 
         })
-        var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
-        this.setState({returnedMoney: Number(this.state.returnedMoney)+Number(coins),
-          allMoney: Number(this.state.allMoney)-Number(coins),
-          PaidOut: result3+(Number(coins)/80)+ ' TRX'
-        });
+        const timer = setTimeout(() => this.fetchData(), 6000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+      }else{Swal({
+        title:'Oops...',
+        text: 'Make sure you have enough money in your account',
+        type: 'error'
+
+      })}
       }
     }
 
