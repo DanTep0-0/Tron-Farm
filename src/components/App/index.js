@@ -184,7 +184,7 @@ class App extends React.Component {
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-      var result2 = contractBalance + result3;
+      var result2 = contractBalance/80 + result3;
       result5 = result5.slice(0, 12);
       this.setState({
         Players: result1,
@@ -262,6 +262,7 @@ class App extends React.Component {
                   profitOfPlayer += animals[f]*profit[f];
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
+                console.log(profitOfPlayer);
                 if(!profitOfPlayer){profitOfPlayer=0;}
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
@@ -311,9 +312,8 @@ class App extends React.Component {
     async dep(value){
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
-
-           yourBalance.then( async function(result) {
             var totalBalance;
+           yourBalance.then( async function(result) {
             totalBalance = result;
             if(totalBalance >= value*12500){
             await Utils.contract.deposit().send({
@@ -324,18 +324,17 @@ class App extends React.Component {
                   type: 'success'
 
               });
-
           }else{
           Swal({
-              title:'Make sure your value > 0',
+              title:'Make sure you have enough money',
               type: 'error'
 
           });
         }
           });
+          const timer = setTimeout(() => this.fetchData(), 5000);
+          const timer2 = setTimeout(() => this.fetchYourData(), 5000);
     }
-    await this.fetchData();
-    await this.fetchYourData();
   }
 
     async buy(type, num){
@@ -360,7 +359,7 @@ class App extends React.Component {
     }
 }
     async improveFood(per){
-      if(per > 0 && per <=5 && per+Number(this.stete.yourCoe)<=105){
+      if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
 
         await Utils.contract.setCoe(per).send({
             shouldPollResponse:false,
@@ -371,8 +370,8 @@ class App extends React.Component {
             type: 'success'
 
         })
-        this.setState({yourCoe: Number(this.state.yourCoe)+per,
-          allMoney: Number(this.state.allMoney)-per*4500
+        this.setState({yourCoe: Number(this.state.yourCoe)+Number(per),
+          allMoney: Number(this.state.allMoney)-Number(per)*4500
         });
       } else {
       Swal(
