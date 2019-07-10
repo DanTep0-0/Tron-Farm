@@ -16,10 +16,13 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(now)
+const contractAddress = 'TBizKJHgb2uFBfpenfooZZDKLvBZdYELsb';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TBizKJHgb2uFBfpenfooZZDKLvBZdYELsb - testnet(now)
 var isClicked = false;
 var period = 120;
+var contractBalance;
+var profit = [300, 1000, 4000, 8000, 16000];
+var prices = [8800, 30000, 100000, 230400, 458800];
 
 class App extends React.Component {
 
@@ -177,10 +180,11 @@ class App extends React.Component {
 
       async fetchData(){
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
-      var result2 = (await Utils.contract.totalInvested().call()).toNumber() / 80;
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
+      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+      var result2 = contractBalance + result3;
       result5 = result5.slice(0, 12);
       this.setState({
         Players: result1,
@@ -191,6 +195,9 @@ class App extends React.Component {
       });
     }
     async fetchYourData() {
+      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+      var contractTime = new Date();
+      contractTime = contractTime.getTime()/1000 >> 0;
       var player = new Object();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -205,6 +212,8 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
+      console.log(contractBalance);
+      if(contractBalance>0){
       this.setState({
       allMoney: result1,
       investedMoney: result2,
@@ -219,97 +228,57 @@ class App extends React.Component {
 
     });
       await this.calcMoney();
+    }else{
+      this.setState({
+      allMoney: 0,
+      investedMoney: result2,
+      returnedMoney: result3,
+      yourCoe: result9,
+      yourChicks: result4,
+      yourPigs: result5,
+      yourSheeps: result6,
+      yourCows: result7,
+      yourHorses: result8,
+      yourTime: result10
+
+    });
+    }
   }
 
   async calcMoney(){
-    var contractTime = new Date();
-    contractTime = contractTime.getTime()/1000 >> 0;
-    var contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-    var allPlayers = await Utils.contract.getAllPlayers().call();
-    var players = new Array();
-    for(var i=0;i<allPlayers.length;i++){
-      var Im = false;
-      var isOwner = false;
-      var player = await Utils.contract.players(allPlayers[i]).call();
-      if (Utils.tronWeb.address.fromHex(allPlayers[i]) == Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())){
-        Im = true;
-      }
-      if (Utils.tronWeb.address.fromHex(allPlayers[i]) =="TXDDoGsykp5XB5m46yXxsuvEosb3grFGxB"){
-        isOwner = true;
-      }
-      var playerTime = player.time;
-      var playerAnimals = player.Animals;
-      var timePassed = contractTime - playerTime;
-      if(!playerAnimals){
-         playerAnimals = [0,0,0,0,0];
-       }
-       var profit = [23, 80, 272, 640, 1300];
-       var profitOfPlayer;
-       for(var f=0; f<5;f++){
-          profitOfPlayer += playerAnimals[f]*profit[f];
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        var contractTime = new Date();
+        contractTime = contractTime.getTime()/1000 >> 0;
+        var player = new Object();
+        player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
+        var playerAllCoins = player.allCoins;
+        var timePassed = contractTime-Number(this.state.yourTime);
+        if(contractBalance>playerAllCoins){
+        contractBalance -= playerAllCoins;
+        var animals = new Array();
+        animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
+        var profitOfPlayer=0;
+               for(var f=0; f<5;f++){
+                  profitOfPlayer += animals[f]*profit[f];
+                }
+                profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
+                if(!profitOfPlayer){profitOfPlayer=0;}
+                var hoursAdded = Math.floor(timePassed/period);
+                var Added = hoursAdded*profitOfPlayer;
+                if(Added>=contractBalance){
+                  Added = contractBalance
+                }
+                this.setState({allMoney: Number(playerAllCoins)+Added});
+        }else if(contractBalance==playerAllCoins){console.log("Added");}
+        else if(contractBalance<playerAllCoins){
+
+          this.setState({allMoney: contractBalance});
         }
-        profitOfPlayer = profitOfPlayer*(player.coe)/100;
-      players[i] = {time: timePassed, profit: profitOfPlayer,allCoins: Number(this.state.allMoney), I: Im,owner:isOwner};
-      players.sort(function(a,b){
-        if(a.time>b.time){
-          return 1;
-        }
-        if(a.time<b.time){
-          return -1;
-        }
-        return 0;
-      });
-    }
-    for(var o = 0; o<players.length;o++){
-      var player = players[players.length-1-o];
-      if(!player.owner){
-      contractBalance -= player.allCoins;
-      if(contractBalance<=0){return;}
-    }
-    }
-    first: while(players.length != 0){
-      if(contractBalance>0){
-     for(;;){
-       player = players[players.length-1];
-       if(player.time>=period && player.profit>0){
-         players[players.length-1].time -=period;
-         contractBalance -= player.profit;
-         if(contractBalance<=0){continue first;}
-         if(player.I){
-         this.setState({allMoney: Number(this.state.allMoney)+player.profit,
-         returnedMoney: Number(this.state.returnedMoney)+player.profit})
-       }
-     }else{
-       players.splice(players.length-1,1);
-       if(player.I){break first;}
-     }
-     players.sort(function(a,b){
-       if(a.time>b.time){
-         return 1;
-       }
-       if(a.time<b.time){
-         return -1;
-       }
-       return 0;
-     });
-     }
-   }else {
-     if(contractBalance<0){
-     contractBalance += players[players.length-1].profit;
-     if(players[players.length-1].I){
-       this.setState({allMoney: Number(this.state.allMoney)+contractBalance,
-       returnedMoney: Number(this.state.returnedMoney)+contractBalance})
-       contractBalance = 0;
-   }
-       break first;
- }else{break first;}
-  }
-}
-      var timePassed = contractTime-Number(this.state.yourTime);
-      var wait = (period - (timePassed % period))*1000;
-      const timer = setTimeout(() => {
-          this.calcMoney();
-        }, wait);
+        var wait = (period - (timePassed % period))*1000;
+            const timer = setTimeout(() => {
+                this.calcMoney();
+              }, wait);
+              console.log(wait/1000);
 }
 
     async play(){
@@ -334,8 +303,8 @@ class App extends React.Component {
       }
     }
 
-        this.fetchData();
-        this.fetchYourData();
+        await this.fetchData();
+        await this.fetchYourData();
         isClicked = true;
     }
 
@@ -365,18 +334,13 @@ class App extends React.Component {
         }
           });
     }
-    this.fetchData();
-    this.fetchYourData();
+    await this.fetchData();
+    await this.fetchYourData();
   }
 
     async buy(type, num){
 
         if (num > 0){
-
-          var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
-
-           yourBalance.then( async function(result) {
-
           await Utils.contract.buy(type, num).send({
               shouldPollResponse:false,
               callValue:0
@@ -384,20 +348,19 @@ class App extends React.Component {
           Swal({
               title:'Transaction Send',
               type: 'success'
-
-          })
           });
-        }
-        this.fetchData();
-        this.fetchYourData();
+            this.setState({allMoney: Number(this.state.allMoney)-(num*prices[type]),
+            Animals: Number(this.state.Animals)+Number(num)
+          });
+          if(Number(type)==0){this.setState({yourChicks:Number(this.state.yourChicks)+Number(num)});}
+          if(Number(type)==1){this.setState({yourPigs:Number(this.state.yourPigs)+Number(num)});}
+          if(Number(type)==2){this.setState({yourSheeps:Number(this.state.yourSheeps)+Number(num)});}
+          if(Number(type)==3){this.setState({yourCows:Number(this.state.yourCows)+Number(num)});}
+          if(Number(type)==4){this.setState({yourHorses:Number(this.state.yourHorses)+Number(num)});}
     }
-
+}
     async improveFood(per){
-      if(per > 0 && per <=5){
-
-        var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
-
-         yourBalance.then( async function(result) {
+      if(per > 0 && per <=5 && per+Number(this.stete.yourCoe)<=105){
 
         await Utils.contract.setCoe(per).send({
             shouldPollResponse:false,
@@ -408,25 +371,22 @@ class App extends React.Component {
             type: 'success'
 
         })
+        this.setState({yourCoe: Number(this.state.yourCoe)+per,
+          allMoney: Number(this.state.allMoney)-per*4500
         });
       } else {
       Swal(
           {
                title:'Oops...',
-               text: 'Make sure your value > 0 and < 6',
+               text: 'Make sure your final percentage < 106 ',
                type: 'error'
           }
        );
 
      }
-     this.fetchYourData();
     }
 
     async pickUp(coins){
-
-      var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
-
-       yourBalance.then( async function(result) {
 
       if(coins > 0){
         await Utils.contract.withdraw(coins).send({
@@ -438,12 +398,12 @@ class App extends React.Component {
             type: 'success'
 
         })
-
+        var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
+        this.setState({returnedMoney: Number(this.state.returnedMoney)+Number(coins),
+          allMoney: Number(this.state.allMoney)-Number(coins),
+          PaidOut: result3+(Number(coins)/80)+ ' TRX'
+        });
       }
-
-});
-
-      this.fetchYourData();
     }
 
     visible(){

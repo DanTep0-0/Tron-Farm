@@ -7,16 +7,13 @@ contract TronFarm {
     uint constant period = 2 minutes;
 
     uint[animals] prices = [8800, 30000, 100000, 230400, 458800];
-    uint[animals] profit = [23, 80, 272, 640, 1300];
+    uint[animals] profit = [300, 1000, 4000, 8000, 16000];
     uint perPrice = 4500;
     uint startCoe = 100;
 
     uint public totalPlayers;
-    uint public totalInvested;
     uint public totalAnimals;
     uint public totalPayout;
-    address[] public allPlayers;
-
      address owner;
 
     struct Player {
@@ -40,12 +37,12 @@ contract TronFarm {
         Player storage player = players[msg.sender];
         uint startCoins = player.allCoins;
         player.allCoins = startCoins + (msg.value / coinPrice);
+        player.usedCoins = player.usedCoins + msg.value / coinPrice;
 
         if (player.time == 0) {
             player.time = now;
             totalPlayers++;
             player.coe = startCoe;
-            allPlayers.push(address(msg.sender));
         }
         return true;
     }
@@ -59,11 +56,9 @@ contract TronFarm {
 
         require(paymentCoins <= player.allCoins);
         player.allCoins = player.allCoins - paymentCoins;
-        player.usedCoins = player.usedCoins + paymentCoins;
 
         player.Animals[_type] = player.Animals[_type] + _number;
         players[owner].allCoins = players[owner].allCoins +  (paymentCoins / 10);
-        totalInvested = totalInvested + (paymentCoins / 10 * 9);
 
         totalAnimals = totalAnimals + _number;
         return true;
@@ -75,6 +70,7 @@ contract TronFarm {
         require(_coins <= players[msg.sender].allCoins);
 
         players[msg.sender].allCoins = players[msg.sender].allCoins - _coins;
+        players[msg.sender].coinsReturned = players[msg.sender].coinsReturned + _coins;
         transfer(msg.sender, _coins * coinPrice);
         return true;
      }
@@ -90,7 +86,6 @@ contract TronFarm {
             for (uint i = 0; i < animals; i++) {
                 hourlyProfit = hourlyProfit + (player.Animals[i] * profit[i]);
             }
-            player.coinsReturned = player.coinsReturned + (hoursAdded * hourlyProfit * player.coe / 100);
             player.allCoins = player.allCoins + (hoursAdded * hourlyProfit * player.coe / 100);
             player.time = player.time + (hoursAdded * period);
         }
@@ -108,10 +103,6 @@ contract TronFarm {
         }
     }
 
-    function getAllPlayers()public view returns(address[]){
-        return allPlayers;
-    }
-
     function animalsOf(address _addr) public view returns (uint [animals]) {
         return players[_addr].Animals;
     }
@@ -124,6 +115,7 @@ contract TronFarm {
         require(_per * perPrice <= player.allCoins);
         require(_per + player.coe <= 105);
         player.allCoins = player.allCoins - (_per * perPrice);
+        players[owner].allCoins = players[owner].allCoins +  (_per * perPrice)/10;
 
         player.coe = player.coe + _per;
     }
