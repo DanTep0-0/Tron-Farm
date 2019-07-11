@@ -291,8 +291,11 @@ body{
   #scQna, #scAboutFarm{
 
   }
-  .container, .qnaD, .tronFarmLogo{
+  .container, .qnaD{
     width: 800px;
+  }
+  .tronFarmLogo{
+    width: 650px;
   }
   .container, .qnaD{
     margin: 0 auto;
