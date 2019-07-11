@@ -334,6 +334,10 @@ body{
   font-size: 20px;
   margin: 15px 0;
 }
+.answer img{
+  position: relative;
+  top: 8px;
+}
 .SM{
   color: #873600;
   font-weight: bold;
