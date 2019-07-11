@@ -64,13 +64,14 @@ body{
 .hidden{
   text-align: center;
   display: none;
+  height: 90px;
 }
 .menuButton{
   background-color: black;
   border: none;
   font-size: 35px;
   color: white;
-  padding: 14px;
+  padding: 25px;
   cursor: pointer;
 }
 .menuDropdown{
@@ -78,15 +79,16 @@ body{
   background-color: white;
   min-width: 200px;
   width: 100%;
-  height: 216px;
+  /* overflow: hidden; */
   position: absolute;
 }
 .dropdownChild, .hidden .sc{
   color: black;
   text-decoration: none;
   display: block;
-  line-height: 70px;
-  font-size: 24px;
+  line-height: 110px;
+  height: 110px;
+  font-size: 30px;
   font-family: 'BigJohn';
   border-bottom: 3px solid #eee;
 }
@@ -98,7 +100,7 @@ body{
   transform: translateY(-2px);
 }
 .hidden #dop, .hidden #dop2{
-  height: 70px;
+  height: 110px;
 }
 .hidden:hover .menuDropdown{
   display: block;
@@ -263,7 +265,7 @@ body{
 /* ------------------------------DANYA'S PART------------------------------- */
 
   #qna, #aboutFarm{
-    width: 85%;
+    width: 65%;
     height: auto;
     background: rgba(255, 255, 255, 0.8);
     margin: 0 auto;
@@ -289,8 +291,11 @@ body{
   #scQna, #scAboutFarm{
 
   }
-  .container, .qnaD, .tronFarmLogo{
+  .container, .qnaD{
     width: 800px;
+  }
+  .tronFarmLogo{
+    width: 650px;
   }
   .container, .qnaD{
     margin: 0 auto;
@@ -376,6 +381,9 @@ hr{
     width: 165px;
     padding-left: 5px;
   }
+  #qna, #aboutFarm{
+    width: 75%;
+  }
 }
 @media (max-width: 1348px) {
   .menuFixed, .menuBottom{
@@ -386,6 +394,7 @@ hr{
   }
   #qna, #aboutFarm{
     background-color: white;
+    width: 85%;
   }
   #emailAdress{
     background: rgba(255, 255, 255, 0.8);
