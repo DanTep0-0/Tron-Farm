@@ -10,12 +10,7 @@ const openTronLink = () => {
 };
 
 const TronLinkGuide = props => {
-    const {
-        installed = false
-    } = props;
-
-    if(!installed) {
-        return (
+      return (
             <div className='tronLink' onClick={ openTronLink }>
               <h1 className = "unin">TronLink Required</h1>
               <img className = "logo2" src={ TronLinkLogo } alt='TronLink logo' />
@@ -31,24 +26,7 @@ const TronLinkGuide = props => {
                 </div>
             </div>
         );
-    }
 
-    return (
-        <div className='tronLink' title = "You must log in" onClick={ openTronLink } >
-          <h1>Log In Required</h1>
-          <img className = "logo" src={ TronLinkLogo } alt='TronLink logo' />
-            <div className='info'>
-                <p className = "text">
-                    TronLink is installed but you must first sign up/log in. Open TronLink
-                    from the browser bar and set up your first wallet or decrypt
-                    a previously-created one.
-                </p>
-                <p className = "warning">
-                  Otherwise, game won't work!!!
-                </p>
-            </div>
-        </div>
-    );
 };
 
 export default TronLinkGuide;

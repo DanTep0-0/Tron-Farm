@@ -4,17 +4,17 @@ contract TronFarm {
 
     uint constant coinPrice = 12500;
     uint constant animals = 5;
-    uint constant period = 2 minutes;
+    uint constant period = 1 hours;
 
     uint[animals] prices = [8800, 30000, 100000, 230400, 458800];
-    uint[animals] profit = [300, 1000, 4000, 8000, 16000];
+    uint[animals] profit = [23, 80, 272, 640, 1300];
     uint perPrice = 4500;
     uint startCoe = 100;
 
     uint public totalPlayers;
     uint public totalAnimals;
     uint public totalPayout;
-     address owner;
+    address owner;
 
     struct Player {
         uint coinsReturned;
