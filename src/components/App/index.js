@@ -528,38 +528,73 @@ class App extends React.Component {
 
             </div>
             <div className = "store">Store</div>
-
             <form className = "allani">
 
-              <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourChicks}/></div><div className = "cost"><div>Cost:</div>
-              <input className = "costI" defaultValue = "8,800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "23" /><img className = "coinfp1" src = {Coin}/>per hour</div></div>
-              <button className="buy" onClick={(event) => {event.preventDefault()
-                                                                 this.buy(0, this.state.ivch)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="chnumber" value = {this.state.ivch} onChange={e => this.setState({ivch: e.target.value})}/></div>
+              <div className = "animal chick">
+                <div className = "name">Chick</div><div className = "forImage"><img className = "image" src = {Chick}/></div>
+                <div className = "about">
+                  <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourChicks)}</p><hr></hr>
+                  <p className = "p">Cost:</p><p className="value">8,400<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">Profit / hour:</p><p className="value">11<img className = "ym" src = {Coin}/></p><hr></hr>
+                </div>
+                <button className="buy" onClick={(event) => {event.preventDefault();this.buy(0, this.state.ivch)}  }>buy</button>
+                <input min="1" step="1" className = "wa" type="number" name="chnumber" value = {this.state.ivch} onChange={e => this.setState({ivch: e.target.value})}/>
+              </div>
 
-                                                               <div className = "animal pig"><div className = "name">Pig</div><img className = "image" src = {Pig}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourPigs}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "30,000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "80" /><img className = "coinfp2" src = {Coin}/>per hour</div></div>
-                                                               <button className="buy" onClick={(event) => {event.preventDefault()
-                                                                 this.buy(1, this.state.ivpg)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="pgnumber" value = {this.state.ivpg} onChange={e => this.setState({ivpg: e.target.value})}/></div>
+              <div className = "animal pig">
+                <div className = "name">Pig</div><div className = "forImage"><img className = "image" src = {Pig}/></div>
+                <div className = "about">
+                  <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourPigs)}</p><hr></hr>
+                  <p className = "p">Cost:</p><p className="value">30,000<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">Profit / hour:</p><p className="value">40<img className = "ym" src = {Coin}/></p><hr></hr>
+                </div>
+                <button className="buy" onClick={(event) => {event.preventDefault();this.buy(1, this.state.ivpg)}  }>buy</button>
+                <input min="1" step="1" className = "wa" type="number" name="pgnumber" value = {this.state.ivpg} onChange={e => this.setState({ivpg: e.target.value})}/>
+              </div>
 
-                                                               <div className = "animal food"><button className="improveFood button1" onClick={(event) => {event.preventDefault()
-                                                                                                                    this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
-                                                                                                                  <input min="1" step="1" max="5" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/><div className = "pers">%</div>
-                                                                                                                <p className = "description">If you improve nutrition, you will receive more profit from all of your animals. This can increase profit by up to 5 percent.</p><div className = "cost2"><div>Cost:</div>
-                                                                                                                <input className = "costI2" defaultValue = "4,500" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourCoe}/><p className = "Pers">%</p></div></div>
+              <div className = "animal food">
+                <button className="improveFood button1" onClick={(event) => {event.preventDefault();this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
+                <input min="1" step="1" max="5" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/>
+                <div className = "pers">%</div>
+                <p className = "description">If you improve nutrition, you will receive more profit from all of your animals. This can increase profit by up to 5 percent.</p>
+                <div className = "about">
+                  <p className = "p">Cost:</p><p className = "value f">4,500<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourCoe)}%</p><hr></hr>
+                </div>
+              </div>
 
+              <div className = "animal sheep"><
+                div className = "name">Sheep</div><div className = "forImage"><img className = "image" src = {Sheep}/></div>
+                <div className = "about">
+                  <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourSheeps)}</p><hr></hr>
+                  <p className = "p">Cost:</p><p className = "value">100,000<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">Profit / hour:</p><p className = "value">136<img className = "ym" src = {Coin}/></p><hr></hr>
+                </div>
+                  <button className="buy" onClick={(event) => {event.preventDefault();this.buy(2, this.state.ivsh)}  }>buy</button>
+                  <input min="1" step="1" className = "wa" type="number" name="shnumber" value = {this.state.ivsh} onChange={e => this.setState({ivsh: e.target.value})}/>
+              </div>
 
+              <div className = "animal cow">
+                <div className = "name">Cow</div><div className = "forImage"><img className = "image" src = {Cow}/></div>
+                <div className = "about">
+                  <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourCows)}</p><hr></hr>
+                  <p className = "p">Cost:</p><p className = "value">230,400<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">Profit / hour:</p><p className = "value">320<img className = "ym" src = {Coin}/></p><hr></hr>
+                </div>
+                  <button className="buy" onClick={(event) => {event.preventDefault();this.buy(3, this.state.ivco)}  }>buy</button>
+                  <input min="1" step="1" className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/>
+              </div>
 
-              <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = {Sheep}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourSheeps}/></div><div className = "cost"><div>Cost:</div>
-              <input className = "costI" defaultValue = "100,000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "272" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
-                                                                 this.buy(2, this.state.ivsh)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="shnumber" value = {this.state.ivsh} onChange={e => this.setState({ivsh: e.target.value})}/></div>
-
-                                                               <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = {Cow}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourCows}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "230,400" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "640" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
-                                                                 this.buy(3, this.state.ivco)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
-
-                                                               <div className = "animal horse"><div className = "name">Horse</div><img className = "image" src = {Horse}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourHorses}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "458,800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "1,300" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
-                                                                 this.buy(4, this.state.ivge)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
+              <div className = "animal horse">
+                <div className = "name">Horse</div><div className = "forImage"><img className = "image" src = {Horse}/></div>
+                <div className = "about">
+                  <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourHorses)}</p><hr></hr>
+                  <p className = "p">Cost:</p><p className = "value">458,800<img className = "ym" src = {Coin}/></p><hr></hr>
+                  <p className = "p">Profit / hour:</p><p className = "value">650<img className = "ym" src = {Coin}/></p><hr></hr>
+                </div>
+                  <button className="buy" onClick={(event) => {event.preventDefault();this.buy(4, this.state.ivge)}  }>buy</button>
+                  <input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/>
+              </div>
             </form>
             </div>
           </div>

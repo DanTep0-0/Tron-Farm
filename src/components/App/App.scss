@@ -122,7 +122,7 @@ table{
   margin-left: 3px;
 }
 .valCoins1, .valCoins2{
-  margin-top: 17px;
+  margin-top: 14px;
 }
 .TRX{
   margin-top: 24px;
@@ -223,7 +223,7 @@ table{
 .value{
   float: right;
 }
-.infbo hr{
+.infbo hr, .animal hr{
   clear: both;
   border: none;
   border-bottom: 1px dashed #ccc;
@@ -231,6 +231,8 @@ table{
 .myMoney .name{
   clear: both;
   font-size: 30px;
+  margin: 5px 0;
+  width: 100%;
 }
 .myMoneyImg img{
   width: 150px;
@@ -246,9 +248,6 @@ table{
 .tw .wa{
   padding-left: 10px;
 }
-.chick .image {
-  margin: 5px 50px 0 50px;
-}
 .invest{
   float: left;
 }
@@ -260,14 +259,18 @@ table{
   top: 4px;
 }
 .name {
-  width: 100%;
-  font-size: 34px;
+  font-size: 30px;
   text-align: center;
   height: 50px;
-  // color: #814B00;
   color: #922B21;
   line-height: 50px;
-  margin: 5px 0;
+}
+.allani .name{
+  float: left;
+  margin: 10px 50px 0;
+}
+.forImage{
+  clear: both;
 }
 .image{
   height: 200px;
@@ -278,56 +281,11 @@ table{
   width: 100%;
   font-size: 22px;
   text-align: center;
-  padding: 5px;
+  padding: 5px 30px;
   box-sizing: border-box;
 }
 .mt15 {
   font-size: 26px;
-}
-.youHave, .profit, .cost, .cost2 {
-  float: left;
-  margin: 1px 0 0 15px;
-  clear: both;
-  border-bottom: 1px dashed #3d85c1;
-  height: 38px;
-  line-height: 38px;
-}
-.thisAnumber{
-  width: 50px;
-  height: 25px;
-}
-.cost div, .cost2 div, .profitI, .costI, .costI2, .profitp{
-  display: inline-block;
-}
-.cost2 div, .youHave{
-  font-size: 22px;
-}
-.cost2{
-  margin-top: 15px;
-}
-.profit{
-  font-size: 22px;
-}
-.profitI, .costI, .costI2, .thisAnumber{
-  padding-left: 10px;
-  background: none;
-  border: none;
-  font-size: 22px;
-}
-.profitI{
-  width: 55px;
-}
-.costI, .costI2{
-  width: 80px;
-}
-.coinfp2, .coinfp1{
-  position: relative;
-  top: 7px;
-  margin-right: 5px;
-}
-.coinfa, .coinfa2{
-  position: relative;
-  top: 5px;
 }
 // ------------------------------BUY BUTTON-------------------------------
 .buy{
@@ -408,17 +366,9 @@ table{
 }
 .description{
   font-size: 22px;
-  margin: 25px 10px 0 10px;
+  margin: 25px 10px 30px 10px;
   float: left;
 }
-.food .thisAnumber{
-  width: 50px;
-}
-.Pers{
-  display: inline-block;
-}
-
-
 
 
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
@@ -465,9 +415,6 @@ table{
   .infbo{
 
   }
-  // .wa{
-  //   border: 1px solid black;
-  // }
   .invest{
     width: auto;
   }
@@ -501,7 +448,7 @@ table{
   .aboutGame {
     margin-top: 90px;
   }
-  .num, .myMoney, .top, .costI2, .costI, .description, .about, .improveFood, .profit, .profitI, .pickUp, .cost2 div, .youHave, .thisAnumber{
+  .num, .myMoney, .top, .description, .about, .improveFood, .pickUp{
     font-size: 26px;
   }
   .animals, .ym{
@@ -522,6 +469,7 @@ table{
   }
   .allani .animal, .yourInf .animal{
     margin: 70px 0;
+    height: 480px;
   }
   .allani .horse{
     margin-bottom: 150px;
@@ -549,12 +497,6 @@ table{
     padding: 5px 50px;
     width: 100%;
   }
-  .youHave, .profit, .cost, .cost2 {
-    margin: 1px 0 0 0;
-    clear: both;
-    border-bottom: 1px solid #ccc;
-    float: none;
-  }
   .button2{
     margin: 25px 0 40px 55px;
     padding: 10px 40px;
@@ -572,12 +514,6 @@ table{
     height: 40px;
     font-size: 24px;
     border: 3px solid #ccc;
-  }
-  .profitI{
-    width: 60px;
-  }
-  .costI, .costI2{
-    width: 90px;
   }
   .buLa, .buLa2, .buLa3, .buLa4 {
     margin-top: 30px;
@@ -619,7 +555,7 @@ table{
     font-size: 28px;
   }
   .description{
-    margin: 70px auto 10px;
+    margin: 70px auto 30px;
     text-align: center;
     float: none;
     width: 75%;
@@ -675,7 +611,7 @@ table{
 }
 
 @media (max-width: 730px) {
-  .description, .top, .myMoney, .about, .improveFood, .profit, .pickUp, .costI, .costI2, .profitI, .cost2 div, .youHave, .thisAnumber{
+  .description, .top, .myMoney, .about, .improveFood, .pickUp{
     font-size: 22px;
   }
   .animals, .ym{
@@ -689,6 +625,9 @@ table{
   }
   .animal, .food {
     width: 350px;
+  }
+  .allani .animal, .yourInf .animal {
+    height: 460px;
   }
   .infbo{
     width: 362px;
@@ -766,7 +705,7 @@ table{
   .allani, .yourInf{
     width: 312px;
   }
-  .infbo, .top, .myMoney, .profitI, .thisAnumber, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
+  .infbo, .top, .myMoney, .about, .ifi, .button1, .button2, .pickUp, .description, .abgl {
     font-size: 20px;
   }
   .animals, .ym{
