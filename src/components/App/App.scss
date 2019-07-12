@@ -84,16 +84,14 @@ table{
   font-family: "BigJohn";
   background-color: white;
 }
-.abgl{
-  width: 15%;
-}
 .adm{
-  width: 24%;
+  width: 36%;
 }
-.adb{
-  width: 23%;
+.ads{
+  width: 12%;
 }
 .num{
+  font-size: 24px;
   margin-top: 10px;
   color: #922B21;
   border-width: 0;
@@ -128,6 +126,19 @@ table{
 .TRX{
   margin-top: 24px;
 }
+.dop{
+  font-size: 5px;
+  text-align: center;
+  height: auto;
+}
+.yourInf{
+  margin-left: calc(calc(100% - 1362px)/2);
+  margin-top: 50px;
+  height: auto;
+  animation-delay: 0.65s;
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+}
 // ------------------------------WITHDRAW-------------------------------
 .pickUp{
   padding: 5px 20px;
@@ -146,47 +157,6 @@ table{
 }
 .pickUp, .improveFood{
   border: 2px solid #4e0c05;
-}
-// ------------------------------MONEY TABLE-------------------------------
-.Infbo{
-  margin-left: 70px;
-  margin-top: 140px;
-  float: left;
-  border: 4px solid #b99d69;
-}
-.yitd{
-  width: 245px;
-  border: 2px solid #b99d69;
-  height: 200px;
-}
-.top{
-  height: 100px;
-  width: 100%;
-  background-color: white;
-  text-align: center;
-  line-height: 100px;
-  font-size: 22px;
-}
-.bottom{
-  height: 100px;
-  width: 100%;
-  background-color: #ffe6b8;
-  border: none;
-  font-size: 22px;
-  text-align: center;
-}
-.dop{
-  font-size: 5px;
-  text-align: center;
-  height: auto;
-}
-.yourInf{
-  margin-left: calc(calc(100% - 1362px)/2);
-  margin-top: 50px;
-  height: auto;
-  animation-delay: 0.65s;
-  animation-name: fadeIn;
-  -webkit-animation-name: fadeIn;
 }
 // ------------------------------STORE-------------------------------
 .allani{
@@ -219,6 +189,52 @@ table{
   border: 6px solid #5f98c9;
   text-align: center;
 }
+// ------------------------------MY MONEY-------------------------------------
+.infbo{
+  border-color: #b99d69;
+  font-size: 22px;
+  padding: 30px;
+  box-sizing: border-box;
+  width: 412px;
+}
+.top{
+  overflow: hidden;
+}
+.p{
+  float: left;
+  clear: both;
+}
+.p, .value{
+  margin: 6px 0;
+}
+.p:first-child, .f{
+  margin-top: 0;
+}
+.ym{
+  height: 22px;
+  top: 3px;
+  position: relative;
+}
+.value{
+  float: right;
+}
+.infbo hr{
+  clear: both;
+  border: none;
+  border-bottom: 1px dashed #ccc;
+}
+.myMoney .name{
+  clear: both;
+  font-size: 30px;
+}
+.myMoneyImg img{
+  width: 150px;
+  margin: 0 auto;
+}
+.time{
+
+}
+// ----------------------------------------------------------------------------
 .horse{
   margin-bottom: 140px;
 }
@@ -270,7 +286,7 @@ table{
   float: left;
   margin: 1px 0 0 15px;
   clear: both;
-  border-bottom: 1px solid #3d85c1;
+  border-bottom: 1px dashed #3d85c1;
   height: 38px;
   line-height: 38px;
 }
@@ -297,17 +313,17 @@ table{
   font-size: 22px;
 }
 .profitI{
-  width: 50px;
+  width: 55px;
 }
 .costI, .costI2{
-  width: 75px;
+  width: 80px;
 }
 .coinfp2, .coinfp1{
   position: relative;
   top: 7px;
   margin-right: 5px;
 }
-.coinfa, .coinfa2, .ym{
+.coinfa, .coinfa2{
   position: relative;
   top: 5px;
 }
@@ -406,6 +422,19 @@ table{
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
 @media (max-width: 1348px) {
+  .abgl{
+    width: 30%;
+    font-size: 26px;
+  }
+  .adm{
+    width: 100%;
+  }
+  .adb{
+    width: 30%;
+  }
+  .ads{
+    width: 20%;
+  }
   .yourInf{
     margin-top: 75px;
   }
@@ -432,9 +461,8 @@ table{
   .pers{
     margin-left: 185px;
   }
-  .Infbo{
-    margin: 70px 0 85px calc(calc(100% - 743px)/2);
-    clear: both;
+  .infbo{
+
   }
   // .wa{
   //   border: 1px solid black;
@@ -472,8 +500,8 @@ table{
   .account, .store{
     margin-left: 46%;
   }
-  .Infbo{
-    margin: 35px 0 85px 25%;
+  .infbo{
+
   }
   .abgl{
     font-size: 22px;
@@ -600,37 +628,29 @@ table{
     height: auto;
     overflow: hidden;
   }
-  .Infbo{
-    margin-bottom: 85px;
-  }
-  .yitd{
-    clear: both;
-    float: left;
+  .infbo{
+
   }
   .yourInf{
     overflow: hidden;
     height: auto;
   }
   .abgl{
-    width: 30%;
     font-size: 26px;
   }
-  .adm{
-    width: 40%;
-  }
-  .adb{
-    width: 50%;
+  .num{
+    font-size: 22px;
   }
 }
 
 @media (max-width: 850px) {
-  .animal, .food, .yitd, .ifi  {
+  .animal, .food, .ifi  {
     width: 550px;
   }
   .account, .store {
     margin-left: 55%;
   }
-  .animal, .Infbo {
+  .animal{
     margin-left: 38%;
   }
   .buLa, .buLa2, .buLa3, .buLa4 {
@@ -668,7 +688,7 @@ table{
   .account {
     margin-left: 58%;
   }
-  .animal, .Infbo {
+  .animal{
     margin-left: 51%;
   }
   .animal, .food, .yitd {
@@ -738,10 +758,10 @@ table{
   .num{
     font-size: 16px;
   }
-  .animal, .yitd, .invest .about, .ifi {
+  .animal, .invest .about, .ifi {
     width: 300px;
   }
-  .top, .profitI, .thisAnumber, .bottom, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
+  .infbo, .profitI, .thisAnumber, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
     font-size: 20px;
   }
   .name{
@@ -750,7 +770,7 @@ table{
   .account, .store {
     margin-left: 63%;
   }
-  .animal, .Infbo {
+  .animal{
     margin-left: 58%;
   }
   .button2{
@@ -768,13 +788,6 @@ table{
   .pers{
     font-size: 24px;
     margin-top: -40px;
-  }
-  .yitd{
-    height: 140px;
-  }
-  .top, .bottom{
-    height: 70px;
-    line-height: 70px;
   }
   .coin{
     position: relative;
@@ -800,7 +813,7 @@ table{
   .account, .store {
     margin-left: 65%;
   }
-  .animal, .Infbo {
+  .animal{
     margin-left: 60%;
   }
   .forQA{

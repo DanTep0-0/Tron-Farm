@@ -352,7 +352,7 @@ body{
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-hr{
+#qna hr{
   /* width: 60%;
   margin-left: 20%;
   border-top: 1px solid black; */
