@@ -483,6 +483,9 @@ table{
 }
 
 @media (max-width: 990px) {
+  .aboutGame {
+    margin-top: 90px;
+  }
   .num, .costI2, .costI, .description, .about, .improveFood, .profit, .profitI, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
     font-size: 26px;
   }

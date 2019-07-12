@@ -426,6 +426,9 @@ hr{
   }
 }
 @media (max-width: 990px) {
+  .divForLogo{
+    margin-top: 120px;
+  }
   .scBottom .contact, #emailAdress{
     /* font-size: 22px; */
     display: none;
