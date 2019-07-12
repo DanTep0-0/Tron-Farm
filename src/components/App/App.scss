@@ -101,13 +101,14 @@ table{
   text-align: center;
   font-size: 24px;
   padding: 5px;
-  // background-color: white;
   background-color: #f4cf86;
   width: 200px;
-  margin: 0 0 15px 557px;
-  // border: 2px solid #eee;
+  margin: 0 auto;
   border-radius: 5px;
   font-family: "BigJohn";
+}
+.account{
+  margin-top: 50px;
 }
 .buLa, .buLa2, .buLa3, .buLa4{
   margin-top: 13px;
@@ -132,13 +133,16 @@ table{
   height: auto;
 }
 .yourInf{
-  margin-left: calc(calc(100% - 1362px)/2);
-  margin-top: 50px;
-  height: auto;
+  overflow: hidden;
   animation-delay: 0.65s;
   animation-name: fadeIn;
   -webkit-animation-name: fadeIn;
+  margin-left: calc(calc(100% - 994px)/2);
 }
+// .flex{
+//   display: flex;
+//   align-items: center;
+// }
 // ------------------------------WITHDRAW-------------------------------
 .pickUp{
   padding: 5px 20px;
@@ -196,6 +200,7 @@ table{
   padding: 30px;
   box-sizing: border-box;
   width: 412px;
+  height: 472px;
 }
 .top{
   overflow: hidden;
@@ -232,14 +237,11 @@ table{
   margin: 0 auto;
 }
 .time{
-
+  padding-top: 10px;
 }
 // ----------------------------------------------------------------------------
 .horse{
   margin-bottom: 140px;
-}
-.tw{
-  margin: 35px 70px 45px 70px;
 }
 .tw .wa{
   padding-left: 10px;
@@ -421,7 +423,7 @@ table{
 
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
-@media (max-width: 1348px) {
+@media (max-width: 1378px) {
   .abgl{
     width: 30%;
     font-size: 26px;
@@ -435,9 +437,6 @@ table{
   .ads{
     width: 20%;
   }
-  .yourInf{
-    margin-top: 75px;
-  }
   .allani{
     margin-right: 0;
     margin-left: calc(calc(100% - 1332px)/2)
@@ -445,6 +444,8 @@ table{
   .animal{
     width: 350px;
     float: left;
+  }
+  .allani .animal{
     margin: 70px -100px 70px 230px;
   }
   .animalsp{
@@ -467,17 +468,11 @@ table{
   // .wa{
   //   border: 1px solid black;
   // }
-  .tw{
-    margin: 55px 0 70px calc(calc(100% - 354px)/2);
-  }
   .invest{
     width: auto;
   }
   .invest .about{
     padding: 5px 15px;
-  }
-  .account, .store{
-    margin: 0 0 15px calc(calc(100% - 214px)/2);
   }
   .button2{
     margin: 25px 40px 40px 45px;
@@ -490,21 +485,9 @@ table{
   }
 }
 
-@media (max-width: 1198px) {
-  .food, .horse{
-    margin: 70px 40%;
-  }
-  .tw{
-    margin: 55px 0 70px 41%;
-  }
-  .account, .store{
-    margin-left: 46%;
-  }
-  .infbo{
-
-  }
-  .abgl{
-    font-size: 22px;
+@media (max-width: 1006px) {
+  .yourInf{
+    margin-left: calc(calc(100% - 1010px)/2);
   }
 }
 
@@ -518,22 +501,43 @@ table{
   .aboutGame {
     margin-top: 90px;
   }
-  .num, .costI2, .costI, .description, .about, .improveFood, .profit, .profitI, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
+  .num, .myMoney, .top, .costI2, .costI, .description, .about, .improveFood, .profit, .profitI, .pickUp, .cost2 div, .youHave, .thisAnumber{
     font-size: 26px;
   }
-  .tw{
-    margin: 55px 0 70px 36%;
+  .animals, .ym{
+    height: 26px;
   }
   .account, .store{
-    margin-left: 49%;
     padding: 20px;
     font-size: 24px;
   }
-  .animal, .food, .Infbo{
-    margin: 70px 0 15px 30%;
+  .allani, .yourInf{
+    height: auto;
+    overflow: hidden;
+    width: 663px;
+    margin: 0 auto;
   }
-  .animal, .food, .yitd {
+  .yourInf{
+    width: 662px;
+  }
+  .allani .animal, .yourInf .animal{
+    margin: 70px 0;
+  }
+  .allani .horse{
+    margin-bottom: 150px;
+  }
+  .infbo{
+
+  }
+  .yourInf{
+    overflow: hidden;
+    height: auto;
+  }
+  .animal, .food {
     width: 650px;
+  }
+  .infbo{
+    width: 662px;
   }
   .horse{
     margin-bottom: 120px;
@@ -624,17 +628,6 @@ table{
     margin-top: 15px;
     margin-left: 50px;
   }
-  .allani{
-    height: auto;
-    overflow: hidden;
-  }
-  .infbo{
-
-  }
-  .yourInf{
-    overflow: hidden;
-    height: auto;
-  }
   .abgl{
     font-size: 26px;
   }
@@ -647,8 +640,11 @@ table{
   .animal, .food, .ifi  {
     width: 550px;
   }
-  .account, .store {
-    margin-left: 55%;
+  .infbo{
+    width: 562px;
+  }
+  .allani, .yourInf{
+    width: 562px;
   }
   .animal{
     margin-left: 38%;
@@ -679,20 +675,26 @@ table{
 }
 
 @media (max-width: 730px) {
-  .description, .about, .improveFood, .profit, .pickUp, .top, .bottom, .costI, .costI2, .profitI, .cost2 div, .youHave, .thisAnumber{
+  .description, .top, .myMoney, .about, .improveFood, .profit, .pickUp, .costI, .costI2, .profitI, .cost2 div, .youHave, .thisAnumber{
     font-size: 22px;
+  }
+  .animals, .ym{
+    height: 22px;
   }
   .num{
     font-size: 18px;
   }
-  .account {
-    margin-left: 58%;
-  }
   .animal{
     margin-left: 51%;
   }
-  .animal, .food, .yitd {
+  .animal, .food {
     width: 350px;
+  }
+  .infbo{
+    width: 362px;
+  }
+  .allani, .yourInf{
+    width: 362px;
   }
   .buy{
     height: 40px;
@@ -743,9 +745,6 @@ table{
 
 
 @media (max-width: 550px) {
-  .account, .store {
-    margin-left: 60%;
-  }
   .animal, .horse, .Infbo {
     margin-left: 53%;
   }
@@ -758,17 +757,23 @@ table{
   .num{
     font-size: 16px;
   }
-  .animal, .invest .about, .ifi {
+  .animal, .invest .about {
     width: 300px;
   }
-  .infbo, .profitI, .thisAnumber, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
+  .infbo{
+    width: 312px;
+  }
+  .allani, .yourInf{
+    width: 312px;
+  }
+  .infbo, .top, .myMoney, .profitI, .thisAnumber, .about, .ifi, .button1, .button2, .pickUp, .description, .youHave, .cost, .cost2 div, .costI, .costI2, .profit, .abgl {
     font-size: 20px;
+  }
+  .animals, .ym{
+    height: 20px;
   }
   .name{
     font-size: 28px;
-  }
-  .account, .store {
-    margin-left: 63%;
   }
   .animal{
     margin-left: 58%;
@@ -810,9 +815,6 @@ table{
 }
 
 @media (max-width: 435px) {
-  .account, .store {
-    margin-left: 65%;
-  }
   .animal{
     margin-left: 60%;
   }

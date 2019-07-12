@@ -499,8 +499,10 @@ class App extends React.Component {
               <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)}</p></li>
             </ul>
 
+            <div className = "account">My Account</div>
+
             <div className = "yourInf">
-              <div className = "account">My Account</div>
+
               <div className = "animal tw bgcn "><div className = "invest"><div className = "about">You have to buy coins to purchase animals</div><button className="improveFood button2" onClick={(event) => {event.preventDefault()
                 this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" placeholder = "0" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/><img className = "valCoins1" src = {Coin}/>
               <input min="0" className = "buLa2 wa" placeholder = "0" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/><div className = "TRX">TRX</div><div className = "about mt15 dop">1 TRX = 80
@@ -511,8 +513,8 @@ class App extends React.Component {
 
                 <div className = " animal tw infbo">
                   <div className="top">
-                  <p className="p">Animals on the farm:</p><p className="value f">{this.state.yourAllAnimals}<img src = {AnimalsP} className = "ym"/></p><hr></hr>
-                  <p className="p">Total profit per hour:</p><p className="value">{this.state.yourProfit}<img src = {Coin} className = "ym"/></p><hr></hr>
+                    <p className="p">Animals on the farm:</p><p className="value f">{this.state.yourAllAnimals}<img src = {AnimalsP} className = "ym"/></p><hr></hr>
+                    <p className="p">Total profit / hour:</p><p className="value">{this.state.yourProfit}<img src = {Coin} className = "ym"/></p><hr></hr>
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
@@ -524,10 +526,10 @@ class App extends React.Component {
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
 
-
             </div>
+            <div className = "store">Store</div>
+
             <form className = "allani">
-              <div className = "store">Store</div>
 
               <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourChicks}/></div><div className = "cost"><div>Cost:</div>
               <input className = "costI" defaultValue = "8,800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "23" /><img className = "coinfp1" src = {Coin}/>per hour</div></div>

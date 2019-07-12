@@ -245,7 +245,7 @@ body{
   position: absolute;
   z-index: 1;
   bottom: 18px;
-  right: 30%;
+  right: 32%;
   opacity: 0;
   transition: opacity 0.5s;
   font-size: 14px;
@@ -372,16 +372,8 @@ body{
 
 
 /* ---------------------------RESPONSIVE------------------------------- */
-/* @media (max-width: 2350px) {
-  .toolTipText{
-    right: 23vw;
-  }
-}
-@media (max-width: 2100px) {
-  .toolTipText{
-    right: 22.5vw;
-  }
-} */
+
+
 
 @media (max-width: 1550px) {
   #emailAdress{
@@ -437,13 +429,12 @@ body{
   .hidden{
     display: inline-block;
   }
-    #qna, #aboutFarm{
-      color: #333;
-    }
+  #qna, #aboutFarm{
+    color: #333;
+  }
   .buttonCopy{
     font-size: 24px;
-    width: 200px;
-    padding: 3px 10px;
+    padding: 3px 13px;
   }
   .btnText1{
     display: none;
@@ -452,7 +443,7 @@ body{
     display: inline-block;
   }
   .toolTipText{
-    right: 75%;
+    right: 84%;
   }
 }
 @media (max-width: 1050px) {
@@ -521,6 +512,14 @@ body{
   width: 120px;
   }
 }
+@media (max-width: 730px) {
+  .buttonCopy{
+    font-size: 20px;
+  }
+  .toolTipText{
+    right: 88%;
+  }
+}
 @media (max-width: 700px) {
   .tronFarmLogo, .container, .qnaD{
     width: 350px;
@@ -554,6 +553,10 @@ body{
   }
   #emailAdress{
   width: 60px;
+  }
+  .buttonCopy{
+    font-size: 18px;
+    padding: 3px 8px;
   }
 }
 
