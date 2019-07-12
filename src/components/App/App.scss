@@ -1,17 +1,12 @@
-.game{
-  // background-image: url('bg.jpg');
-  // position: fixed;
-  // height: 100%;
-  // width: 100%;
-  // top: 0;
-  // left: 0;
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: center center;
-  // opacity: 1;
+*{
+  color: #2b2b2b;
 }
+.game{
+
+}
+// ------------------------------BG-------------------------------
 .fixed-bg{
-  background-image: url('bg.jpg');
+  background-image: url('animebg.jpg');
   position: fixed;
   height: 100%;
   width: 100%;
@@ -31,6 +26,7 @@ table{
   border-spacing: 0;
   border-collapse: collapse;
 }
+// ------------------------------First page-------------------------------
 .forButton{
   width: 331px;
   margin: 0 auto 130px auto;
@@ -67,6 +63,7 @@ table{
   -webkit-transform: scale(1.06);
   transform: scale(1.06);
 }
+// ------------------------------STATS-------------------------------
 .aboutGame {
   width: 100%;
   overflow: hidden;
@@ -82,23 +79,32 @@ table{
   float: left;
   font-size: 24px;
   text-align: center;
-  border: 2px solid #eee;
+  border: 2px solid #f4cf86;
   box-sizing: border-box;
   font-family: "BigJohn";
   background-color: white;
+}
+.abgl{
+  width: 15%;
+}
+.adm{
+  width: 24%;
+}
+.adb{
+  width: 23%;
 }
 .num{
   margin-top: 10px;
   color: #922B21;
   border-width: 0;
 }
+// ------------------------------ACCOUNT, STORE-------------------------------
 .account, .store{
   text-align: center;
   font-size: 24px;
   padding: 5px;
   // background-color: white;
-  background-color: #fece00;
-  color: black;
+  background-color: #f4cf86;
   width: 200px;
   margin: 0 0 15px 557px;
   // border: 2px solid #eee;
@@ -122,6 +128,7 @@ table{
 .TRX{
   margin-top: 24px;
 }
+// ------------------------------WITHDRAW-------------------------------
 .pickUp{
   padding: 5px 20px;
   border-radius: 5px;
@@ -138,23 +145,24 @@ table{
   cursor: pointer;
 }
 .pickUp, .improveFood{
-  border: 2px solid #aaa;
+  border: 2px solid #4e0c05;
 }
+// ------------------------------MONEY TABLE-------------------------------
 .Infbo{
   margin-left: 70px;
   margin-top: 140px;
   float: left;
-  border: 4px solid #922B21;
+  border: 4px solid #b99d69;
 }
 .yitd{
   width: 245px;
-  border: 2px solid #922B21;
+  border: 2px solid #b99d69;
   height: 200px;
 }
 .top{
   height: 100px;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: white;
   text-align: center;
   line-height: 100px;
   font-size: 22px;
@@ -162,7 +170,7 @@ table{
 .bottom{
   height: 100px;
   width: 100%;
-  background-color: linen;
+  background-color: #ffe6b8;
   border: none;
   font-size: 22px;
   text-align: center;
@@ -180,6 +188,7 @@ table{
   animation-name: fadeIn;
   -webkit-animation-name: fadeIn;
 }
+// ------------------------------STORE-------------------------------
 .allani{
   height: auto;
   overflow: hidden;
@@ -204,10 +213,10 @@ table{
   height: 460px;
   width: 300px;
   margin: 70px 70px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: white;
   float: left;
   // border: 2px solid #ffffff;
-  border: 6px solid #ffffff;
+  border: 6px solid #5f98c9;
   text-align: center;
 }
 .horse{
@@ -261,7 +270,7 @@ table{
   float: left;
   margin: 1px 0 0 15px;
   clear: both;
-  border-bottom: 1px solid #888;
+  border-bottom: 1px solid #3d85c1;
   height: 38px;
   line-height: 38px;
 }
@@ -302,19 +311,22 @@ table{
   position: relative;
   top: 5px;
 }
+// ------------------------------BUY BUTTON-------------------------------
 .buy{
   background-color: white;
   height: 40px;
   width: 90px;
   margin: 10px 5px;
-  border: 2px solid #922B21;
+  border: 3px solid #b99d69;
   border-radius: 5px;
+  font-size: 18px;
 }
 .buy:hover{
-  color: #922B21;
+  color: #b99d69;
   font-weight: bold;
   cursor: pointer;
 }
+// -------------------------------------------------------------
 .wa{
   width: 80px;
   height: 30px;
@@ -331,6 +343,7 @@ table{
 .horse .wa{
   margin-left: 10px;
 }
+// ------------------------------IMPROVE BUTTON-------------------------------
 .improveFood {
   border-radius: 5px;
   background-color: #922B21;
@@ -352,6 +365,7 @@ table{
   padding: 5px 30px;
   float: left
 }
+// ------------------------------------------------------------
 .ifi {
   margin-top: 30px;
   float: left;
@@ -364,7 +378,7 @@ table{
   box-sizing: border-box;
 }
 .ifi, .mt15{
-  border: 3px solid #aaa;
+  border: 3px solid #5f98c9;
   border-left: none;
   border-right: none;
 }
@@ -392,15 +406,6 @@ table{
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
 @media (max-width: 1348px) {
-  .abgl{
-    width: 15%;
-  }
-  .adm{
-    width: 24%;
-  }
-  .adb{
-    width: 23%;
-  }
   .yourInf{
     margin-top: 75px;
   }
@@ -412,7 +417,6 @@ table{
     width: 350px;
     float: left;
     margin: 70px -100px 70px 230px;
-    // border-color: #922B21;
   }
   .animalsp{
     margin: 0;
@@ -489,9 +493,6 @@ table{
   .num, .costI2, .costI, .description, .about, .improveFood, .profit, .profitI, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
     font-size: 26px;
   }
-  .wa, .thisAnumber, .costI, .costI2, .profitI, .bottom{
-    color: #333;
-  }
   .tw{
     margin: 55px 0 70px 36%;
   }
@@ -500,31 +501,30 @@ table{
     padding: 20px;
     font-size: 24px;
   }
-  .animal{
-    border-color: #ccc;
-    background-color: white;
-    color: #333;
-  }
-  .animal, .food{
-    margin: 70px 0 15px 36%;
+  .animal, .food, .Infbo{
+    margin: 70px 0 15px 30%;
   }
   .animal, .food, .yitd {
-    width: 550px;
+    width: 650px;
+  }
+  .horse{
+    margin-bottom: 120px;
   }
   .name{
     margin: 0;
   }
   .about{
     padding: 5px 50px;
-    width: 550px;
+    width: 100%;
   }
   .youHave, .profit, .cost, .cost2 {
     margin: 1px 0 0 0;
     clear: both;
     border-bottom: 1px solid #ccc;
+    float: none;
   }
   .button2{
-    margin: 25px 0 40px 45px;
+    margin: 25px 0 40px 55px;
     padding: 10px 40px;
   }
   .button1{
@@ -549,10 +549,10 @@ table{
   }
   .buLa, .buLa2, .buLa3, .buLa4 {
     margin-top: 30px;
-    margin-left: 20px;
+    margin-left: 40px;
   }
   .buLa3, .buLa4{
-    margin-left: 70px;
+    margin-left: 120px;
   }
   .valCoins1, .valCoins2{
     margin-top: 35px;
@@ -567,7 +567,7 @@ table{
     font-size: 26px;
   }
   .pickUp{
-    margin: -18px 80px 0 0;
+    margin: -18px 110px 0 0;
     clear: both;
     padding: 15px 40px;
   }
@@ -575,36 +575,33 @@ table{
     background-color: white;
     color: #922B21;
   }
-  .yitd, .Infbo{
-    border-color: #ccc;
-  }
   .ifi{
-    width: 550px;
+    width: 650px;
     font-size: 28px;
     height: 50px;
     margin-top: 0;
   }
   .pers{
-    margin-left: 305px;
+    margin-left: 330px;
     margin-top: -42px;
     font-size: 28px;
   }
   .description{
-    margin: 25px 10px 0 10px;
+    margin: 70px auto 10px;
+    text-align: center;
+    float: none;
+    width: 75%;
   }
   .cost2, .food .youHave{
     margin-top: 15px;
     margin-left: 50px;
-  }
-  .horse{
-    margin: 70px 0 120px 36%;
   }
   .allani{
     height: auto;
     overflow: hidden;
   }
   .Infbo{
-    margin: 70px 0 85px 36%;
+    margin-bottom: 85px;
   }
   .yitd{
     clear: both;
@@ -626,12 +623,27 @@ table{
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
+  .animal, .food, .yitd, .ifi  {
+    width: 550px;
+  }
   .account, .store {
     margin-left: 55%;
   }
   .animal, .Infbo {
-    margin-left: 40%;
+    margin-left: 38%;
+  }
+  .buLa, .buLa2, .buLa3, .buLa4 {
+    margin-left: 20px;
+  }
+  .buLa3, .buLa4{
+    margin-left: 50px;
+  }
+  .button2{
+    margin: 25px 0 40px 45px;
+  }
+  .pickUp{
+    margin-right: 70px;
   }
   .play{
     padding: 15px 90px;
@@ -646,8 +658,8 @@ table{
   }
 }
 
-@media (max-width: 630px) {
-  .description, .about, .improveFood, .profit, .pickUp, .top, .bottom, .cost2 div, .youHave, .thisAnumber{
+@media (max-width: 730px) {
+  .description, .about, .improveFood, .profit, .pickUp, .top, .bottom, .costI, .costI2, .profitI, .cost2 div, .youHave, .thisAnumber{
     font-size: 22px;
   }
   .num{
@@ -673,7 +685,7 @@ table{
     padding-left: 20px;
   }
   .wa, .buy{
-    font-size: 14px;
+    font-size: 18px;
   }
   .about, .ifi {
     width: 350px;
@@ -706,9 +718,6 @@ table{
   }
   .pers{
     margin-left: 195px;
-  }
-  .description{
-    margin: 25px 10px 0 10px;
   }
 }
 
