@@ -84,16 +84,14 @@ table{
   font-family: "BigJohn";
   background-color: white;
 }
-.abgl{
-  width: 15%;
-}
 .adm{
-  width: 24%;
+  width: 36%;
 }
-.adb{
-  width: 23%;
+.ads{
+  width: 12%;
 }
 .num{
+  font-size: 24px;
   margin-top: 10px;
   color: #922B21;
   border-width: 0;
@@ -127,6 +125,19 @@ table{
 }
 .TRX{
   margin-top: 24px;
+}
+.dop{
+  font-size: 5px;
+  text-align: center;
+  height: auto;
+}
+.yourInf{
+  margin-left: calc(calc(100% - 1362px)/2);
+  margin-top: 50px;
+  height: auto;
+  animation-delay: 0.65s;
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
 }
 // ------------------------------WITHDRAW-------------------------------
 .pickUp{
@@ -174,19 +185,6 @@ table{
   border: none;
   font-size: 22px;
   text-align: center;
-}
-.dop{
-  font-size: 5px;
-  text-align: center;
-  height: auto;
-}
-.yourInf{
-  margin-left: calc(calc(100% - 1362px)/2);
-  margin-top: 50px;
-  height: auto;
-  animation-delay: 0.65s;
-  animation-name: fadeIn;
-  -webkit-animation-name: fadeIn;
 }
 // ------------------------------STORE-------------------------------
 .allani{
@@ -297,10 +295,10 @@ table{
   font-size: 22px;
 }
 .profitI{
-  width: 50px;
+  width: 55px;
 }
 .costI, .costI2{
-  width: 75px;
+  width: 80px;
 }
 .coinfp2, .coinfp1{
   position: relative;
@@ -406,6 +404,19 @@ table{
 // ----------------------ADAPTIVE + RESPONSIVE DESIGN--------------------------
 
 @media (max-width: 1348px) {
+  .abgl{
+    width: 30%;
+    font-size: 26px;
+  }
+  .adm{
+    width: 100%;
+  }
+  .adb{
+    width: 30%;
+  }
+  .ads{
+    width: 20%;
+  }
   .yourInf{
     margin-top: 75px;
   }
@@ -612,15 +623,17 @@ table{
     height: auto;
   }
   .abgl{
-    width: 30%;
     font-size: 26px;
   }
-  .adm{
-    width: 40%;
+  .num{
+    font-size: 22px;
   }
-  .adb{
-    width: 50%;
-  }
+  // .adm{
+  //   width: 40%;
+  // }
+  // .adb{
+  //   width: 50%;
+  // }
 }
 
 @media (max-width: 850px) {
