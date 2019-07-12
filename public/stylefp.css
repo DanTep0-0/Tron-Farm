@@ -334,6 +334,10 @@ body{
   font-size: 20px;
   margin: 15px 0;
 }
+.answer img{
+  position: relative;
+  top: 8px;
+}
 .SM{
   color: #873600;
   font-weight: bold;
@@ -422,6 +426,9 @@ hr{
   }
 }
 @media (max-width: 990px) {
+  .divForLogo{
+    margin-top: 120px;
+  }
   .scBottom .contact, #emailAdress{
     /* font-size: 22px; */
     display: none;
