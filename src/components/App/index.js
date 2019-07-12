@@ -9,6 +9,8 @@ import Sheep from './sheep.png';
 import Cow from './cow.png';
 import Horse from './horse.png';
 import Coin from './coin.png';
+import Money from './money.png';
+import AnimalsP from './animals.png';
 
 
 import './App.scss';
@@ -491,17 +493,17 @@ class App extends React.Component {
                 <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
                     this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
 
-                <div className = "Infbo">
+                <div className = " animal tw infbo">
                   <div className="top">
-                  <p>Animals on the farm:</p><p className="value">{this.state.yourAllAnimals}</p>
-                  <p>Total profit per hour:</p><p className="value">{this.state.yourProfit}</p>
+                  <p className="p">Animals on the farm:</p><p className="value f">{this.state.yourAllAnimals}<img src = {AnimalsP} className = "ym"/></p><hr></hr>
+                  <p className="p">Total profit per hour:</p><p className="value">{this.state.yourProfit}<img src = {Coin} className = "ym"/></p><hr></hr>
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"></div>
-                    <p>Available:</p><p className="value">{this.beauty(this.state.allMoney)}</p><img src = {Coin} className = "ym"/>
-                    <p>Returned:</p><p className="value">{this.beauty(this.state.returnedMoney)}</p><img src = {Coin} className = "ym"/>
-                    <p>Invested:</p><p className="value">{this.beauty(this.state.investedMoney)}</p><img src = {Coin} className = "ym"/>
+                    <div className="myMoneyImg"><img src = {Money}/></div>
+                    <p className="p">Available:</p><p className="value">{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym"/></p><hr></hr>
+                    <p className="p">Returned:</p><p className="value">{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym"/></p><hr></hr>
+                    <p className="p">Invested:</p><p className="value">{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym"/></p><hr></hr>
                   </div>
                   <div className="time"></div>
                 </div>
