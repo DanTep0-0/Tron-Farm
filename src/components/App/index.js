@@ -61,7 +61,7 @@ class App extends React.Component {
               yourHorses: '0',
               yourTime: '0',
               yourAllAnimals: '0',
-              yourProfit: '0'
+              yourProfit: '0',
               val: 0,
               yourAddressMoney: 0,
               timer: '',
@@ -152,12 +152,12 @@ class App extends React.Component {
     }
 
 
-    checkForClick(){
+    async checkForClick(){
       if(isClicked){
         clearInterval(this.state.timer);
         if(this.state.TronLinkValue == 1){
           if(!!window.tronWeb && window.tronWeb.ready){
-            this.setState({TronLinkValue: 0});
+            await this.fetchData();
               this.play();
           }
         }else{
@@ -193,13 +193,12 @@ class App extends React.Component {
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
       var result2 = contractBalance/80 + result3;
-      result5 = result5.slice(0, 12);
       this.setState({
         Players: result1,
-        Invested: result2 + ' TRX',
-        PaidOut: result3 + ' TRX',
+        Invested: Math.ceil(result2) + ' TRX',
+        PaidOut: Math.ceil(result3) + ' TRX',
         Animals: result4,
-        Address: result5 + '...'
+        Address: result5
       });
     }
 
@@ -269,6 +268,8 @@ class App extends React.Component {
         var playerAllCoins = player.allCoins;
         var timePassed = contractTime-Number(this.state.yourTime);
         var profitOfPlayer=0;
+        var animals = new Array();
+        animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
                for(var f=0; f<5;f++){
                   profitOfPlayer += animals[f]*profit[f];
                 }
@@ -276,8 +277,6 @@ class App extends React.Component {
                 if(!profitOfPlayer){profitOfPlayer=0;}
         if(contractBalance>playerAllCoins){
         contractBalance -= playerAllCoins;
-        var animals = new Array();
-        animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>=contractBalance){
@@ -302,22 +301,18 @@ class App extends React.Component {
 }
 
     async play(){
-      var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
-      result5 = result5.slice(0, 12);
-      this.setState({Address: result5 + '...'});
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
-          console.log("here1");
           if(this.state.TronLinkValue==1){
-          if(!this.state.Players == "..." || !this.state.Invested == "..." || !this.state.PaidOut == "..." || !this.state.Animals == "..."){
+          if(!(this.state.Players === "...") || !(this.state.Invested === "...") || !(this.state.PaidOut === "...") || !(this.state.Animals === "...")){
+            this.setState({TronLinkValue: 0});
             this.playVisible();
             break ifPart;
-      }else{await this.fetchData();return;}
+      }else{return;}
     }
     this.playVisible();
       }else{
         if(!(await window.tronWeb) || !(await window.tronWeb.ready)){
           this.setState({TronLinkValue: 1});
-          console.log("here");
           isClicked = true;
           return;
       }
@@ -337,8 +332,12 @@ class App extends React.Component {
       document.querySelector('.menuBottom').classList.remove('dnone');
     }
 
+      beauty(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
     async dep(value){
-      this.setState({valueDep: '0',valueDepTRX: '0',});
+      this.setState({valueDep: '',valueDepTRX: '',});
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
             var totalBalance;
@@ -346,7 +345,7 @@ class App extends React.Component {
             totalBalance = result;
             if(totalBalance >= value*12500){
             await Utils.contract.deposit().send({
-              shouldPollResponse: false,
+              shouldPollResponse: true,
               callValue: value*12500});
               Swal({
                   title:'Transaction Sent',
@@ -477,10 +476,10 @@ class App extends React.Component {
           <div className = "game dnone">
             <ul className = "aboutGame">
               <li className = "abgl adm">Your Address:<p className = "num">{this.state.Address}</p></li>
-              <li className = "abgl ads">Players:<p className = "num">{this.state.Players}</p></li>
-              <li className = "abgl ads">Animals:<p className = "num">{this.state.Animals}</p></li>
-              <li className = "abgl adb">Invested:<p className = "num">{this.state.Invested}</p></li>
-              <li className = "abgl adb">Paid Out:<p className = "num">{this.state.PaidOut}</p></li>
+              <li className = "abgl ads">Players:<p className = "num">{this.beauty(this.state.Players)}</p></li>
+              <li className = "abgl ads">Animals:<p className = "num">{this.beauty(this.state.Animals)}</p></li>
+              <li className = "abgl adb">Invested:<p className = "num">{this.beauty(this.state.Invested)}</p></li>
+              <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)}</p></li>
             </ul>
             <div className = "yourInf">
               <div className = "account">My Account</div>
@@ -494,9 +493,9 @@ class App extends React.Component {
                   <table className = "Infbo">
                     <tbody>
                     <tr className = "yourInftr1">
-                      <td className = "yitd" ><div className = "top">My Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.allMoney}/></td>
-                      <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.investedMoney}/></td>
-                      <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.returnedMoney}/></td>
+                      <td className = "yitd" ><div className = "top">My Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.allMoney)}/></td>
+                      <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.investedMoney)}/></td>
+                      <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.returnedMoney)}/></td>
                       //profit = {this.state.yourProfit}
                       //animals = {this.state.yourAllAnimals}
                   </tr>
@@ -507,12 +506,12 @@ class App extends React.Component {
               <div className = "store">Store</div>
 
               <div className = "animal chick"><div className = "name">Chick</div><img className = "image" src = {Chick}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readonly value = {this.state.yourChicks}/></div><div className = "cost"><div>Cost:</div>
-              <input className = "costI" defaultValue = "8800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "23" /><img className = "coinfp1" src = {Coin}/>per hour</div></div>
+              <input className = "costI" defaultValue = "8,800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "23" /><img className = "coinfp1" src = {Coin}/>per hour</div></div>
               <button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(0, this.state.ivch)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="chnumber" value = {this.state.ivch} onChange={e => this.setState({ivch: e.target.value})}/></div>
 
                                                                <div className = "animal pig"><div className = "name">Pig</div><img className = "image" src = {Pig}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readonly value = {this.state.yourPigs}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "30000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "80" /><img className = "coinfp2" src = {Coin}/>per hour</div></div>
+                                                               <input className = "costI" defaultValue = "30,000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "80" /><img className = "coinfp2" src = {Coin}/>per hour</div></div>
                                                                <button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(1, this.state.ivpg)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="pgnumber" value = {this.state.ivpg} onChange={e => this.setState({ivpg: e.target.value})}/></div>
 
@@ -520,20 +519,20 @@ class App extends React.Component {
                                                                                                                     this.improveFood(this.state.ivper)}  }>Improve Nutrition</button>
                                                                                                                   <input min="1" step="1" max="5" className = "ifi wa" type="number" name="pernumber" value={this.state.ivper} onChange={e => this.setState({ivper: e.target.value})}/><div className = "pers">%</div>
                                                                                                                 <p className = "description">If you improve nutrition, you will receive more profit from all of your animals. This can increase profit by up to 5 percent.</p><div className = "cost2"><div>Cost:</div>
-                                                                                                                <input className = "costI2" defaultValue = "4500" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourCoe}/><p className = "Pers">%</p></div></div>
+                                                                                                                <input className = "costI2" defaultValue = "4,500" /><img className = "coinfa2" src = {Coin}/></div><div className = "youHave">You have:<input className = "thisAnumber" readOnly value = {this.state.yourCoe}/><p className = "Pers">%</p></div></div>
 
 
 
               <div className = "animal sheep"><div className = "name">Sheep</div><img className = "image" src = {Sheep}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readonly value = {this.state.yourSheeps}/></div><div className = "cost"><div>Cost:</div>
-              <input className = "costI" defaultValue = "100000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "272" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
+              <input className = "costI" defaultValue = "100,000" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "272" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(2, this.state.ivsh)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="shnumber" value = {this.state.ivsh} onChange={e => this.setState({ivsh: e.target.value})}/></div>
 
                                                                <div className = "animal cow"><div className = "name">Cow</div><img className = "image" src = {Cow}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readonly value = {this.state.yourCows}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "230400" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "640" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <input className = "costI" defaultValue = "230,400" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "640" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(3, this.state.ivco)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="conumber" value = {this.state.ivco} onChange={e => this.setState({ivco: e.target.value})}/></div>
 
                                                                <div className = "animal horse"><div className = "name">Horse</div><img className = "image" src = {Horse}/><div className = "about"><div className = "youHave">You have:<input className = "thisAnumber" readonly value = {this.state.yourHorses}/></div><div className = "cost"><div>Cost:</div>
-                                                               <input className = "costI" defaultValue = "458800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "1300" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
+                                                               <input className = "costI" defaultValue = "458,800" /><img className = "coinfa" src = {Coin}/></div><div className = "profit"><div className = "profitp">Profit:</div><input className = "profitI" defaultValue = "1,300" /><img className = "coinfp2" src = {Coin}/>per hour</div></div><button className="buy" onClick={(event) => {event.preventDefault()
                                                                  this.buy(4, this.state.ivge)}  }>buy</button><input min="1" step="1" className = "wa" type="number" name="genumber" value = {this.state.ivge} onChange={e => this.setState({ivge: e.target.value})}/></div>
             </form>
             </div>
