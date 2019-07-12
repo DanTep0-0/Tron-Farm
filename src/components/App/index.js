@@ -66,7 +66,8 @@ class App extends React.Component {
               yourAddressMoney: 0,
               timer: '',
               timer2: '',
-              TronLinkValue: ''
+              TronLinkValue: '',
+              timeLeft: ''
 
             }
                     this.state.timer = setInterval(() => {
@@ -298,7 +299,21 @@ class App extends React.Component {
             const timer = setTimeout(() => {
                 this.calcMoney();
               }, wait);
+        this.state.Timer = setInterval(() => {
+            this.calcTime();
+          }, 1000);
 }
+
+        calcTime(){
+          var contractTime = new Date();
+          contractTime = contractTime.getTime()/1000 >> 0;
+          var timePassed = contractTime-Number(this.state.yourTime);
+          var timeLeft = (period - (timePassed % period));
+          var minutesLeft = timeLeft/60>>0;
+          var secondsLeft = timeLeft-(minutesLeft*60);
+          if(secondsLeft<10){secondsLeft = "0"+secondsLeft}
+          this.setState({timeLeft: minutesLeft + " : " + secondsLeft});
+        }
 
     async play(){
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
@@ -493,11 +508,12 @@ class App extends React.Component {
                   <table className = "Infbo">
                     <tbody>
                     <tr className = "yourInftr1">
-                      <td className = "yitd" ><div className = "top">My Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.allMoney)}/></td>
-                      <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.investedMoney)}/></td>
-                      <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.beauty(this.state.returnedMoney)}/></td>
+                      <td className = "yitd" ><div className = "top">My Money(<img src = {Coin} className = "ym"/>)</div><p className = "bottom">{this.beauty(this.state.allMoney)}</p></td>
+                      <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><p className = "bottom">{this.beauty(this.state.investedMoney)}</p></td>
+                      <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><p className = "bottom">{this.beauty(this.state.returnedMoney)}</p></td>
                       //profit = {this.state.yourProfit}
                       //animals = {this.state.yourAllAnimals}
+                      //timeLeft = {this.state.timeLeft}
                   </tr>
                     </tbody>
                   </table>
