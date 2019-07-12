@@ -60,6 +60,8 @@ class App extends React.Component {
               yourCows: '0',
               yourHorses: '0',
               yourTime: '0',
+              yourAllAnimals: '0',
+              yourProfit: '0'
               val: 0,
               yourAddressMoney: 0,
               timer: '',
@@ -266,26 +268,32 @@ class App extends React.Component {
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
         var timePassed = contractTime-Number(this.state.yourTime);
-        if(contractBalance>playerAllCoins){
-        contractBalance -= playerAllCoins;
-        var animals = new Array();
-        animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
         var profitOfPlayer=0;
                for(var f=0; f<5;f++){
                   profitOfPlayer += animals[f]*profit[f];
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
+        if(contractBalance>playerAllCoins){
+        contractBalance -= playerAllCoins;
+        var animals = new Array();
+        animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>=contractBalance){
                   Added = contractBalance
                 }
-                this.setState({allMoney: Number(playerAllCoins)+Added});
+                this.setState({allMoney: Number(playerAllCoins)+Added,
+                  yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
+                  yourProfit:profitOfPlayer
+                });
         }else if(contractBalance==playerAllCoins){}
         else if(contractBalance<playerAllCoins){
 
-          this.setState({allMoney: contractBalance});
+          this.setState({allMoney: contractBalance,
+            yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
+            yourProfit:profitOfPlayer
+          });
         }
         var wait = (period - (timePassed % period))*1000;
             const timer = setTimeout(() => {
@@ -298,6 +306,7 @@ class App extends React.Component {
       result5 = result5.slice(0, 12);
       this.setState({Address: result5 + '...'});
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
+          console.log("here1");
           if(this.state.TronLinkValue==1){
           if(!this.state.Players == "..." || !this.state.Invested == "..." || !this.state.PaidOut == "..." || !this.state.Animals == "..."){
             this.playVisible();
@@ -308,6 +317,7 @@ class App extends React.Component {
       }else{
         if(!(await window.tronWeb) || !(await window.tronWeb.ready)){
           this.setState({TronLinkValue: 1});
+          console.log("here");
           isClicked = true;
           return;
       }
@@ -487,7 +497,9 @@ class App extends React.Component {
                       <td className = "yitd" ><div className = "top">My Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.allMoney}/></td>
                       <td className = "yitd" ><div className = "top">Invested Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.investedMoney}/></td>
                       <td className = "yitd" ><div className = "top">Returned Money(<img src = {Coin} className = "ym"/>)</div><input className = "bottom" readonly value = {this.state.returnedMoney}/></td>
-                    </tr>
+                      //profit = {this.state.yourProfit}
+                      //animals = {this.state.yourAllAnimals}
+                  </tr>
                     </tbody>
                   </table>
             </div>
