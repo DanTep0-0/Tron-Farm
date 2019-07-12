@@ -68,7 +68,8 @@ class App extends React.Component {
               yourAddressMoney: 0,
               timer: '',
               timer2: '',
-              TronLinkValue: ''
+              TronLinkValue: '',
+              timeLeft: ''
 
             }
                     this.state.timer = setInterval(() => {
@@ -300,7 +301,21 @@ class App extends React.Component {
             const timer = setTimeout(() => {
                 this.calcMoney();
               }, wait);
+        this.state.Timer = setInterval(() => {
+            this.calcTime();
+          }, 1000);
 }
+
+        calcTime(){
+          var contractTime = new Date();
+          contractTime = contractTime.getTime()/1000 >> 0;
+          var timePassed = contractTime-Number(this.state.yourTime);
+          var timeLeft = (period - (timePassed % period));
+          var minutesLeft = timeLeft/60>>0;
+          var secondsLeft = timeLeft-(minutesLeft*60);
+          if(secondsLeft<10){secondsLeft = "0"+secondsLeft}
+          this.setState({timeLeft: minutesLeft + " : " + secondsLeft});
+        }
 
     async play(){
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
@@ -493,6 +508,7 @@ class App extends React.Component {
                 <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
                     this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
 
+
                 <div className = " animal tw infbo">
                   <div className="top">
                   <p className="p">Animals on the farm:</p><p className="value f">{this.state.yourAllAnimals}<img src = {AnimalsP} className = "ym"/></p><hr></hr>
@@ -505,8 +521,10 @@ class App extends React.Component {
                     <p className="p">Returned:</p><p className="value">{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym"/></p><hr></hr>
                     <p className="p">Invested:</p><p className="value">{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym"/></p><hr></hr>
                   </div>
-                  <div className="time"></div>
+                  <div className="time">{this.state.timeLeft}</div>
                 </div>
+
+
             </div>
             <form className = "allani">
               <div className = "store">Store</div>
