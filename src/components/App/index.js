@@ -276,29 +276,21 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-        if(contractBalance>playerAllCoins){
         contractBalance -= playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>=contractBalance){
+                  if(!this.state.isEnd){
                   Swal({
                       html: "<b>Money of the game is less than your money in the game so you can`t withdraw all of them</b>",
                       type: 'warning'
 
                   });
-                }
+                }}
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer
                 });
-        }else if(contractBalance===playerAllCoins){}
-        else if(contractBalance<playerAllCoins){
-
-          this.setState({allMoney: contractBalance,
-            yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
-            yourProfit:profitOfPlayer
-          });
-        }
           if(contractBalance!=0 && profitOfPlayer!=0){
             this.state.Timer = setInterval(() => {
               this.calcTime();
