@@ -18,13 +18,13 @@ import './App.scss';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(now)
+const contractAddress = 'TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(now)
 var isClicked = false;
 var period = 120;
 var contractBalance;
-var profit = [300, 1000, 4000, 8000, 1600];
-var prices = [8800, 30000, 100000, 230400, 458800];
+var profit = [11, 40, 136, 320, 650];
+var prices = [8400, 30000, 100000, 230400, 458800];
 
 class App extends React.Component {
 
@@ -69,7 +69,8 @@ class App extends React.Component {
               timer: '',
               timer2: '',
               TronLinkValue: '',
-              timeLeft: ''
+              timeLeft: '',
+              isEnd: false
 
             }
                     this.state.timer = setInterval(() => {
@@ -216,6 +217,11 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+      if(Number(this.state.Players)!=0){
+        if(contractBalance===0){
+          this.setState({isEnd: true});
+          this.gameEnd();
+      }}
       var contractTime = new Date();
       contractTime = contractTime.getTime()/1000 >> 0;
       var player = new Object();
@@ -232,7 +238,6 @@ class App extends React.Component {
       var result6 = animals[2];
       var result7 = animals[3];
       var result8 = animals[4];
-      if(contractBalance>0){
       this.setState({
       allMoney: result1,
       investedMoney: result2,
@@ -247,27 +252,15 @@ class App extends React.Component {
 
     });
       await this.calcMoney();
-    }else{
-      this.setState({
-      allMoney: 0,
-      investedMoney: result2,
-      returnedMoney: result3,
-      yourCoe: result9,
-      yourChicks: result4,
-      yourPigs: result5,
-      yourSheeps: result6,
-      yourCows: result7,
-      yourHorses: result8,
-      yourTime: result10
-
-    });
-    }
   }
 
   async calcMoney(){
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         var contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
+        console.log(contractTime);
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
+        console.log(contractTime);
         var player = new Object();
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -339,7 +332,7 @@ class App extends React.Component {
         await this.fetchData();
         if(this.state.TronLinkValue===1){return;}
         await this.fetchYourData();
-        isClicked = true;
+        isClicked = false;
     }
 
     playVisible(){
@@ -357,6 +350,7 @@ class App extends React.Component {
 
     async dep(value){
       this.setState({valueDep: '',valueDepTRX: '',});
+      if(!this.state.isEnd){
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
             var totalBalance;
@@ -383,10 +377,12 @@ class App extends React.Component {
           const timer = setTimeout(() => this.fetchData(), 6000);
           const timer2 = setTimeout(() => this.fetchYourData(), 6000);
     }
+  }else{this.gameEnd();}
   }
 
     async buy(type, num){
         this.setState({ivch: '1',ivpg: '1',ivsh: '1',ivco: '1',ivge: '1'});
+        if(!this.state.isEnd){
         if (num > 0){
           if(Number(this.state.allMoney)>=prices[Number(type)]*num){
           await Utils.contract.buy(type, num).send({
@@ -408,9 +404,11 @@ class App extends React.Component {
           })
         }
     }
+  }else{this.gameEnd();}
 }
     async improveFood(per){
       this.setState({ivper:1});
+      if(!this.state.isEnd){
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
         if(Number(per)*4500<=Number(this.state.allMoney)){
         await Utils.contract.setCoe(per).send({
@@ -441,10 +439,12 @@ class App extends React.Component {
        );
 
      }
+   }else{this.gameEnd();}
     }
 
     async pickUp(coins){
       this.setState({puv: 0,puvTRX: 0});
+      if(!this.state.isEnd){
       if(coins > 0){
         if(Number(coins)<=Number(this.state.allMoney)){
         await Utils.contract.withdraw(coins).send({
@@ -465,6 +465,16 @@ class App extends React.Component {
 
       })}
       }
+    }else{this.gameEnd();}
+    }
+
+    gameEnd(){
+      Swal({
+          title:'Game over',
+          text: 'Money of the game have ended',
+          type: 'error'
+
+      });
     }
 
     visible(){

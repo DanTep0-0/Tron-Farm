@@ -4,17 +4,18 @@ contract TronFarm {
 
     uint constant coinPrice = 12500;
     uint constant animals = 5;
-    uint constant period = 1 hours;
+    uint constant period = 2 minutes ;
 
-    uint[animals] prices = [8800, 30000, 100000, 230400, 458800];
-    uint[animals] profit = [23, 80, 272, 640, 1300];
+    uint[animals] prices = [8400, 30000, 100000, 230400, 458800];
+    uint[animals] profit = [11, 40, 136, 320, 650];
     uint perPrice = 4500;
     uint startCoe = 100;
 
+    uint public last;
     uint public totalPlayers;
     uint public totalAnimals;
     uint public totalPayout;
-    address owner;
+    address public owner;
 
     struct Player {
         uint coinsReturned;
@@ -29,6 +30,7 @@ contract TronFarm {
 
     constructor() public {
         owner = msg.sender;
+        last = now;
     }
 
     function deposit() public payable returns(bool success){
@@ -98,6 +100,7 @@ contract TronFarm {
                 uint payout = _amount > contractBalance ? contractBalance : _amount;
                 totalPayout = totalPayout + payout;
                 msg.sender.transfer(payout);
+                last = now;
                 return true;
             }
         }
