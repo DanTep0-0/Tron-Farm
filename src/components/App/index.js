@@ -170,7 +170,7 @@ class App extends React.Component {
         }else{
           this.play();
         }
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           this.state.timer2 = setInterval(() => {
               this.checkForLogo();
             }, 1000);
@@ -209,7 +209,6 @@ class App extends React.Component {
         href: "https://tronscan.org/#/address/" + result5.toString()
       });
     }
-
 
     checkForEntering(){
       if(this.state.Players === "..." || this.state.Invested === "..." || this.state.PaidOut === "..." || this.state.Animals === "..."){
