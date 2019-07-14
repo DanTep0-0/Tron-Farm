@@ -42,8 +42,8 @@ table{
   font-size: 65px;
   border-radius: 100px;
   // border: 3px solid white;
-  -webkit-transition: background-color 2s, color 0.4s;
-  transition: background-color 1s, color 0.4s, transform 0.8s;
+  -webkit-transition: background-color 1s, color 0.5s;
+  transition: background-color 1s, color 0.5s, transform 1s;
   -webkit-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.75);
   box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.75);
@@ -91,10 +91,18 @@ table{
   width: 12%;
 }
 .num{
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 10px;
   color: #922B21;
   border-width: 0;
+}
+.num a{
+  color: #922B21;
+  text-decoration: none;
+  transition: color 0.5s;
+}
+.num a:hover{
+  color: #f4cf86;
 }
 // ------------------------------ACCOUNT, STORE-------------------------------
 .account, .store{
@@ -266,8 +274,18 @@ table{
   line-height: 50px;
 }
 .allani .name{
+  margin: 10px 30px 0;
+}
+.Name{
+  color: #922B21;
   float: left;
-  margin: 10px 50px 0;
+}
+.payback{
+  color: #922B21;
+  float: right;
+}
+.small{
+  font-size: 16px;
 }
 .forImage{
   clear: both;
@@ -296,6 +314,7 @@ table{
   border: 3px solid #b99d69;
   border-radius: 5px;
   font-size: 18px;
+  transition: color 0.5s;
 }
 .buy:hover{
   color: #b99d69;
@@ -484,6 +503,10 @@ table{
   .animal, .food {
     width: 650px;
   }
+  .allani .name{
+    margin-left: 50px;
+    margin-right: 50px;
+  }
   .infbo{
     width: 662px;
   }
@@ -567,9 +590,6 @@ table{
   .abgl{
     font-size: 26px;
   }
-  .num{
-    font-size: 22px;
-  }
 }
 
 @media (max-width: 850px) {
@@ -607,6 +627,9 @@ table{
   }
   .forButton{
     width: 301px;
+  }
+  .pers{
+    margin-left: 280px;
   }
 }
 
