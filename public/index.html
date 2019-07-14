@@ -5,10 +5,11 @@
     <title>Tron Farm</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="./stylefp.css">
+    <link rel="stylesheet" href="./css/animate.css">
     <script src="https://kit.fontawesome.com/4731f5d3bc.js"></script>
   </head>
   <body>
-    <nav class="menuFixed main">
+    <nav class="menuFixed main wow fadeInUp" data-wow-duration="1s">
       <ul class="menu">
         <li class="list"><a class="sc" target="_blank" href="https://tronscan.org/#/contract/TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ">
           <i class="fas fa-link"></i><p>&nbsp;Smart-contract</p></a></li>
@@ -16,7 +17,7 @@
         <li class="list"><div id="dop4"></div></li>
       </ul>
     </nav>
-    <div class="menuFixed hidden" id="menu">
+    <div class="menuFixed hidden wow fadeInUp" id="menu" data-wow-duration="1s">
       <button class="menuButton" id="menuButton"><i class="fas fa-bars"></i></button>
       <div class="menuDropdown">
         <a href="https://tronscan.org/#/contract/TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ" target="_blank" class="dropdownChild"><i class="fas fa-link"></i>&nbsp;Smart-contract</a>
@@ -24,14 +25,17 @@
         <div id="dop2"></div>
       </div>
     </div>
-    <div class="divForLogo">
+    <div class="divForLogo wow zoomIn" data-wow-duration="1s" data-wow-delay="0.6s">
       <img class="tronFarmLogo" src="logo.png">
     </div>
 
-    <div id = "ButtonPlay" class = "BTP"></div>
+    <div id = "ButtonPlay" class = "BTP wow fadeInUp" data-wow-delay="0.6s"></div>
 
     <div class="cover">
-      <div id="aboutFarm">
+      <div class="numberAnimate">
+
+      </div>
+      <div id="aboutFarm" class="wow fadeInLeft" data-wow-delay="0.9s">
         <div id="scAboutFarm"></div>
         <div class="container">
           <div class="aboutF">
@@ -47,7 +51,7 @@
                 <p>Play Tron Farm now and easily get cryptocurrency TRX every day!</p>
               </div>
             </div>
-            <img src="tron.png">
+            <img src="tron.png" class="wow fadeIn" data-wow-delay="0.3s">
           </div>
           <div class="aboutS">
             <div class="textfield">
@@ -59,7 +63,7 @@
                   The more an animal costs, the more profit it makes!</p>
               </div>
             </div>
-            <img src="pig.png">
+            <img src="pig.png" class="wow fadeIn">
           </div>
         </div>
       </div>
@@ -68,7 +72,7 @@
       <div class="coinRate"></div>
 
 
-      <div id="qna">
+      <div id="qna" class="wow fadeInLeft" data-wow-delay="0.3s">
         <h3>Q&A</h3>
         <div id="scQna"></div>
         <div class="scroll">
@@ -157,7 +161,7 @@
 
       <div id="root"></div>
 
-      <footer class="menuBottom">
+      <footer class="menuBottom  wow fadeInUp">
         <ul class="menu">
           <li class="list"><a target="_blank" class="sc scBottom" href="https://t.me/tronfarm">
             <i class="fab fa-telegram-plane"></i><p class="contact">&nbsp;Telegram</p></a></li>
@@ -180,6 +184,9 @@
 
     <script src="input.js"></script>
     <script type="text/javascript"></script>
-    <!-- <script src=".bootstrap-input-spinner.js"></script> -->
+    <script src="js/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
   </body>
 </html>
