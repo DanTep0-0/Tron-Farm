@@ -16,7 +16,7 @@ html{
 }
 
 body{
-
+  
 }
 
 
@@ -54,6 +54,9 @@ body{
   background-color: #4f8541;
   transform: translateY(-2px);
 }
+.menuBottom a, .list, .buttonCopy, .dropdownChild, .hidden .sc{
+  transition: all 0.5s;
+}
 .link{
   display: block;
   height: 70px;
@@ -82,6 +85,7 @@ body{
   width: 100%;
   /* overflow: hidden; */
   position: absolute;
+  transition: all 1s;
 }
 .dropdownChild, .hidden .sc{
   color: black;
@@ -105,6 +109,14 @@ body{
 }
 .hidden:hover .menuDropdown{
   display: block;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 .sc, .contact{
   text-decoration: none;
@@ -247,7 +259,7 @@ body{
   bottom: 18px;
   right: 32%;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s ease-in;
   font-size: 14px;
   width: 125px;
 }
@@ -316,10 +328,10 @@ body{
   }
   .telegram{
     color: #00affe;
-    transition: 0.3s;
+    transition: 0.5s;
   }
   .telegram:hover{
-    color: #0084fe;
+    color: #0040fe;
   }
 
 /* --------------------^^^COMMON^^^----------------------------- */
@@ -346,6 +358,7 @@ body{
   color: #873600;
   font-weight: bold;
   text-decoration: none;
+  transition: all 0.5s;
 }
 .SM:hover{
   background: linear-gradient(90deg, #673AB7 10%, #922B21 100%);
