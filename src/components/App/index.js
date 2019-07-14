@@ -12,7 +12,6 @@ import Coin from './coin.png';
 import Money from './money.png';
 import AnimalsP from './animals.png';
 
-
 import './App.scss';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
@@ -488,7 +487,7 @@ class App extends React.Component {
           <div className = "allReact">
             {this.visible()}
           <div className = "forButton">
-            <button className="play" onClick={(event) => {event.preventDefault()
+            <button className="play wow zoomIn" onClick={(event) => {event.preventDefault()
                                                                this.play()}  }>Play</button>
           </div>
           <div className="fixed-bg"></div>
