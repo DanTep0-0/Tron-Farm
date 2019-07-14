@@ -18,12 +18,12 @@ import WOW from 'wowjs';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(now)
+const contractAddress = 'TT2kv7UNYFaymo4zhofGv9ia38HEVoApo9';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TT2kv7UNYFaymo4zhofGv9ia38HEVoApo9 - testnet(now)
 var isClicked = false;
-var period = 120;
+var period = 10;
 var contractBalance;
-var profit = [11, 40, 136, 320, 650];
+var profit = [22, 80,272, 640, 1300];
 var prices = [8400, 30000, 100000, 230400, 458800];
 
 class App extends React.Component {
@@ -68,6 +68,7 @@ class App extends React.Component {
               yourAddressMoney: 0,
               timer: '',
               timer2: '',
+              timer3: '',
               TronLinkValue: '',
               timeLeft: '',
               isEnd: false
@@ -76,6 +77,9 @@ class App extends React.Component {
                     this.state.timer = setInterval(() => {
                     this.checkForClick();
                   }, 200);
+                  this.state.timer3 = setInterval(() => {
+                  this.fetchData();
+                }, 10000);
     }
     async componentDidMount() {
 
@@ -155,7 +159,6 @@ class App extends React.Component {
         new WOW.WOW().init();
     }
 
-
     async checkForClick(){
       if(isClicked){
         clearInterval(this.state.timer);
@@ -217,13 +220,15 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+      var contractTime = new Date();
+      contractTime = contractTime.getTime()/1000 >> 0;
       if(Number(this.state.Players)!==0){
         if(contractBalance===0){
           this.setState({isEnd: true});
           this.gameEnd();
+          contractTime = (await Utils.contract.last().call()).toNumber();
+
       }}
-      var contractTime = new Date();
-      contractTime = contractTime.getTime()/1000 >> 0;
       var player = new Object();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -258,9 +263,7 @@ class App extends React.Component {
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         var contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        console.log(contractTime);
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
-        console.log(contractTime);
         var player = new Object();
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -273,32 +276,31 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-        if(contractBalance>playerAllCoins){
         contractBalance -= playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>=contractBalance){
-                  Added = contractBalance
-                }
+                  if(!this.state.isEnd){
+                  Swal({
+                      html: "<b>Money of the game is less than your money in the game so you can`t withdraw all of them</b>",
+                      type: 'warning'
+
+                  });
+                }}
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer
                 });
-        }else if(contractBalance===playerAllCoins){}
-        else if(contractBalance<playerAllCoins){
+          if(contractBalance!=0 && profitOfPlayer!=0){
+            this.state.Timer = setInterval(() => {
+              this.calcTime();
+            }, 1000);
+          }
 
-          this.setState({allMoney: contractBalance,
-            yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
-            yourProfit:profitOfPlayer
-          });
-        }
         var wait = (period - (timePassed % period))*1000;
             const timer = setTimeout(() => {
-                this.calcMoney();
+                this.calcAll();
               }, wait);
-        this.state.Timer = setInterval(() => {
-            this.calcTime();
-          }, 1000);
 }
 
         calcTime(){
@@ -310,6 +312,11 @@ class App extends React.Component {
           var secondsLeft = timeLeft-(minutesLeft*60);
           if(secondsLeft<10){secondsLeft = "0"+secondsLeft}
           this.setState({timeLeft: minutesLeft + " : " + secondsLeft});
+        }
+
+        async calcAll(){
+          await this.fetchData();
+          this.calcMoney();
         }
 
     async play(){
@@ -374,7 +381,7 @@ class App extends React.Component {
           });
         }
           });
-          const timer = setTimeout(() => this.fetchData(), 6000);
+          const timer = setTimeout(() => this.fetchData(), 3000);
           const timer2 = setTimeout(() => this.fetchYourData(), 6000);
     }
   }else{this.gameEnd();}
@@ -386,15 +393,15 @@ class App extends React.Component {
         if (num > 0){
           if(Number(this.state.allMoney)>=prices[Number(type)]*num){
           await Utils.contract.buy(type, num).send({
-              shouldPollResponse:false,
+              shouldPollResponse:true,
               callValue:0
           });
           Swal({
               title:'Transaction Sent',
               type: 'success'
           });
-          const timer = setTimeout(() => this.fetchData(), 6000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+          const timer = setTimeout(() => this.fetchData(), 3000);
+          const timer2 = setTimeout(() => this.fetchYourData(), 3000);
         }else{
           Swal({
               title:'Oops...',
@@ -412,7 +419,7 @@ class App extends React.Component {
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
         if(Number(per)*4500<=Number(this.state.allMoney)){
         await Utils.contract.setCoe(per).send({
-            shouldPollResponse:false,
+            shouldPollResponse:true,
             callValue:0
         });
         Swal({
@@ -420,9 +427,8 @@ class App extends React.Component {
             type: 'success'
 
         })
-        const timer = setTimeout(() => this.fetchData(), 6000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 6000);
-      }else{
+        const timer = setTimeout(() => this.fetchData(), 3000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 3000);
         Swal({
                  title:'Oops...',
                  text: 'Make sure you have enough money in your account',
@@ -448,7 +454,7 @@ class App extends React.Component {
       if(coins > 0){
         if(Number(coins)<=Number(this.state.allMoney)){
         await Utils.contract.withdraw(coins).send({
-          shouldPollResponse: false,
+          shouldPollResponse: true,
           callValue: 0
         });
         Swal({
@@ -456,8 +462,8 @@ class App extends React.Component {
             type: 'success'
 
         })
-        const timer = setTimeout(() => this.fetchData(), 6000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+        const timer = setTimeout(() => this.fetchData(), 3000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 3000);
       }else{Swal({
         title:'Oops...',
         text: 'Make sure you have enough money in your account',
