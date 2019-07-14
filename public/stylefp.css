@@ -55,7 +55,7 @@ body{
   transform: translateY(-2px);
 }
 .menuBottom a, .list, .buttonCopy, .dropdownChild, .hidden .sc{
-  transition: all 0.5s;
+  transition: background 0.5s, transform 0.5s;
 }
 .link{
   display: block;
@@ -79,13 +79,15 @@ body{
   color: white;
 }
 .menuDropdown{
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
   background-color: white;
   min-width: 200px;
   width: 100%;
   /* overflow: hidden; */
   position: absolute;
-  transition: all 1s;
+  transition: opacity 0.5s, visibility 0.5s;
 }
 .dropdownChild, .hidden .sc{
   color: black;
@@ -108,15 +110,9 @@ body{
   height: 110px;
 }
 .hidden:hover .menuDropdown{
-  display: block;
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-@-webkit-keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  /* display: block; */
+  opacity: 1;
+  visibility: visible;
 }
 .sc, .contact{
   text-decoration: none;
@@ -358,12 +354,10 @@ body{
   color: #873600;
   font-weight: bold;
   text-decoration: none;
-  transition: all 0.5s;
+  transition: color 0.5s;
 }
 .SM:hover{
-  background: linear-gradient(90deg, #673AB7 10%, #922B21 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+ color: #f4cf86;
 }
 #qna hr{
   /* width: 60%;

@@ -13,6 +13,7 @@ import Money from './money.png';
 import AnimalsP from './animals.png';
 
 import './App.scss';
+import WOW from 'wowjs';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -76,7 +77,6 @@ class App extends React.Component {
                     this.checkForClick();
                   }, 200);
     }
-
     async componentDidMount() {
 
         this.setState({loading:true})
@@ -152,6 +152,7 @@ class App extends React.Component {
         }
 
         await Utils.setTronWeb(window.tronWeb, contractAddress);
+        new WOW.WOW().init();
     }
 
 
@@ -216,7 +217,7 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-      if(Number(this.state.Players)!=0){
+      if(Number(this.state.Players)!==0){
         if(contractBalance===0){
           this.setState({isEnd: true});
           this.gameEnd();
@@ -502,7 +503,7 @@ class App extends React.Component {
           </div>
           <div className="fixed-bg"></div>
           <div className = "game dnone">
-            <ul className = "aboutGame">
+            <ul className = "aboutGame wow fadeIn">
               <li className = "abgl adm">Your Address:<p className = "num"><a href={this.state.href} target="_blank" rel="noopener noreferrer" title="Click to see your transactions">{this.state.Address}</a></p></li>
               <li className = "abgl ads">Players:<p className = "num">{this.beauty(this.state.Players)}</p></li>
               <li className = "abgl ads">Animals:<p className = "num">{this.beauty(this.state.Animals)}</p></li>
@@ -510,9 +511,9 @@ class App extends React.Component {
               <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)}</p></li>
             </ul>
 
-            <div className = "account">My Account</div>
+            <div className = "account wow fadeIn" data-wow-delay="0.3s">My Account</div>
 
-            <div className = "yourInf">
+            <div className = "yourInf wow fadeIn" data-wow-delay="0.5s">
 
               <div className = "animal tw bgcn ">
                 <div className = "invest">
@@ -547,8 +548,8 @@ class App extends React.Component {
                 </div>
 
             </div>
-            <div className = "store">Store</div>
-            <form className = "allani">
+            <div className = "store wow fadeIn" data-wow-delay="0.8s">Store</div>
+            <form className = "allani wow fadeIn" data-wow-delay="1.2s">
 
               <div className = "animal chick">
                 <div className = "name"><span className="Name">Chick</span><small className="payback">94%<span className="small"> /mo</span></small></div>
@@ -641,5 +642,4 @@ class ButtonPlay extends React.Component {
     );
   }
 }
-
 export default {App: App, ButtonPlay: ButtonPlay};
