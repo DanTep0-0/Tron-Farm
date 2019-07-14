@@ -503,12 +503,21 @@ class App extends React.Component {
 
             <div className = "yourInf">
 
-              <div className = "animal tw bgcn "><div className = "invest"><div className = "about">You have to buy coins to purchase animals</div><button className="improveFood button2" onClick={(event) => {event.preventDefault()
-                this.dep(this.state.valueDep)}  }>Buy</button><input min="1" step="1" className = "buLa wa" type="number" name="denumber" placeholder = "0" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/><img className = "valCoins1" src = {Coin}/>
-              <input min="0" className = "buLa2 wa" placeholder = "0" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/><div className = "TRX">TRX</div><div className = "about mt15 dop">1 TRX = 80
-                <img src = {Coin} className= "coin" /></div><p className = "about">You can withdraw money you've earned</p><input min="1" step="1" className = "buLa3 wa" placeholder = "0" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
-                <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
-                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/><div className = "TRX">TRX</div></div></div>
+              <div className = "animal tw bgcn ">
+                <div className = "invest">
+                  <div className = "about">You have to buy coins to purchase animals</div>
+                  <button className="improveFood button2" onClick={(event) => {event.preventDefault()
+                    this.dep(this.state.valueDep)}  }>Buy</button>
+                  <input min="1" step="1" className = "buLa wa" type="number" name="denumber" placeholder = "0" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/>
+                    <img className = "valCoins1" src = {Coin}/>
+                  <input min="0" className = "buLa2 wa" placeholder = "0" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/>
+                    <div className = "TRX">TRX</div>
+                  <div className = "about mt15 dop">1 TRX = 80<img src = {Coin} className= "coin" /></div>
+                  <p className = "about">You can withdraw money you've earned</p><input min="1" step="1" className = "buLa3 wa" placeholder = "0" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
+                  <img className = "valCoins2" src = {Coin}/><button className="pickUp" onClick={(event) => {event.preventDefault()
+                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/>
+                    <div className = "TRX">TRX</div></div>
+                </div>
 
 
                 <div className = " animal tw infbo">
@@ -531,7 +540,8 @@ class App extends React.Component {
             <form className = "allani">
 
               <div className = "animal chick">
-                <div className = "name">Chick</div><div className = "forImage"><img className = "image" src = {Chick}/></div>
+                <div className = "name"><span className="Name">Chick</span><small className="payback">94%<span className="small"> /mo</span></small></div>
+                <div className = "forImage"><img className = "image" src = {Chick}/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourChicks)}</p><hr></hr>
                   <p className = "p">Cost:</p><p className="value">8,400<img className = "ym" src = {Coin}/></p><hr></hr>
@@ -542,7 +552,8 @@ class App extends React.Component {
               </div>
 
               <div className = "animal pig">
-                <div className = "name">Pig</div><div className = "forImage"><img className = "image" src = {Pig}/></div>
+                <div className = "name"><span className="Name">Pig</span><small className="payback">96%<span className="small"> /mo</span></small></div>
+                <div className = "forImage"><img className = "image" src = {Pig}/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourPigs)}</p><hr></hr>
                   <p className = "p">Cost:</p><p className="value">30,000<img className = "ym" src = {Coin}/></p><hr></hr>
@@ -564,7 +575,8 @@ class App extends React.Component {
               </div>
 
               <div className = "animal sheep"><
-                div className = "name">Sheep</div><div className = "forImage"><img className = "image" src = {Sheep}/></div>
+                div className = "name"><span className="Name">Sheep</span><small className="payback">98%<span className="small"> /mo</span></small></div>
+                <div className = "forImage"><img className = "image" src = {Sheep}/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourSheeps)}</p><hr></hr>
                   <p className = "p">Cost:</p><p className = "value">100,000<img className = "ym" src = {Coin}/></p><hr></hr>
@@ -575,7 +587,8 @@ class App extends React.Component {
               </div>
 
               <div className = "animal cow">
-                <div className = "name">Cow</div><div className = "forImage"><img className = "image" src = {Cow}/></div>
+                <div className = "name"><span className="Name">Cow</span><small className="payback">100%<span className="small"> /mo</span></small></div>
+                <div className = "forImage"><img className = "image" src = {Cow}/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourCows)}</p><hr></hr>
                   <p className = "p">Cost:</p><p className = "value">230,400<img className = "ym" src = {Coin}/></p><hr></hr>
@@ -586,7 +599,8 @@ class App extends React.Component {
               </div>
 
               <div className = "animal horse">
-                <div className = "name">Horse</div><div className = "forImage"><img className = "image" src = {Horse}/></div>
+                <div className = "name"><span className="Name">Horse</span><small className="payback">102%<span className="small"> /mo</span></small></div>
+                <div className = "forImage"><img className = "image" src = {Horse}/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourHorses)}</p><hr></hr>
                   <p className = "p">Cost:</p><p className = "value">458,800<img className = "ym" src = {Coin}/></p><hr></hr>
