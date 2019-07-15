@@ -282,7 +282,7 @@ class App extends React.Component {
                 if(Added>=contractBalance){
                   if(!this.state.isEnd){
                   Swal({
-                      html: "<b>Money of the game is less than your money in the game so you can`t withdraw all of them</b>",
+                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them!",
                       type: 'warning'
 
                   });
@@ -477,7 +477,7 @@ class App extends React.Component {
     gameEnd(){
       Swal({
           title:'Game over',
-          text: 'Money of the game have ended',
+          text: 'Smart-contract has no more money',
           type: 'error'
 
       });
