@@ -291,7 +291,7 @@ class App extends React.Component {
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer
                 });
-          if(contractBalance!=0 && profitOfPlayer!=0){
+          if(contractBalance!==0 && profitOfPlayer!==0){
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
