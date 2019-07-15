@@ -63,8 +63,10 @@ body{
   width: 100%;
 }
 .hidden{
-  text-align: center;
   display: none;
+}
+.menuFixed.hidden{
+  text-align: center;
   height: 90px;
 }
 .menuButton{
@@ -239,40 +241,17 @@ body{
 .btnText1, .btnText2{
   color: white;
 }
-.toolTip{
-  display: inline-block;
-  margin-left: 3px;
-}
-.toolTipText{
-  visibility: hidden;
+.tooltip{
+  position: fixed;
   background-color: white;
   color: black;
   text-align: center;
   border-radius: 3px;
-  padding: 10px 15px;
-  position: absolute;
-  z-index: 1;
-  bottom: 18px;
-  right: 32%;
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
-  font-size: 14px;
-  width: 125px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #f4cf86;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .3);
 }
-.toolTipText::after {
-  content: "";
-  position: absolute;
-  top: 35%;
-  left: 100%;
-  border-width: 8px;
-  border-style: solid;
-  border-color: transparent transparent transparent white;
-}
-.buttonCopy:hover .toolTipText{
-  opacity: 1;
-  visibility: visible;
-}
-
 
 /* ------------------------------DANYA'S PART------------------------------- */
 
@@ -443,15 +422,6 @@ body{
     font-size: 24px;
     padding: 3px 13px;
   }
-  .btnText1{
-    display: none;
-  }
-  .btnText2{
-    display: inline-block;
-  }
-  .toolTipText{
-    right: 84%;
-  }
 }
 @media (max-width: 1050px) {
   .menu{
@@ -521,10 +491,7 @@ body{
 }
 @media (max-width: 730px) {
   .buttonCopy{
-    font-size: 20px;
-  }
-  .toolTipText{
-    right: 88%;
+    font-size: 18px;
   }
 }
 @media (max-width: 700px) {

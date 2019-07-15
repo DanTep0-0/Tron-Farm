@@ -1,61 +1,54 @@
-// window.onload = function(){
-//     document.body.scrollTop = 0;
-// }
+//--------------------TOOLTIP APPEARANCE-----------
 
-// function storePagePosition() {
-//   var page_y = window.pageYOffset;
-//   localStorage.setItem("page_y", page_y);
-// }
-// window.addEventListener("scroll", storePagePosition);
-// var currentPageY;
-// try {
-//   currentPageY = localStorage.getItem("page_y");
-//   if (currentPageY === undefined) {
-//     localStorage.setItem("page_y") = 0;
-//   }
-//   window.scrollTo( 0, currentPageY );
-// } catch (e) {
-//     // no localStorage available
-// }
+var showingTooltip;
 
+document.onmouseover = function(e) {
+  var target = e.target;
 
+  var tooltip = target.getAttribute('data-tooltip');
+  if (!tooltip) return;
 
-//------------------TOOLTIP APPEARANCE AND CHANGING-----------------
-function copyFunction(text){
-  var input = document.createElement('input');
-  input.value = text;
-  document.body.appendChild(input);
-  input.select();
+  var tooltipElem = document.createElement('div');
+  tooltipElem.className = 'tooltip';
+  tooltipElem.innerHTML = tooltip;
+  document.body.appendChild(tooltipElem);
 
-  try {
-    var success = document.execCommand('copy');
-    var msg = success ? 'successful!' : 'not successful';
-    console.log("Copying text command was " + msg);
-  } catch (err) {
-    console.error("Unable to copy", err);
+  var coords = target.getBoundingClientRect();
+
+  var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
+  if (left < 0) left = 0; // не вылезать за левую границу окна
+
+  var top = coords.top - tooltipElem.offsetHeight - 5;
+  if (top < 0) { // не вылезать за верхнюю границу окна
+    top = coords.top + target.offsetHeight + 5;
   }
-  document.body.removeChild(input);
-  var toolTip = document.getElementById("myToolTip");
-  toolTip.innerHTML = "Copied!";
-}
 
-function outFunction() {
-  var toolTip = document.getElementById("myToolTip");
-  toolTip.innerHTML = "Copy email adress";
-}
+  tooltipElem.style.left = left + 'px';
+  tooltipElem.style.top = top + 'px';
 
-//---------------------COPYING-------------------
-document.getElementById('button').addEventListener('click', function(){
-  copyFunction("tron.farm@gmail.com")
-})
+  showingTooltip = tooltipElem;
+};
 
-//---------------------COUNT UP-------------------
+document.onmouseout = function(e) {
+  if (showingTooltip) {
+    document.body.removeChild(showingTooltip);
+    showingTooltip = null;
+  }  };
 
-// var currentNumber = $('.number').text();
-// $({numberValue: currentNumber}).animate({numberValue: 2000}, {
-//     duration: 2000,
-//     easing: 'linear',
-//     step: function() {
-//         $('.number').text(Math.ceil(this.numberValue));
-//     }
-// });
+
+  //--------------------COPY FUNCTION-----------------
+  function copyFunction(text){
+    var input = document.createElement('input');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+
+    try {
+      var success = document.execCommand('copy');
+      var msg = success ? 'successful!' : 'not successful';
+      console.log("Copying text command was " + msg);
+    } catch (err) {
+      console.error("Unable to copy", err);
+    }
+    document.body.removeChild(input);
+  }
