@@ -83,6 +83,7 @@ class App extends React.Component {
                   this.fetchData();
                 }, 7000);
     }
+
     async componentDidMount() {
 
         this.setState({loading:true})
@@ -204,8 +205,8 @@ class App extends React.Component {
       var result2 = contractBalance/80 + result3;
       this.setState({
         Players: result1,
-        Invested: Math.ceil(result2) + ' TRX',
-        PaidOut: Math.ceil(result3) + ' TRX',
+        Invested: Math.ceil(result2),
+        PaidOut: Math.ceil(result3),
         Animals: result4,
         Address: result5,
         href: "https://tronscan.org/#/address/" + result5.toString()
@@ -216,9 +217,8 @@ class App extends React.Component {
       if(document.querySelector('.cover').classList.contains('dnone')){
       if(this.state.Players == "..." || this.state.Invested == "..." || this.state.PaidOut == "..." || this.state.Animals == "..."){
         this.setState({TronLinkValue: 1});
-      }
         document.querySelector('.divForLogo').classList.remove('dnone');
-      }
+      }}
     }
 
     async fetchYourData() {
@@ -316,18 +316,15 @@ class App extends React.Component {
       }
 
       minO(x){
-        var y = "";
-        if(x[x.length-1]=="0"){
-        for(var i = 0;i<(x.length-1);i++){
-          y = y + x[i];
-        }
-      }
+        var y;
+        for(var j=0;j<2;j++){
       if(x[x.length-1]=="0"){
         y = "";
       for(var i = 0;i<(x.length-1);i++){
         y = y + x[i];
       }
     }
+  }
     return y;
       }
 
@@ -389,13 +386,20 @@ class App extends React.Component {
             totalBalance = result;
             if(totalBalance >= value*12500){
             await Utils.contract.deposit().send({
-              shouldPollResponse: true,
+              shouldPollResponse: false,
               callValue: value*12500});
               Swal({
                   title:'Transaction Sent',
                   type: 'success'
 
               });
+              this.setState({allMoney: Number(this.state.allMoney) + value,
+                investedMoney: Number(this.state.returnedMoney) + value,
+                Invested: Number(this.state.Invested) + value
+              });
+              if(!Number(this.state.yourTime)){
+                this.setState({Players: Number(this.state.Players)+1});
+              }
           }else{
           Swal({
               title: 'Oops...',
@@ -405,8 +409,8 @@ class App extends React.Component {
           });
         }
           });
-          const timer = setTimeout(() => this.fetchData(), 3000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 6000);
+          const timer = setTimeout(() => this.fetchData(), 6000);
+          const timer2 = setTimeout(() => this.fetchYourData(), 1000);
     }
   }else{this.gameEnd();}
   }
@@ -417,15 +421,21 @@ class App extends React.Component {
         if (num > 0){
           if(Number(this.state.allMoney)>=prices[Number(type)]*num){
           await Utils.contract.buy(type, num).send({
-              shouldPollResponse:true,
+              shouldPollResponse:false,
               callValue:0
           });
           Swal({
               title:'Transaction Sent',
               type: 'success'
           });
-          const timer = setTimeout(() => this.fetchData(), 3000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 3000);
+          var coins = prices[type]*num;
+          this.setState({allMoney: Number(this.state.allMoney)-coins,
+            totalAnimals: Number(this.state.totalAnimals)+num
+          });
+          console.log("here1");
+          const timer = setTimeout(() => this.fetchData(), 6000);
+          console.log("here2");
+          const timer2 = setTimeout(() => this.fetchYourData(), 1000);
         }else{
           Swal({
               title:'Oops...',
@@ -437,13 +447,14 @@ class App extends React.Component {
     }
   }else{this.gameEnd();}
 }
+
     async improveFood(per){
       this.setState({ivper:1});
       if(!this.state.isEnd){
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
         if(Number(per)*4500<=Number(this.state.allMoney)){
         await Utils.contract.setCoe(per).send({
-            shouldPollResponse:true,
+            shouldPollResponse:false,
             callValue:0
         });
         Swal({
@@ -451,8 +462,13 @@ class App extends React.Component {
             type: 'success'
 
         })
-        const timer = setTimeout(() => this.fetchData(), 3000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 3000);
+        var coins = Number(per)*4500;
+        this.setState({
+          allMoney: Number(this.state.allMoney)-coins,
+          yourCoe: Number(this.state.yourCoe)+per
+        });
+        const timer = setTimeout(() => this.fetchData(), 6000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 1000);
         Swal({
                  title:'Oops...',
                  text: 'Make sure you have enough money in your account',
@@ -487,9 +503,14 @@ class App extends React.Component {
             type: 'success'
 
         });
-        this.setState({allMoney: Number(this.state.allMoney)+coins});
-        const timer = setTimeout(() => this.fetchData(), 5000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 5000);
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        coins = coins > contractBalance ? contractBalance : coins;
+        this.setState({allMoney: Number(this.state.allMoney)+coins,
+          totalPayout: Number(this.state.totalPayout)+coins/80>>0,
+          returnedMoney: Number(this.state.returnedMoney)+coins
+        });
+        const timer = setTimeout(() => this.fetchData(), 6000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 1000);
       }else{Swal({
         title:'Oops...',
         text: 'Make sure you have enough money in your account',
@@ -539,8 +560,8 @@ class App extends React.Component {
               <li className = "abgl adm">Your Address:<p className = "num"><a href={this.state.href} target="_blank" rel="noopener noreferrer" title="Click to see your transactions">{this.state.Address}</a></p></li>
               <li className = "abgl ads">Players:<p className = "num">{this.beauty(this.state.Players)}</p></li>
               <li className = "abgl ads">Animals:<p className = "num">{this.beauty(this.state.Animals)}</p></li>
-              <li className = "abgl adb">Invested:<p className = "num">{this.beauty(this.state.Invested)}</p></li>
-              <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)}</p></li>
+              <li className = "abgl adb">Invested:<p className = "num">{this.beauty(this.state.Invested)+" TRX"}</p></li>
+              <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)+" TRX"}</p></li>
             </ul>
 
             <div className = "account wow fadeIn" data-wow-delay="0.3s">My Account</div>
@@ -674,4 +695,5 @@ class ButtonPlay extends React.Component {
     );
   }
 }
+
 export default {App: App, ButtonPlay: ButtonPlay};
