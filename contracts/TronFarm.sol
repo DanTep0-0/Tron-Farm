@@ -71,8 +71,6 @@ contract TronFarm {
         collect(msg.sender);
         require(_coins <= players[msg.sender].allCoins);
 
-        players[msg.sender].allCoins = players[msg.sender].allCoins - _coins;
-        players[msg.sender].coinsReturned = players[msg.sender].coinsReturned + _coins;
         transfer(msg.sender, _coins * coinPrice);
         return true;
      }
@@ -99,6 +97,8 @@ contract TronFarm {
             if (contractBalance > 0) {
                 uint payout = _amount > contractBalance ? contractBalance : _amount;
                 totalPayout = totalPayout + payout;
+                players[msg.sender].allCoins = players[msg.sender].allCoins - payout/coinPrice;
+                players[msg.sender].coinsReturned = players[msg.sender].coinsReturned + payout/coinPrice;
                 msg.sender.transfer(payout);
                 last = now;
                 return true;
