@@ -1,12 +1,26 @@
-// function copyFunction() {
-//   var copyText = document.getElementById("emailAdress");
-//   copyText.select();
-//   document.execCommand("copy");
-//
-//   var toolTip = document.getElementById("myToolTip");
-//   toolTip.innerHTML = "Copied!";
+// window.onload = function(){
+//     document.body.scrollTop = 0;
 // }
 
+// function storePagePosition() {
+//   var page_y = window.pageYOffset;
+//   localStorage.setItem("page_y", page_y);
+// }
+// window.addEventListener("scroll", storePagePosition);
+// var currentPageY;
+// try {
+//   currentPageY = localStorage.getItem("page_y");
+//   if (currentPageY === undefined) {
+//     localStorage.setItem("page_y") = 0;
+//   }
+//   window.scrollTo( 0, currentPageY );
+// } catch (e) {
+//     // no localStorage available
+// }
+
+
+
+//------------------TOOLTIP APPEARANCE AND CHANGING-----------------
 function copyFunction(text){
   var input = document.createElement('input');
   input.value = text;
@@ -30,7 +44,18 @@ function outFunction() {
   toolTip.innerHTML = "Copy email adress";
 }
 
-
+//---------------------COPYING-------------------
 document.getElementById('button').addEventListener('click', function(){
   copyFunction("tron.farm@gmail.com")
 })
+
+//---------------------COUNT UP-------------------
+
+// var currentNumber = $('.number').text();
+// $({numberValue: currentNumber}).animate({numberValue: 2000}, {
+//     duration: 2000,
+//     easing: 'linear',
+//     step: function() {
+//         $('.number').text(Math.ceil(this.numberValue));
+//     }
+// });

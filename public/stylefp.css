@@ -87,7 +87,7 @@ body{
   width: 100%;
   /* overflow: hidden; */
   position: absolute;
-  transition: opacity 0.5s, visibility 0.5s;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 .dropdownChild, .hidden .sc{
   color: black;
