@@ -14,6 +14,8 @@ import AnimalsP from './animals.png';
 
 import './App.scss';
 import WOW from 'wowjs';
+import Info from './info-icon.png';
+import Info2 from './info-icon2.png';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -165,7 +167,7 @@ class App extends React.Component {
     async checkForClick(){
       if(isClicked){
         clearInterval(this.state.timer);
-        if(this.state.TronLinkValue == 1){
+        if(this.state.TronLinkValue === 1){
           if(!!window.tronWeb && window.tronWeb.ready){
             await this.fetchData();
               this.play();
@@ -184,7 +186,7 @@ class App extends React.Component {
     checkForLogo(){
       if (!document.querySelector('.divForLogo').classList.contains('dnone')) {
         clearInterval(this.state.timer2);
-        if(!this.state.TronLinkValue == 1){isClicked = false;}
+        if(!this.state.TronLinkValue === 1){isClicked = false;}
         this.state.timer = setInterval(() => {
             this.checkForClick();
           }, 200);
@@ -216,7 +218,7 @@ class App extends React.Component {
 
     checkForEntering(){
       if(document.querySelector('.cover').classList.contains('dnone')){
-      if(this.state.Players == "..." || this.state.Invested == "..." || this.state.PaidOut == "..." || this.state.Animals == "..."){
+      if(this.state.Players === "..." || this.state.Invested === "..." || this.state.PaidOut === "..." || this.state.Animals === "..."){
         this.setState({TronLinkValue: 1});
         document.querySelector('.divForLogo').classList.remove('dnone');
       }}
@@ -250,7 +252,6 @@ class App extends React.Component {
       yourCows: result7,
       yourHorses: result8,
       yourTime: result10
-
     });
       await this.calcMoney();
   }
@@ -286,7 +287,10 @@ class App extends React.Component {
                 }}
                 this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
-                  yourProfit:profitOfPlayer
+                  yourProfit:profitOfPlayer,
+                  allMoneyTRX: this.beauty(Number(this.minO((Number(playerAllCoins)+Added).toFixed(2)))/80) + " TRX",
+                  investedMoneyTRX: this.beauty(this.minO((Number(this.state.investedMoney)/80).toFixed(2))) + " TRX",
+                  returnedMoneyTRX: this.beauty(this.minO((Number(this.state.returnedMoney)/80).toFixed(2))) + " TRX"
                 });
           if(contractBalance!==0 && profitOfPlayer!==0){
             this.state.Timer = setInterval(() => {
@@ -307,8 +311,8 @@ class App extends React.Component {
         return;
       }
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-        if(Number(this.state.Players)!=0){
-          if(contractBalance==0){
+        if(Number(this.state.Players)!==0){
+          if(contractBalance===0){
             this.setState({isEnd: true});
             this.gameEnd();
             contractTime = (await Utils.contract.last().call()).toNumber();
@@ -346,8 +350,8 @@ class App extends React.Component {
 
     async play(){
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
-          if(this.state.TronLinkValue==1){
-          if(!(this.state.Players == "...") || !(this.state.Invested == "...") || !(this.state.PaidOut == "...") || !(this.state.Animals == "...")){
+          if(this.state.TronLinkValue===1){
+          if(!(this.state.Players === "...") || !(this.state.Invested === "...") || !(this.state.PaidOut === "...") || !(this.state.Animals === "...")){
             this.setState({TronLinkValue: 0});
             this.playVisible();
             break ifPart;
@@ -362,7 +366,7 @@ class App extends React.Component {
       }
     }
         await this.fetchData();
-        if(this.state.TronLinkValue==1){return;}
+        if(this.state.TronLinkValue===1){return;}
         await this.fetchYourData();
         isClicked = false;
     }
@@ -533,7 +537,7 @@ class App extends React.Component {
     }
 
     visible(){
-      if(Number(this.state.val) == 0 ){
+      if(Number(this.state.val) === 0 ){
       document.querySelector('.cover').classList.remove('dnone');
       document.querySelector('.BTP').classList.remove('dnone');
       document.querySelector('.menuBottom').classList.remove('dnone');
@@ -543,7 +547,7 @@ class App extends React.Component {
 
 
         render() {
-        if(Number(this.state.TronLinkValue) == 1){
+        if(Number(this.state.TronLinkValue) === 1){
           document.querySelector('.cover').classList.add('dnone');
           document.querySelector('.BTP').classList.add('dnone');
           document.querySelector('.menuBottom').classList.add('dnone');
@@ -594,10 +598,10 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/></div>
-                    <p className="p">Available:</p><p className="value">{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p">Returned:</p><p className="value">{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p">Invested:</p><p className="value">{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" src = {Info2}/></div>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                   </div>
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
