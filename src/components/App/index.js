@@ -14,6 +14,7 @@ import AnimalsP from './animals.png';
 
 import './App.scss';
 import WOW from 'wowjs';
+import Info from './info-icon.png';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -249,7 +250,6 @@ class App extends React.Component {
       yourCows: result7,
       yourHorses: result8,
       yourTime: result10
-
     });
       await this.calcMoney();
   }
@@ -285,7 +285,10 @@ class App extends React.Component {
                 }}
                 this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
-                  yourProfit:profitOfPlayer
+                  yourProfit:profitOfPlayer,
+                  allMoneyTRX: this.beauty(Number(this.minO((Number(playerAllCoins)+Added).toFixed(2)))/80) + " TRX",
+                  investedMoneyTRX: this.beauty(this.minO((Number(this.state.investedMoney)/80).toFixed(2))) + " TRX",
+                  returnedMoneyTRX: this.beauty(this.minO((Number(this.state.returnedMoney)/80).toFixed(2))) + " TRX"
                 });
           if(contractBalance!==0 && profitOfPlayer!==0){
             this.state.Timer = setInterval(() => {
@@ -323,7 +326,7 @@ class App extends React.Component {
       for(var i = 0;i<(x.length-1);i++){
         y = y + x[i];
       }
-    }
+    }else{y=x;}
   }
     return y;
       }
@@ -432,9 +435,7 @@ class App extends React.Component {
           this.setState({allMoney: Number(this.state.allMoney)-coins,
             totalAnimals: Number(this.state.totalAnimals)+num
           });
-          console.log("here1");
           const timer = setTimeout(() => this.fetchData(), 6000);
-          console.log("here2");
           const timer2 = setTimeout(() => this.fetchYourData(), 1000);
         }else{
           Swal({
@@ -593,9 +594,9 @@ class App extends React.Component {
                   <div className="myMoney">
                     <div className="name">My money</div>
                     <div className="myMoneyImg"><img src = {Money} alt="money bags"/></div>
-                    <p className="p">Available:</p><p className="value">{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p">Returned:</p><p className="value">{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p">Invested:</p><p className="value">{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                   </div>
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
