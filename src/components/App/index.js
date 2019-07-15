@@ -209,6 +209,7 @@ class App extends React.Component {
         PaidOut: Math.ceil(result3),
         Animals: result4,
         Address: result5,
+        ContractBalance: contractBalance,
         href: "https://tronscan.org/#/address/" + result5.toString()
       });
     }
@@ -317,12 +318,15 @@ class App extends React.Component {
 
       minO(x){
         var y;
-        for(var j=0;j<2;j++){
-      if(x[x.length-1]=="0"){
+        for(var j=0;j<3;j++){
+      if(x[x.length-1-j]=="0" || x[x.length-1-j]=="."){
         y = "";
-      for(var i = 0;i<(x.length-1);i++){
+      for(var i = 0;i<(x.length-1-j);i++){
         y = y + x[i];
       }
+    }else {
+      if(!y){y=x}
+      return y;
     }
   }
     return y;
@@ -432,9 +436,7 @@ class App extends React.Component {
           this.setState({allMoney: Number(this.state.allMoney)-coins,
             totalAnimals: Number(this.state.totalAnimals)+num
           });
-          console.log("here1");
           const timer = setTimeout(() => this.fetchData(), 6000);
-          console.log("here2");
           const timer2 = setTimeout(() => this.fetchYourData(), 1000);
         }else{
           Swal({
