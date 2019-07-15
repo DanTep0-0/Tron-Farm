@@ -168,12 +168,12 @@
           <li class="list">
             <input type="text" id="emailAdress" value="tron.farm@gmail.com">
 
-            <div class="toolTip">
-              <button id="button" class="buttonCopy" onmouseout="outFunction()">
-                <span class="toolTipText" id="myToolTip">Copy email adress</span>
-                <i class="fas fa-clipboard"></i><p class="btnText1">&nbsp;Copy</p><p class="btnText2">&nbsp;Email address</p>
+              <button id="button" class="buttonCopy main" onclick="copyFunction('tron.farm@gmail.com')" data-tooltip="Copy email adress">
+                <i class="fas fa-clipboard"></i>&nbsp;Copy</p>
               </button>
-            </div>
+              <button id="button" class="buttonCopy hidden" onclick="copyFunction('tron.farm@gmail.com')" data-tooltip="Copy email adress">
+                <i class="fas fa-clipboard"></i>&nbsp;Email address</p>
+              </button>
           </li>
         </ul>
       </footer>
