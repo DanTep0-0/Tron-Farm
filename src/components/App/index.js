@@ -277,7 +277,7 @@ class App extends React.Component {
                 if(Added>=contractBalance){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
-                      html: "<b>Money of the game is less than your money in the game so you can`t withdraw all of them</b>",
+                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them!",
                       type: 'warning'
 
                   });
@@ -287,7 +287,7 @@ class App extends React.Component {
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer
                 });
-          if(contractBalance!=0 && profitOfPlayer!=0){
+          if(contractBalance!==0 && profitOfPlayer!==0){
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
@@ -503,7 +503,7 @@ class App extends React.Component {
     gameEnd(){
       Swal({
           title:'Game over',
-          text: 'Money of the game have ended',
+          text: 'Smart-contract has no more money',
           type: 'error'
 
       });
@@ -580,11 +580,11 @@ class App extends React.Component {
                 </div>
 
             </div>
-            <div className = "store wow fadeIn" data-wow-delay="0.8s">Store</div>
-            <form className = "allani wow fadeIn" data-wow-delay="1.2s">
+            <div className = "store wow fadeIn" data-wow-delay="0.5s">Store</div>
+            <form className = "allani wow fadeIn" data-wow-delay="0.8s">
 
               <div className = "animal chick">
-                <div className = "name"><span className="Name">Chick</span><small className="payback">94%<span className="small"> /mo</span></small></div>
+                <div className = "name"><span className="Name">Chick</span><small className="payback">&asymp;94%<span className="small"> /mo</span></small></div>
                 <div className = "forImage"><img className = "image" src = {Chick} alt="chick"/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourChicks)}</p><hr></hr>
@@ -596,7 +596,7 @@ class App extends React.Component {
               </div>
 
               <div className = "animal pig">
-                <div className = "name"><span className="Name">Pig</span><small className="payback">96%<span className="small"> /mo</span></small></div>
+                <div className = "name"><span className="Name">Pig</span><small className="payback">&asymp;96%<span className="small"> /mo</span></small></div>
                 <div className = "forImage"><img className = "image" src = {Pig} alt="pig"/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className="value f">{this.beauty(this.state.yourPigs)}</p><hr></hr>
@@ -619,7 +619,7 @@ class App extends React.Component {
               </div>
 
               <div className = "animal sheep"><
-                div className = "name"><span className="Name">Sheep</span><small className="payback">98%<span className="small"> /mo</span></small></div>
+                div className = "name"><span className="Name">Sheep</span><small className="payback">&asymp;98%<span className="small"> /mo</span></small></div>
                 <div className = "forImage"><img className = "image" src = {Sheep} alt="sheep"/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourSheeps)}</p><hr></hr>
@@ -643,7 +643,7 @@ class App extends React.Component {
               </div>
 
               <div className = "animal horse">
-                <div className = "name"><span className="Name">Horse</span><small className="payback">102%<span className="small"> /mo</span></small></div>
+                <div className = "name"><span className="Name">Horse</span><small className="payback">&asymp;102%<span className="small"> /mo</span></small></div>
                 <div className = "forImage"><img className = "image" src = {Horse} alt="horse"/></div>
                 <div className = "about">
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourHorses)}</p><hr></hr>

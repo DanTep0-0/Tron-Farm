@@ -8,9 +8,8 @@ var myRef2 = React.createRef();
 
 
 class Dop extends React.Component {
-
-    scrollToMyRef(){window.scrollTo(0, myRef.current.offsetTop - 160)}
-
+  
+    scrollToMyRef = () => window.scrollTo(0, myRef.current.offsetTop - 70)
 
 change(){
   document.querySelector('.cover').classList.remove('dnone');
@@ -30,7 +29,7 @@ change(){
 }
 class Dop2 extends React.Component {
 
-scrollToMyRef(){window.scrollTo(0, myRef2.current.offsetTop - 120);}
+scrollToMyRef(){window.scrollTo(0, myRef2.current.offsetTop - 70);}
 
 
 change(){

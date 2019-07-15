@@ -11,10 +11,10 @@ const openTronLink = () => {
 
 const TronLinkGuide = props => {
       return (
-            <div className='tronLink' onClick={ openTronLink }>
+            <div className='tronLink wow fadeIn' data-wow-dely="0.8s" onClick={ openTronLink }>
               <h2 className = "unin">Please login to</h2>
-              <a className="a" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Tron Chrome Wallet</a>
-              <img className = "logo2" src={ TronLinkLogo } alt='TronLink logo' />
+              <a className="a wow fadeIn" data-wow-delay="0.5s" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Tron Chrome Wallet</a>
+              <img className = "logo2 wow slideInRight" data-wow-dely="1.2s" src={ TronLinkLogo } alt='TronLink logo' />
                 <div className='info'>
                     <div className = "text">
                       If you haven't downloaded the TRON wallet web extension yet,
@@ -25,7 +25,7 @@ const TronLinkGuide = props => {
                       please reload the page.</p>
                     </div>
                 </div>
-                <a className = "a dwnld" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Download TronLink</a>
+                <a className = "a dwnld wow fadeIn" data-wow-delay="0.8s" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Download TronLink</a>
             </div>
         );
 
