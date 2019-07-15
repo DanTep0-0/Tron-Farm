@@ -23,6 +23,7 @@ const contractAddress = 'TT2kv7UNYFaymo4zhofGv9ia38HEVoApo9';   /// Add your con
 var isClicked = false;
 var period = 10;
 var contractBalance;
+var contractTime;
 var profit = [22, 80,272, 640, 1300];
 var prices = [8400, 30000, 100000, 230400, 458800];
 
@@ -71,15 +72,16 @@ class App extends React.Component {
               timer3: '',
               TronLinkValue: '',
               timeLeft: '',
-              isEnd: false
+              isEnd: false,
+              MOTH: false
 
             }
                     this.state.timer = setInterval(() => {
                     this.checkForClick();
                   }, 200);
-                  this.state.timer3 = setInterval(() => {
+                  this.state.timer2 = setInterval(() => {
                   this.fetchData();
-                }, 10000);
+                }, 7000);
     }
     async componentDidMount() {
 
@@ -162,7 +164,7 @@ class App extends React.Component {
     async checkForClick(){
       if(isClicked){
         clearInterval(this.state.timer);
-        if(this.state.TronLinkValue === 1){
+        if(this.state.TronLinkValue == 1){
           if(!!window.tronWeb && window.tronWeb.ready){
             await this.fetchData();
               this.play();
@@ -181,7 +183,7 @@ class App extends React.Component {
     checkForLogo(){
       if (!document.querySelector('.divForLogo').classList.contains('dnone')) {
         clearInterval(this.state.timer2);
-        if(!this.state.TronLinkValue === 1){isClicked = false;}
+        if(!this.state.TronLinkValue == 1){isClicked = false;}
         this.state.timer = setInterval(() => {
             this.checkForClick();
           }, 200);
@@ -211,21 +213,17 @@ class App extends React.Component {
     }
 
     checkForEntering(){
-      if(this.state.Players === "..." || this.state.Invested === "..." || this.state.PaidOut === "..." || this.state.Animals === "..."){
+      if(document.querySelector('.cover').classList.contains('dnone')){
+      if(this.state.Players == "..." || this.state.Invested == "..." || this.state.PaidOut == "..." || this.state.Animals == "..."){
         this.setState({TronLinkValue: 1});
       }
         document.querySelector('.divForLogo').classList.remove('dnone');
+      }
     }
 
     async fetchYourData() {
-      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-      if(Number(this.state.Players)!==0){
-        if(contractBalance===0){
-          this.setState({isEnd: true});
-          this.gameEnd();
-          contractTime = (await Utils.contract.last().call()).toNumber();
-
-      }}
+      contractTime = new Date();
+      this.checkForEnd();
       var player = new Object();
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -258,7 +256,7 @@ class App extends React.Component {
 
   async calcMoney(){
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-        var contractTime = new Date();
+        contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
         var player = new Object();
@@ -277,14 +275,15 @@ class App extends React.Component {
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>=contractBalance){
-                  if(!this.state.isEnd){
+                  if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
                       html: "<b>Money of the game is less than your money in the game so you can`t withdraw all of them</b>",
                       type: 'warning'
 
                   });
+                  this.setState({MOTH: true});
                 }}
-                this.setState({allMoney: Number(playerAllCoins)+Added,
+                this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer
                 });
@@ -296,12 +295,44 @@ class App extends React.Component {
 
         var wait = (period - (timePassed % period))*1000;
             const timer = setTimeout(() => {
-                this.calcAll();
+                this.calcMoney();
               }, wait);
 }
 
+      async checkForEnd(){
+        try{
+        var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
+      }catch(e){
+        return;
+      }
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        if(Number(this.state.Players)!=0){
+          if(contractBalance==0){
+            this.setState({isEnd: true});
+            this.gameEnd();
+            contractTime = (await Utils.contract.last().call()).toNumber();
+
+        }}
+      }
+
+      minO(x){
+        var y = "";
+        if(x[x.length-1]=="0"){
+        for(var i = 0;i<(x.length-1);i++){
+          y = y + x[i];
+        }
+      }
+      if(x[x.length-1]=="0"){
+        y = "";
+      for(var i = 0;i<(x.length-1);i++){
+        y = y + x[i];
+      }
+    }
+    return y;
+      }
+
         calcTime(){
-          var contractTime = new Date();
+          contractTime = new Date();
           contractTime = contractTime.getTime()/1000 >> 0;
           var timePassed = contractTime-Number(this.state.yourTime);
           var timeLeft = (period - (timePassed % period));
@@ -311,15 +342,11 @@ class App extends React.Component {
           this.setState({timeLeft: minutesLeft + " : " + secondsLeft});
         }
 
-        async calcAll(){
-          await this.fetchData();
-          this.calcMoney();
-        }
 
     async play(){
         ifPart: if(!!window.tronWeb && window.tronWeb.ready){
-          if(this.state.TronLinkValue===1){
-          if(!(this.state.Players === "...") || !(this.state.Invested === "...") || !(this.state.PaidOut === "...") || !(this.state.Animals === "...")){
+          if(this.state.TronLinkValue==1){
+          if(!(this.state.Players == "...") || !(this.state.Invested == "...") || !(this.state.PaidOut == "...") || !(this.state.Animals == "...")){
             this.setState({TronLinkValue: 0});
             this.playVisible();
             break ifPart;
@@ -334,7 +361,7 @@ class App extends React.Component {
       }
     }
         await this.fetchData();
-        if(this.state.TronLinkValue===1){return;}
+        if(this.state.TronLinkValue==1){return;}
         await this.fetchYourData();
         isClicked = false;
     }
@@ -447,20 +474,22 @@ class App extends React.Component {
 
     async pickUp(coins){
       this.setState({puv: 0,puvTRX: 0});
+      await this.checkForEnd();
       if(!this.state.isEnd){
       if(coins > 0){
         if(Number(coins)<=Number(this.state.allMoney)){
-        await Utils.contract.withdraw(coins).send({
-          shouldPollResponse: true,
+        Utils.contract.withdraw(coins).send({
+          shouldPollResponse: false,
           callValue: 0
         });
         Swal({
             title:'Transaction Sent',
             type: 'success'
 
-        })
-        const timer = setTimeout(() => this.fetchData(), 3000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 3000);
+        });
+        this.setState({allMoney: Number(this.state.allMoney)+coins});
+        const timer = setTimeout(() => this.fetchData(), 5000);
+        const timer2 = setTimeout(() => this.fetchYourData(), 5000);
       }else{Swal({
         title:'Oops...',
         text: 'Make sure you have enough money in your account',
@@ -481,7 +510,7 @@ class App extends React.Component {
     }
 
     visible(){
-      if(Number(this.state.val) === 0 ){
+      if(Number(this.state.val) == 0 ){
       document.querySelector('.cover').classList.remove('dnone');
       document.querySelector('.BTP').classList.remove('dnone');
       document.querySelector('.menuBottom').classList.remove('dnone');
@@ -491,7 +520,7 @@ class App extends React.Component {
 
 
         render() {
-        if(Number(this.state.TronLinkValue) === 1){
+        if(Number(this.state.TronLinkValue) == 1){
           document.querySelector('.cover').classList.add('dnone');
           document.querySelector('.BTP').classList.add('dnone');
           document.querySelector('.menuBottom').classList.add('dnone');
