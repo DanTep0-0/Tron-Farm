@@ -156,7 +156,7 @@ body{
 }
 .es{
   font-size: 22px;
-  color: #6D251D;
+  color: #4b78a6;
 }
 .textField h1, .textfield h1{
   font-size: 45px;
@@ -189,7 +189,7 @@ body{
 }
 .cyf{
   font-size: 24px;
-  color: #6D251D;
+  color: #4b78a6;
 }
 .bottomDiv{
   position: relative;
@@ -331,7 +331,7 @@ body{
   top: 8px;
 }
 .SM{
-  color: #873600;
+  color: #4b78a6;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.5s;
