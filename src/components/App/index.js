@@ -28,6 +28,7 @@ var contractBalance;
 var contractTime;
 var profit = [22, 80,272, 640, 1300];
 var prices = [8400, 30000, 100000, 230400, 458800];
+var perPrice = 2500;
 var vall;
 
 class App extends React.Component {
@@ -222,7 +223,6 @@ class App extends React.Component {
         ContractBalance: contractBalance,
         href: "https://tronscan.org/#/address/" + result5.toString()
       });
-      console.log("fetched");
     }
 
     checkForEntering(){
@@ -269,7 +269,7 @@ class App extends React.Component {
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();      document.querySelector('.info').classList.add('dnone');}
         var player = new Object();
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -293,8 +293,10 @@ class App extends React.Component {
 
                   });
                   this.setState({MOTH: true});
-                }}
-                this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
+                }
+                document.querySelector('.info').classList.remove('dnone');
+}
+                this.setState({allMoney: this.minO(Number(playerAllCoins)+Added),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
                   allMoneyTRX: this.beauty(Number(this.minO(Number(playerAllCoins)+Added))/80) + " TRX",
@@ -311,7 +313,6 @@ class App extends React.Component {
             const timer = setTimeout(() => {
                 this.calcMoney();
               }, wait);
-              console.log("fetchedYour");
 }
 
       async checkForEnd(){
@@ -389,6 +390,7 @@ class App extends React.Component {
       document.querySelector('.divForLogo').classList.add('dnone');
       document.querySelector('.cover').classList.add('dnone');
       document.querySelector('.menuBottom').classList.remove('dnone');
+      document.querySelector('.info').classList.add('dnone');
     }
 
       beauty(x) {
@@ -478,7 +480,7 @@ class App extends React.Component {
       this.setState({ivper:1});
       if(!this.state.isEnd){
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
-        if(Number(per)*4500<=Number(this.state.allMoney)){
+        if(Number(per)*perPrice<=Number(this.state.allMoney)){
         await Utils.contract.setCoe(per).send({
             shouldPollResponse:false,
             callValue:0
@@ -488,7 +490,7 @@ class App extends React.Component {
             type: 'success'
 
         })
-        var coins = Number(per)*4500;
+        var coins = Number(per)*perPrice;
         this.setState({
           allMoney: this.minO(Number(this.state.allMoney)-coins),
           yourCoe: Number(this.state.yourCoe)+Number(per)
@@ -662,7 +664,7 @@ class App extends React.Component {
                 <div className = "pers">%</div>
                 <p className = "description">If you improve nutrition, you will receive more profit from all of your animals. This can increase profit by up to 5 percent.</p>
                 <div className = "about">
-                  <p className = "p">Cost:</p><p className = "value f">4,500<img className = "ym" src = {Coin} alt="coin"/></p><hr></hr>
+                  <p className = "p">Cost:</p><p className = "value f">{this.beauty(perPrice)}<img className = "ym" src = {Coin} alt="coin"/></p><hr></hr>
                   <p className = "p">You have:</p><p className = "value">{this.beauty(this.state.yourCoe)}%</p><hr></hr>
                 </div>
               </div>
