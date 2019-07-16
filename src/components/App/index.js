@@ -15,7 +15,7 @@ import AnimalsP from './animals.png';
 import './App.scss';
 import WOW from 'wowjs';
 import Info from './info-icon.png';
-import Info2 from './info-icon2.png';
+import Attention from './attention.png';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -78,8 +78,6 @@ class App extends React.Component {
               timeLeft: '',
               isEnd: false,
               MOTH: false,
-              timeR: ''
-
             }
                     this.state.timer = setInterval(() => {
                     this.checkForClick();
@@ -220,8 +218,9 @@ class App extends React.Component {
         PaidOut: Math.ceil(result3),
         Animals: result4,
         Address: result5,
+        href: "https://tronscan.org/#/address/" + result5.toString(),
         ContractBalance: contractBalance,
-        href: "https://tronscan.org/#/address/" + result5.toString()
+        contractBalanceWarn: "Smart-contract's balance: " + this.beauty(this.minO(contractBalance)) + " Coins"
       });
     }
 
@@ -288,7 +287,7 @@ class App extends React.Component {
                 if(Added>contractBalance2){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
-                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them!",
+                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section",
                       type: 'warning'
 
                   });
@@ -345,7 +344,7 @@ class App extends React.Component {
       return y;
     }
   }
-    return y;
+    return Number(y);
       }
 
         calcTime(){
@@ -412,7 +411,7 @@ class App extends React.Component {
               callValue: value*12500});
               vall = true;
               Swal({
-                  title:'Transaction Sent',
+                  title:'Transaction sent',
                   type: 'success'
 
               });
@@ -455,7 +454,7 @@ class App extends React.Component {
               callValue:0
           });
           Swal({
-              title:'Transaction Sent',
+              title:'Transaction sent',
               type: 'success'
           });
           var coins = prices[type]*num;
@@ -486,7 +485,7 @@ class App extends React.Component {
             callValue:0
         });
         Swal({
-            title:'Transaction Sent',
+            title:'Transaction sent',
             type: 'success'
 
         })
@@ -529,7 +528,7 @@ class App extends React.Component {
           callValue: 0
         });
         Swal({
-            title:'Transaction Sent',
+            title:'Transaction sent',
             type: 'success'
 
         });
@@ -554,7 +553,7 @@ class App extends React.Component {
     gameEnd(){
       Swal({
           title:'Game over',
-          text: 'Smart-contract has no more money',
+          text: 'Smart-contract has no more money :(',
           type: 'error'
 
       });
@@ -622,7 +621,7 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" src = {Info2}/></div>
+                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" data-tooltip={this.state.contractBalanceWarn} src = {Attention}/></div>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>

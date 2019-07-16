@@ -1,3 +1,9 @@
+var x = "https://tronscan.org/#/contract/TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ";
+document.querySelector(".contract1").href = x;
+document.querySelector(".contract2").href = x;
+document.querySelector(".contract3").href = x;
+document.querySelector(".contract4").href = x;
+
 //--------------------TOOLTIP APPEARANCE-----------
 
 var showingTooltip;
