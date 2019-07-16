@@ -292,7 +292,7 @@ class App extends React.Component {
                 this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
-                  allMoneyTRX: this.beauty(Number(this.minO((Number(playerAllCoins)+Added).toFixed(2)))/80) + " TRX",
+                  allMoneyTRX: this.beauty(this.minO(((Number(playerAllCoins)+Added)/80).toFixed(2))) + " TRX",
                   investedMoneyTRX: this.beauty(this.minO((Number(this.state.investedMoney)/80).toFixed(2))) + " TRX",
                   returnedMoneyTRX: this.beauty(this.minO((Number(this.state.returnedMoney)/80).toFixed(2))) + " TRX"
                 });
@@ -337,7 +337,7 @@ class App extends React.Component {
       return y;
     }
   }
-    return y;
+    return Number(y);
       }
 
         calcTime(){
