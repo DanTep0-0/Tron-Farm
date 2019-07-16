@@ -273,7 +273,10 @@ table{
   width: 150px;
   margin: 0 auto;
 }
-.info{
+.myMoneyImg{
+  position: relative;
+}
+.myMoneyImg .info{
   width: 20px;
   bottom: 120px;
   position: absolute;

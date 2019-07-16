@@ -4,7 +4,7 @@ contract TronFarm {
 
     uint constant coinPrice = 12500;
     uint constant animals = 5;
-    uint constant period = 10 seconds ;
+    uint constant period = 1 minutes ;
 
     uint[animals] prices = [8400, 30000, 100000, 230400, 458800];
     uint[animals] profit = [22, 80,272, 640, 1300];
