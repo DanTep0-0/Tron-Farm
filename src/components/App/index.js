@@ -28,6 +28,7 @@ var contractBalance;
 var contractTime;
 var profit = [22, 80,272, 640, 1300];
 var prices = [8400, 30000, 100000, 230400, 458800];
+var vall;
 
 class App extends React.Component {
 
@@ -214,6 +215,7 @@ class App extends React.Component {
         ContractBalance: contractBalance,
         contractBalanceWarn: "Smart-contract's balance: " + this.beauty(this.minO(contractBalance)) + " Coins"
       });
+      console.log("fetched");
     }
 
     checkForEntering(){
@@ -273,13 +275,9 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-                console.log(profitOfPlayer);
-                console.log(contractBalance);
         var contractBalance2 = contractBalance -= playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
-                console.log(Added);
-                console.log(contractBalance2);
                 if(Added>contractBalance2){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
@@ -306,7 +304,8 @@ class App extends React.Component {
             const timer = setTimeout(() => {
                 this.calcMoney();
               }, wait);
-  }
+              console.log("fetchedYour");
+}
 
       async checkForEnd(){
         try{
@@ -394,10 +393,10 @@ class App extends React.Component {
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
             var totalBalance;
-            var vall = false;
+            vall = false;
            yourBalance.then( async function(result) {
             totalBalance = result;
-            if(totalBalance >= value*12500){
+            if(totalBalance >= Number(value)*12500){
             await Utils.contract.deposit().send({
               shouldPollResponse: false,
               callValue: value*12500});
@@ -416,21 +415,24 @@ class App extends React.Component {
           });
         }
           });
-          if(vall){
-            console.log("here");
-            console.log(value);
-            this.setState({allMoney: Number(this.state.allMoney) + value,
-              investedMoney: Number(this.state.returnedMoney) + value,
-              Invested: Number(this.state.Invested) + value
-            });
-            if(!Number(this.state.yourTime)){
-              this.setState({Players: Number(this.state.Players)+1});
-            }
-          }
-          const timer = setTimeout(() => this.fetchData(), 6000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 1000);
+          this.state.timeR = setInterval(() => this.depDop(value),200);
     }
   }else{this.gameEnd();}
+  }
+
+  depDop(value){
+    if(vall){
+      this.setState({allMoney: Number(this.state.allMoney) + Number(value),
+        investedMoney: Number(this.state.investedMoney) + Number(value),
+        Invested: Math.ceil(Number(this.state.Invested) + Number(value)/80)
+      });
+      if(!Number(this.state.yourTime)){
+        this.setState({Players: Number(this.state.Players)+1});
+      }
+      clearInterval(this.state.timeR);
+      const timer = setTimeout(() => this.fetchData(), 7500);
+      const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+    }
   }
 
     async buy(type, num){
@@ -450,8 +452,8 @@ class App extends React.Component {
           this.setState({allMoney: Number(this.state.allMoney)-coins,
             totalAnimals: Number(this.state.totalAnimals)+num
           });
-          const timer = setTimeout(() => this.fetchData(), 6000);
-          const timer2 = setTimeout(() => this.fetchYourData(), 1000);
+          const timer = setTimeout(() => this.fetchData(), 7500);
+          const timer2 = setTimeout(() => this.fetchYourData(), 8000);
         }else{
           Swal({
               title:'Oops...',
@@ -483,8 +485,8 @@ class App extends React.Component {
           allMoney: Number(this.state.allMoney)-coins,
           yourCoe: Number(this.state.yourCoe)+per
         });
-        const timer = setTimeout(() => this.fetchData(), 6000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 1000);
+        const timer = setTimeout(() => this.fetchData(), 7500);
+        const timer2 = setTimeout(() => this.fetchYourData(), 8000);
         Swal({
                  title:'Oops...',
                  text: 'Make sure you have enough money in your account',
@@ -505,15 +507,17 @@ class App extends React.Component {
     }
 
     async pickUp(coins){
-      this.setState({puv: 0,puvTRX: 0});
+      coins = Number(coins);
+      this.setState({puv: '',puvTRX: ''});
       await this.checkForEnd();
       if(!this.state.isEnd){
       if(coins > 0){
         if(Number(coins)<=Number(this.state.allMoney)){
-        Utils.contract.withdraw(coins).send({
+        await Utils.contract.withdraw(coins).send({
           shouldPollResponse: false,
           callValue: 0
         });
+        vall = false;
         Swal({
             title:'Transaction sent',
             type: 'success'
@@ -521,12 +525,12 @@ class App extends React.Component {
         });
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         coins = coins > contractBalance ? contractBalance : coins;
-        this.setState({allMoney: Number(this.state.allMoney)+coins,
+        this.setState({allMoney: Number(this.state.allMoney)-coins,
           totalPayout: Number(this.state.totalPayout)+coins/80>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
-        const timer = setTimeout(() => this.fetchData(), 6000);
-        const timer2 = setTimeout(() => this.fetchYourData(), 1000);
+        const timer = setTimeout(() => this.fetchData(), 7500);
+        const timer2 = setTimeout(() => this.fetchYourData(), 8000);
       }else{Swal({
         title:'Oops...',
         text: 'Make sure you have enough money in your account',
