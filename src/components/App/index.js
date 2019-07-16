@@ -84,13 +84,16 @@ class App extends React.Component {
                   }, 200);
                   setTimeout(() => {
                     this.setT();
-                },10000);
+                },1000);
+                setTimeout(() => {this.fetchYourData();},2000);
     }
 
     setT(){
-      this.state.timer2 = setInterval(() => {
+      this.setState({
+        timer2: setInterval(() => {
       this.fetchData();
-    }, 7000);
+        }, 7000)
+      });
     }
 
     async componentDidMount() {
@@ -168,7 +171,12 @@ class App extends React.Component {
         }
 
         await Utils.setTronWeb(window.tronWeb, contractAddress);
-        new WOW.WOW().init();
+
+        new WOW.WOW({
+          live: false
+        }).init();
+
+        this.visible();
     }
 
     async checkForClick(){
@@ -194,10 +202,10 @@ class App extends React.Component {
       if (!document.querySelector('.divForLogo').classList.contains('dnone')) {
         clearInterval(this.state.timer2);
         if(!this.state.TronLinkValue === 1){isClicked = false;}
-        this.state.timer = setInterval(() => {
+        this.setState({timer: setInterval(() => {
             this.checkForClick();
-          }, 200);
-	     }
+          }, 200)
+	     })}
     }
 
       async fetchData(){
@@ -235,7 +243,7 @@ class App extends React.Component {
     async fetchYourData() {
       contractTime = new Date();
       this.checkForEnd();
-      var player = new Object();
+      var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
@@ -269,12 +277,12 @@ class App extends React.Component {
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();      document.querySelector('.info').classList.add('dnone');}
-        var player = new Object();
+        var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
         var timePassed = contractTime-Number(this.state.yourTime);
         var profitOfPlayer=0;
-        var animals = new Array();
+        var animals = [];
         animals = [Number(this.state.yourChicks),Number(this.state.yourPigs),Number(this.state.yourSheeps),Number(this.state.yourCows),Number(this.state.yourHorses)];
                for(var f=0; f<5;f++){
                   profitOfPlayer += animals[f]*profit[f];
@@ -309,14 +317,14 @@ class App extends React.Component {
           }
 
         var wait = (period - (timePassed % period))*1000;
-            const timer = setTimeout(() => {
+              setTimeout(() => {
                 this.calcMoney();
               }, wait);
 }
 
       async checkForEnd(){
         try{
-        var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
+        await Utils.contract.totalPlayers().call().toNumber();
       }catch(e){
         return;
       }
@@ -334,7 +342,7 @@ class App extends React.Component {
         x=(Number(x).toFixed(2)).toString();
         var y;
         for(var j=0;j<3;j++){
-      if(x[x.length-1-j]=="0" || x[x.length-1-j]=="."){
+      if(x[x.length-1-j]==="0" || x[x.length-1-j]==="."){
         y = "";
       for(var i = 0;i<(x.length-1-j);i++){
         y = y + x[i];
@@ -439,8 +447,8 @@ class App extends React.Component {
         this.setState({Players: Number(this.state.Players)+1});
       }
       clearInterval(this.state.timeR);
-      const timer = setTimeout(() => this.fetchData(), 7500);
-      const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+      setTimeout(() => this.fetchData(), 7500);
+      setTimeout(() => this.fetchYourData(), 8000);
     }
   }
 
@@ -461,8 +469,8 @@ class App extends React.Component {
           this.setState({allMoney: this.mino(Number(this.state.allMoney)-coins),
             totalAnimals: Number(this.state.totalAnimals)+num
           });
-          const timer = setTimeout(() => this.fetchData(), 7500);
-          const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+          setTimeout(() => this.fetchData(), 7500);
+          setTimeout(() => this.fetchYourData(), 8000);
         }else{
           Swal({
               title:'Oops...',
@@ -494,8 +502,8 @@ class App extends React.Component {
           allMoney: this.minO(Number(this.state.allMoney)-coins),
           yourCoe: Number(this.state.yourCoe)+Number(per)
         });
-        const timer = setTimeout(() => this.fetchData(), 7500);
-        const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+        setTimeout(() => this.fetchData(), 7500);
+        setTimeout(() => this.fetchYourData(), 8000);
       }else{
         Swal({
                  title:'Oops...',
@@ -538,8 +546,8 @@ class App extends React.Component {
           totalPayout: Number(this.state.totalPayout)+coins/80>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
-        const timer = setTimeout(() => this.fetchData(), 7500);
-        const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+        setTimeout(() => this.fetchData(), 7500);
+        setTimeout(() => this.fetchYourData(), 8000);
       }else{Swal({
         title:'Oops...',
         text: 'Make sure you have enough money in your account',
@@ -565,7 +573,7 @@ class App extends React.Component {
       document.querySelector('.BTP').classList.remove('dnone');
       document.querySelector('.menuBottom').classList.remove('dnone');
     }
-      this.state.val = 5;
+      this.setState({val: 5});
     }
 
 
@@ -578,7 +586,6 @@ class App extends React.Component {
         }
         return (
           <div className = "allReact">
-            {this.visible()}
           <div className = "forButton">
             <button className="play wow zoomIn" onClick={(event) => {event.preventDefault()
                                                                this.play()}  }>Play</button>
@@ -621,7 +628,7 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" data-tooltip={this.state.contractBalanceWarn} src = {Attention}/></div>
+                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" alt = "info" data-tooltip={this.state.contractBalanceWarn} src = {Attention}/></div>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>

@@ -8,7 +8,7 @@ var myRef2 = React.createRef();
 
 
 class Dop extends React.Component {
-  
+
     scrollToMyRef = () => window.scrollTo(0, myRef.current.offsetTop - 70)
 
 change(){
@@ -22,8 +22,8 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a className="sc">
-      <p>Q&A</p></a></div>
+      this.change()}}><div className="sc">
+      <p>Q&A</p></div></div>
     );
   }
 }
@@ -44,7 +44,7 @@ change(){
 
   render(){return(
     <div className = "forQA" onClick = {(event) => {event.preventDefault()
-      this.change()}}><a className="sc"><p>About game</p></a></div>
+      this.change()}}><div className="sc"><p>About game</p></div></div>
     );
   }
 }
