@@ -23,7 +23,7 @@ const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 const contractAddress = 'TYjaMYZ1sy5joHsYWTDBMiPGkZKfytFZjH';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
 ////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TYjaMYZ1sy5joHsYWTDBMiPGkZKfytFZjH - testnet(now)
 var isClicked = false;
-var period = 120;
+var period = 60;
 var contractBalance;
 var contractTime;
 var profit = [22, 80,272, 640, 1300];
@@ -81,9 +81,15 @@ class App extends React.Component {
                     this.state.timer = setInterval(() => {
                     this.checkForClick();
                   }, 200);
-                  this.state.timer2 = setInterval(() => {
-                  this.fetchData();
-                }, 7000);
+                  setTimeout(() => {
+                    this.setT();
+                },10000);
+    }
+
+    setT(){
+      this.state.timer2 = setInterval(() => {
+      this.fetchData();
+    }, 7000);
     }
 
     async componentDidMount() {
@@ -244,9 +250,9 @@ class App extends React.Component {
       var result7 = animals[3];
       var result8 = animals[4];
       this.setState({
-      allMoney: result1,
-      investedMoney: result2,
-      returnedMoney: result3,
+      allMoney: this.minO(result1),
+      investedMoney: this.minO(result2),
+      returnedMoney: this.minO(result3),
       yourCoe: result9,
       yourChicks: result4,
       yourPigs: result5,
@@ -290,9 +296,9 @@ class App extends React.Component {
                 this.setState({allMoney: this.minO((Number(playerAllCoins)+Added).toFixed(2)),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
-                  allMoneyTRX: this.beauty(this.minO(((Number(playerAllCoins)+Added)/80).toFixed(2))) + " TRX",
-                  investedMoneyTRX: this.beauty(this.minO((Number(this.state.investedMoney)/80).toFixed(2))) + " TRX",
-                  returnedMoneyTRX: this.beauty(this.minO((Number(this.state.returnedMoney)/80).toFixed(2))) + " TRX",
+                  allMoneyTRX: this.beauty(Number(this.minO(Number(playerAllCoins)+Added))/80) + " TRX",
+                  investedMoneyTRX: this.beauty(this.minO(Number(this.state.investedMoney)/80)) + " TRX",
+                  returnedMoneyTRX: this.beauty(this.minO(Number(this.state.returnedMoney)/80)) + " TRX"
                 });
           if(contractBalance!==0 && profitOfPlayer!==0){
             this.state.Timer = setInterval(() => {
@@ -324,6 +330,7 @@ class App extends React.Component {
       }
 
       minO(x){
+        x=(Number(x).toFixed(2)).toString();
         var y;
         for(var j=0;j<3;j++){
       if(x[x.length-1-j]=="0" || x[x.length-1-j]=="."){
@@ -422,8 +429,8 @@ class App extends React.Component {
 
   depDop(value){
     if(vall){
-      this.setState({allMoney: Number(this.state.allMoney) + Number(value),
-        investedMoney: Number(this.state.investedMoney) + Number(value),
+      this.setState({allMoney: this.minO(Number(this.state.allMoney) + Number(value)),
+        investedMoney: this.minO(Number(this.state.investedMoney) + Number(value)),
         Invested: Math.ceil(Number(this.state.Invested) + Number(value)/80)
       });
       if(!Number(this.state.yourTime)){
@@ -449,7 +456,7 @@ class App extends React.Component {
               type: 'success'
           });
           var coins = prices[type]*num;
-          this.setState({allMoney: Number(this.state.allMoney)-coins,
+          this.setState({allMoney: this.mino(Number(this.state.allMoney)-coins),
             totalAnimals: Number(this.state.totalAnimals)+num
           });
           const timer = setTimeout(() => this.fetchData(), 7500);
@@ -482,11 +489,12 @@ class App extends React.Component {
         })
         var coins = Number(per)*4500;
         this.setState({
-          allMoney: Number(this.state.allMoney)-coins,
-          yourCoe: Number(this.state.yourCoe)+per
+          allMoney: this.minO(Number(this.state.allMoney)-coins),
+          yourCoe: Number(this.state.yourCoe)+Number(per)
         });
         const timer = setTimeout(() => this.fetchData(), 7500);
         const timer2 = setTimeout(() => this.fetchYourData(), 8000);
+      }else{
         Swal({
                  title:'Oops...',
                  text: 'Make sure you have enough money in your account',
@@ -517,7 +525,6 @@ class App extends React.Component {
           shouldPollResponse: false,
           callValue: 0
         });
-        vall = false;
         Swal({
             title:'Transaction sent',
             type: 'success'
@@ -525,7 +532,7 @@ class App extends React.Component {
         });
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         coins = coins > contractBalance ? contractBalance : coins;
-        this.setState({allMoney: Number(this.state.allMoney)-coins,
+        this.setState({allMoney: this.minO(Number(this.state.allMoney)-coins),
           totalPayout: Number(this.state.totalPayout)+coins/80>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
