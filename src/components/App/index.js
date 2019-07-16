@@ -273,10 +273,14 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-        contractBalance -= playerAllCoins;
+                console.log(profitOfPlayer);
+                console.log(contractBalance);
+        var contractBalance2 = contractBalance -= playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
-                if(Added>=contractBalance){
+                console.log(Added);
+                console.log(contractBalance2);
+                if(Added>contractBalance2){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
                       html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them!",
@@ -390,24 +394,19 @@ class App extends React.Component {
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
             var totalBalance;
+            var vall = false;
            yourBalance.then( async function(result) {
             totalBalance = result;
             if(totalBalance >= value*12500){
             await Utils.contract.deposit().send({
               shouldPollResponse: false,
               callValue: value*12500});
+              vall = true;
               Swal({
                   title:'Transaction Sent',
                   type: 'success'
 
               });
-              this.setState({allMoney: Number(this.state.allMoney) + value,
-                investedMoney: Number(this.state.returnedMoney) + value,
-                Invested: Number(this.state.Invested) + value
-              });
-              if(!Number(this.state.yourTime)){
-                this.setState({Players: Number(this.state.Players)+1});
-              }
           }else{
           Swal({
               title: 'Oops...',
@@ -417,6 +416,17 @@ class App extends React.Component {
           });
         }
           });
+          if(vall){
+            console.log("here");
+            console.log(value);
+            this.setState({allMoney: Number(this.state.allMoney) + value,
+              investedMoney: Number(this.state.returnedMoney) + value,
+              Invested: Number(this.state.Invested) + value
+            });
+            if(!Number(this.state.yourTime)){
+              this.setState({Players: Number(this.state.Players)+1});
+            }
+          }
           const timer = setTimeout(() => this.fetchData(), 6000);
           const timer2 = setTimeout(() => this.fetchYourData(), 1000);
     }
