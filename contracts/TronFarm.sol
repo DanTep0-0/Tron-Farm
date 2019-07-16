@@ -8,7 +8,7 @@ contract TronFarm {
 
     uint[animals] prices = [8400, 30000, 100000, 230400, 458800];
     uint[animals] profit = [22, 80,272, 640, 1300];
-    uint perPrice = 4500;
+    uint perPrice = 2500;
     uint startCoe = 100;
 
     uint public last;
