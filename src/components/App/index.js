@@ -231,8 +231,6 @@ class App extends React.Component {
         Animals: result4,
         Address: result5,
         href: "https://tronscan.org/#/address/" + result5.toString(),
-        ContractBalance: contractBalance,
-        contractBalanceWarn: "Smart-contract's balance: " + this.beauty(this.minO(contractBalance)) + " Coins"
       });
     }
 
@@ -280,7 +278,7 @@ class App extends React.Component {
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
         var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -303,10 +301,11 @@ class App extends React.Component {
                       type: 'warning'
 
                   });
-                  this.setState({MOTH: true});
+                    this.setState({MOTH: true});
+                  }
+                  document.querySelector('.info').classList.remove('dnone');
                 }
-                document.querySelector('#info').classList.remove('display-none');
-}
+
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
@@ -632,7 +631,8 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img id="info" className="display-none" data-tooltip={this.state.contractBalanceWarn} src = {Money} alt="money bags"/></div>
+                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/></div>
+                    <p className="info dnone">Smart-contract's balance: {this.beauty(this.minO(Number(contractBalance)))} Coins</p>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>

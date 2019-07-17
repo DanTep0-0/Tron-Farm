@@ -276,14 +276,9 @@ table{
 .myMoney{
   position: relative;
 }
-// .info{
-//   top: 10px;
-//   position: absolute;
-//   margin: 0;
-//   width: 20px;
-//   padding: 5px;
-//   right: 9px;
-// }
+.info{
+  font-size: 16px;
+}
 .time{
   padding-top: 10px;
 }
@@ -540,6 +535,9 @@ table{
   .yourInf{
     overflow: hidden;
     height: auto;
+  }
+  .info{
+    font-size: 18px;
   }
   .animal, .food {
     width: 650px;
