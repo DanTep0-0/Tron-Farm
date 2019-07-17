@@ -269,6 +269,7 @@ class App extends React.Component {
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();      document.querySelector('.info').classList.add('dnone');}
+        console.log(this.state.isEnd);
         var player = new Object();
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -298,15 +299,15 @@ class App extends React.Component {
                 this.setState({allMoney: this.minO(Number(playerAllCoins)+Added),
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
-                  allMoneyTRX: this.beauty(Number(this.minO(Number(playerAllCoins)+Added))/80) + " TRX",
+                  allMoneyTRX: this.beauty(this.minO((Number(playerAllCoins)+Added)/80)) + " TRX",
                   investedMoneyTRX: this.beauty(this.minO(Number(this.state.investedMoney)/80)) + " TRX",
                   returnedMoneyTRX: this.beauty(this.minO(Number(this.state.returnedMoney)/80)) + " TRX"
                 });
-          if(contractBalance!==0 && profitOfPlayer!==0){
+          if(contractBalance!==0 && profitOfPlayer>0){
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
-          }
+          }else{this.setState({timeLeft: ''});}
 
         var wait = (period - (timePassed % period))*1000;
             const timer = setTimeout(() => {
@@ -348,6 +349,7 @@ class App extends React.Component {
       }
 
         calcTime(){
+          console.log("inTime");
           contractTime = new Date();
           contractTime = contractTime.getTime()/1000 >> 0;
           var timePassed = contractTime-Number(this.state.yourTime);
