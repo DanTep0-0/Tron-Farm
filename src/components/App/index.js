@@ -77,7 +77,7 @@ class App extends React.Component {
               TronLinkValue: '',
               timeLeft: '',
               isEnd: false,
-              MOTH: false,
+              MOTH: true,
             }
                     this.state.timer = setInterval(() => {
                     this.checkForClick();
@@ -277,12 +277,7 @@ class App extends React.Component {
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();      document.querySelector('.info').classList.add('dnone');}
-<<<<<<< HEAD
-        console.log(this.state.isEnd);
-        var player = new Object();
-=======
         var player = {};
->>>>>>> 220a7a52393d2360a2db0e52405ed64f64d068d9
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
         var timePassed = contractTime-Number(this.state.yourTime);
@@ -392,6 +387,7 @@ class App extends React.Component {
     }
         await this.fetchData();
         if(this.state.TronLinkValue===1){return;}
+        this.setState({MOTH: false});
         await this.fetchYourData();
         isClicked = false;
     }
@@ -472,7 +468,7 @@ class App extends React.Component {
               type: 'success'
           });
           var coins = prices[type]*num;
-          this.setState({allMoney: this.mino(Number(this.state.allMoney)-coins),
+          this.setState({allMoney: this.minO(Number(this.state.allMoney)-coins),
             totalAnimals: Number(this.state.totalAnimals)+num
           });
           setTimeout(() => this.fetchData(), 7500);
