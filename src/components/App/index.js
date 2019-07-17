@@ -242,9 +242,7 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractTime = new Date();
-      if(!this.state.MOTH){
       this.checkForEnd();
-    }
       var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -260,9 +258,9 @@ class App extends React.Component {
       var result7 = animals[3];
       var result8 = animals[4];
       this.setState({
-      allMoney: this.minO(result1),
-      investedMoney: this.minO(result2),
-      returnedMoney: this.minO(result3),
+      allMoney: result1,
+      investedMoney: result2,
+      returnedMoney: result3,
       yourCoe: result9,
       yourChicks: result4,
       yourPigs: result5,
@@ -278,7 +276,7 @@ class App extends React.Component {
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();      document.querySelector('.info').classList.add('dnone');}
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();     document.querySelector('.info').classList.add('dnone');}
         var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -305,7 +303,7 @@ class App extends React.Component {
                 }
                 document.querySelector('.info').classList.remove('dnone');
 }
-                this.setState({allMoney: this.minO(Number(playerAllCoins)+Added),
+                this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
                   allMoneyTRX: this.beauty(this.minO((Number(playerAllCoins)+Added)/80)) + " TRX",
@@ -332,7 +330,9 @@ class App extends React.Component {
         if(Number(this.state.Players)!==0){
           if(contractBalance===0){
             this.setState({isEnd: true});
+            if(!this.state.MOTH){
             this.gameEnd();
+          }
             contractTime = (await Utils.contract.last().call()).toNumber();
 
         }}
@@ -441,9 +441,9 @@ class App extends React.Component {
 
   depDop(value){
     if(vall){
-      this.setState({allMoney: this.minO(Number(this.state.allMoney) + Number(value)),
-        investedMoney: this.minO(Number(this.state.investedMoney) + Number(value)),
-        Invested: Math.ceil(Number(this.state.Invested) + Number(value)/80)
+      this.setState({allMoney: Number(this.state.allMoney) + Number(value),
+        investedMoney: Number(this.state.investedMoney) + Number(value),
+        Invested: Math.floor(Number(this.state.Invested) + Number(value)/80)
       });
       if(!Number(this.state.yourTime)){
         this.setState({Players: Number(this.state.Players)+1});
@@ -468,7 +468,7 @@ class App extends React.Component {
               type: 'success'
           });
           var coins = prices[type]*num;
-          this.setState({allMoney: this.minO(Number(this.state.allMoney)-coins),
+          this.setState({allMoney: Number(this.state.allMoney)-coins,
             totalAnimals: Number(this.state.totalAnimals)+num
           });
           setTimeout(() => this.fetchData(), 7500);
@@ -501,7 +501,7 @@ class App extends React.Component {
         })
         var coins = Number(per)*perPrice;
         this.setState({
-          allMoney: this.minO(Number(this.state.allMoney)-coins),
+          allMoney: Number(this.state.allMoney)-coins,
           yourCoe: Number(this.state.yourCoe)+Number(per)
         });
         setTimeout(() => this.fetchData(), 7500);
@@ -544,7 +544,7 @@ class App extends React.Component {
         });
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         coins = coins > contractBalance ? contractBalance : coins;
-        this.setState({allMoney: this.minO(Number(this.state.allMoney)-coins),
+        this.setState({allMoney: Number(this.state.allMoney)-coins,
           totalPayout: Number(this.state.totalPayout)+coins/80>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
@@ -631,9 +631,9 @@ class App extends React.Component {
                   <div className="myMoney">
                     <div className="name">My money</div>
                     <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" alt = "info" data-tooltip={this.state.contractBalanceWarn} src = {Attention}/></div>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX))}>{Math.floor(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{Math.floor(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{Math.floor(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                   </div>
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
