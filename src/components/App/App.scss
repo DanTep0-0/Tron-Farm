@@ -273,15 +273,17 @@ table{
   width: 150px;
   margin: 0 auto;
 }
-.myMoneyImg{
+.myMoney{
   position: relative;
 }
-.myMoneyImg .info{
-  width: 20px;
-  bottom: 120px;
-  position: absolute;
-  right: 0px;
-}
+// .info{
+//   top: 10px;
+//   position: absolute;
+//   margin: 0;
+//   width: 20px;
+//   padding: 5px;
+//   right: 9px;
+// }
 .time{
   padding-top: 10px;
 }
@@ -675,7 +677,6 @@ table{
     margin-left: 280px;
   }
 }
-
 @media (max-width: 730px) {
   .description, .top, .myMoney, .about, .improveFood, .pickUp{
     font-size: 22px;
@@ -694,9 +695,6 @@ table{
   }
   .allani .animal, .yourInf .animal {
     height: 460px;
-  }
-  .infbo{
-    width: 362px;
   }
   .allani, .yourInf{
     width: 362px;

@@ -15,7 +15,7 @@ const TronLinkGuide = props => {
               <h2 className = "unin">Please login to</h2>
               <a className="a wow fadeIn" data-wow-delay="0.5s" href={ WEBSTORE_URL } target='_blank' rel='noopener noreferrer'>Tron Chrome Wallet</a>
               <img className = "logo2 wow slideInRight" data-wow-dely="1.2s" src={ TronLinkLogo } alt='TronLink logo' />
-                <div className='info'>
+                <div className='infoT'>
                     <div className = "text">
                       If you haven't downloaded the TRON wallet web extension yet,
                       download TronLink to work with the website.

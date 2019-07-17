@@ -9,6 +9,10 @@ document.querySelector(".contract4").href = x;
 var showingTooltip;
 
 document.onmouseover = function(e) {
+  // if(document.querySelector(".info").contains(".display-none")) {
+  //   return;
+  // }
+
   var target = e.target;
 
   var tooltip = target.getAttribute('data-tooltip');
