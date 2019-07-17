@@ -12,12 +12,12 @@ var showingTooltip;
 
 document.onmouseover = function(e) {
 // -------------------BREAK IF DISPLAY-NONE---------
-  var info = document.querySelector("#info");
-  var infoClass = info.className;
-  switch(infoClass) {
-    case "display-none":
-    break;
-  }
+  // var info = document.getElementById("info");
+  // var infoClass = info.className;
+  // switch(infoClass) {
+  //   case "display-none":
+  //   break;
+  // }
 
   var target = e.target;
 
