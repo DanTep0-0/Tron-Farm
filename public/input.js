@@ -1,17 +1,23 @@
+//--------------------SMART-CONTRACT LINK-----------
 var x = "https://tronscan.org/#/contract/TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ";
 document.querySelector(".contract1").href = x;
 document.querySelector(".contract2").href = x;
 document.querySelector(".contract3").href = x;
 document.querySelector(".contract4").href = x;
 
+
 //--------------------TOOLTIP APPEARANCE-----------
 
 var showingTooltip;
 
 document.onmouseover = function(e) {
-  // if(document.querySelector(".info").contains(".display-none")) {
-  //   return;
-  // }
+// -------------------BREAK IF DISPLAY-NONE---------
+  var info = document.querySelector("#info");
+  var infoClass = info.className;
+  switch(infoClass) {
+    case "display-none":
+    break;
+  }
 
   var target = e.target;
 
@@ -44,6 +50,7 @@ document.onmouseout = function(e) {
     document.body.removeChild(showingTooltip);
     showingTooltip = null;
   }  };
+
 
 
   //--------------------COPY FUNCTION-----------------
