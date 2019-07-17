@@ -242,7 +242,9 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractTime = new Date();
+      if(!this.state.MOTH){
       this.checkForEnd();
+    }
       var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -310,12 +312,15 @@ class App extends React.Component {
                   investedMoneyTRX: this.beauty(this.minO(Number(this.state.investedMoney)/80)) + " TRX",
                   returnedMoneyTRX: this.beauty(this.minO(Number(this.state.returnedMoney)/80)) + " TRX"
                 });
+                if(!this.state.Timer){
+                  if(!this.state.isEnd){
           if(contractBalance!==0 && profitOfPlayer>0){
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
           }else{this.setState({timeLeft: ''});}
-
+        }
+        }
         var wait = (period - (timePassed % period))*1000;
               setTimeout(() => {
                 this.calcMoney();
@@ -323,11 +328,6 @@ class App extends React.Component {
 }
 
       async checkForEnd(){
-        try{
-        await Utils.contract.totalPlayers().call().toNumber();
-      }catch(e){
-        return;
-      }
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         if(Number(this.state.Players)!==0){
           if(contractBalance===0){
