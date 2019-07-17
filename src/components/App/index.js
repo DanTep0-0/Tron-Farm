@@ -15,7 +15,6 @@ import AnimalsP from './animals.png';
 import './App.scss';
 import WOW from 'wowjs';
 import Info from './info-icon.png';
-import Attention from './attention.png';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
@@ -276,7 +275,7 @@ class App extends React.Component {
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();     document.querySelector('.info').classList.add('dnone');}
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber();}
         var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
@@ -295,13 +294,13 @@ class App extends React.Component {
                 if(Added>contractBalance2){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
-                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section",
+                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section by hovering the money bags",
                       type: 'warning'
 
                   });
                   this.setState({MOTH: true});
                 }
-                document.querySelector('.info').classList.remove('dnone');
+                document.querySelector('.info').classList.remove('display-none');
 }
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
@@ -399,7 +398,6 @@ class App extends React.Component {
       document.querySelector('.divForLogo').classList.add('dnone');
       document.querySelector('.cover').classList.add('dnone');
       document.querySelector('.menuBottom').classList.remove('dnone');
-      document.querySelector('.info').classList.add('dnone');
     }
 
       beauty(x) {
@@ -630,10 +628,10 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img src = {Money} alt="money bags"/><img className="info" alt = "info" data-tooltip={this.state.contractBalanceWarn} src = {Attention}/></div>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX))}>{Math.floor(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{Math.floor(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="info" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{Math.floor(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <div className="myMoneyImg"><img className="info display-none" data-tooltip={this.state.contractBalanceWarn} src = {Money} alt="money bags"/></div>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                   </div>
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
