@@ -84,7 +84,12 @@ class App extends React.Component {
                   setTimeout(() => {
                     this.setT();
                 },1000);
+                if(!!window.tronWeb && window.tronWeb.ready){
+                setTimeout(() => {this.fetchData();},1000);
+                if(!(this.state.Players === "...") || !(this.state.Invested === "...") || !(this.state.PaidOut === "...") || !(this.state.Animals === "...")){
                 setTimeout(() => {this.fetchYourData();},2000);
+              }
+              }
     }
 
     setT(){
@@ -355,7 +360,6 @@ class App extends React.Component {
       }
 
         calcTime(){
-          console.log("inTime");
           contractTime = new Date();
           contractTime = contractTime.getTime()/1000 >> 0;
           var timePassed = contractTime-Number(this.state.yourTime);
