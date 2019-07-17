@@ -305,7 +305,7 @@ class App extends React.Component {
                   });
                   this.setState({MOTH: true});
                 }
-                document.querySelector('.info').classList.remove('display-none');
+                document.querySelector('#info').classList.remove('display-none');
 }
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
@@ -632,7 +632,7 @@ class App extends React.Component {
                   </div>
                   <div className="myMoney">
                     <div className="name">My money</div>
-                    <div className="myMoneyImg"><img className="info display-none" data-tooltip={this.state.contractBalanceWarn} src = {Money} alt="money bags"/></div>
+                    <div className="myMoneyImg"><img id="info" className="display-none" data-tooltip={this.state.contractBalanceWarn} src = {Money} alt="money bags"/></div>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                     <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
