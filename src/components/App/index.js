@@ -19,8 +19,8 @@ import Info from './info-icon.png';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TCosH1WUwJ8rDoayRFJERPd3WiLkWxkE6k';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TCosH1WUwJ8rDoayRFJERPd3WiLkWxkE6k - testnet(now)
+const contractAddress = 'TR8aTLMDktWBskWvqBhvyEEHe4SiG2nshx';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TR8aTLMDktWBskWvqBhvyEEHe4SiG2nshx - testnet(now)
 var isClicked = false;
 var period = 10;
 var contractBalance;
@@ -453,6 +453,7 @@ class App extends React.Component {
 
   depDop(value){
     if(vall){
+      contractBalance += value;
       this.setState({allMoney: Number(this.state.allMoney) + Number(value),
         investedMoney: Number(this.state.investedMoney) + Number(value),
         Invested: Math.floor(Number(this.state.Invested) + Number(value)/80)
