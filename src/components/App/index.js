@@ -297,7 +297,7 @@ class App extends React.Component {
                 if(Added>contractBalance2){
                   if(!this.state.isEnd && !this.state.MOTH){
                   Swal({
-                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section by hovering the money bags",
+                      html: "There are <b>less</b> money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section.",
                       type: 'warning'
 
                   });
