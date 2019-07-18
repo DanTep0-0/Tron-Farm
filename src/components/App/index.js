@@ -19,8 +19,8 @@ import Info from './info-icon.png';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TR8aTLMDktWBskWvqBhvyEEHe4SiG2nshx';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TR8aTLMDktWBskWvqBhvyEEHe4SiG2nshx - testnet(now)
+const contractAddress = 'TRmGytELWcs1FGGMoiC9nA4RsLP8w9wQZU';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TRmGytELWcs1FGGMoiC9nA4RsLP8w9wQZU - testnet(now)
 var isClicked = false;
 var period = 10;
 var contractBalance;
@@ -219,16 +219,20 @@ class App extends React.Component {
     }
 
       async fetchData(){
+        console.log("in fetchData");
       try{
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
     }catch(e){
       this.checkForEntering();
+      console.log("checking for enter");
       return;
     }
+    console.log("passed checkForEntering()");
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
       contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+      console.log("in fetch, balance = "+contractBalance);
       var result2 = contractBalance/80 + result3;
       this.setState({
         Players: result1,
@@ -239,7 +243,11 @@ class App extends React.Component {
         href: "https://tronscan.org/#/address/" + result5.toString(),
       });
       if(!this.state.isEnd){
+        console.log("now it is not end");
+        if(wait >=8){
+          console.log("wait >= 8");
         this.checkForEnd();
+      }
       }
     }
 
@@ -252,9 +260,11 @@ class App extends React.Component {
     }
 
     async fetchYourData() {
+      console.log("in fetchYourData()");
       contractTime = new Date();
       var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
+      console.log("here player.allCoins = " + player.allCoins);
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
       var result3 = player.coinsReturned;
@@ -283,14 +293,16 @@ class App extends React.Component {
   }
 
   async calcMoney(){
+    console.log("in calcMoney");
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-        console.log(contractBalance);
+        console.log("here contractBalance = "+contractBalance);
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
+        if(this.state.isEnd){console.log("it is end now");contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
         var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
+        console.log("here player.allCoins = "+player.allCoins);
         var timePassed = contractTime-Number(this.state.yourTime);
         var profitOfPlayer=0;
         var animals = [];
@@ -301,19 +313,17 @@ class App extends React.Component {
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
         var contractBalance2 = contractBalance - playerAllCoins;
+        console.log("contractBalance2 = "+contractBalance2);
                 var hoursAdded = Math.floor(timePassed/period);
+                console.log("hours added:  "+hoursAdded);
                 var Added = hoursAdded*profitOfPlayer;
-                if(Added>contractBalance2){
-                  if(!this.state.isEnd && !this.state.MOTH){
-                  Swal({
-                      html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section by hovering the money bags",
-                      type: 'warning'
-
-                  });
-                    this.setState({MOTH: true});
-                  }
-                  document.querySelector('.info').classList.remove('dnone');
-                }
+                console.log("so added = "+Added);
+                var waitFor;
+                if(wait>=8){waitFor=0;}else{waitFor=8-wait;}
+              setTimeout(() => {
+                this.fetchDop(Added, playerAllCoins);
+              }, waitFor*1000);
+              console.log("Timeout, waitFor = "+waitFor);
 
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
@@ -325,28 +335,50 @@ class App extends React.Component {
                 if(!this.state.Timer){
                   if(!this.state.isEnd){
           if(contractBalance!==0 && profitOfPlayer>0){
+            console.log("setting timer, contractBalance = "+contractBalance+"and profit of player = "+profitOfPlayer);
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
-          }else{this.setState({timeLeft: ''});}
+          }else{this.setState({timeLeft: ''});console.log("removed timer")}
         }
         }
-        var wait = (period - (timePassed % period))*1000;
+        var wait2 = (period - (timePassed % period))*1000;
               setTimeout(() => {
                 this.calcMoney();
-              }, wait);
+              }, wait2);
 }
 
+  fetchDop(Added, playerAllCoins){
+    console.log("in fetchDop()");
+    var contractBalance2 = contractBalance - playerAllCoins;
+    console.log("here contractBalance2 = "+contractBalance2);
+    if(Number(Added)>Number(contractBalance2)){
+      if(!this.state.isEnd && !this.state.MOTH){
+      Swal({
+          html: "There are less money in the smart-contract than in your game account so you can't withdraw all of them! You can track smart-contract's balance online in 'My Money' section by hovering the money bags",
+          type: 'warning'
+
+      });
+        this.setState({MOTH: true});
+      }
+      document.querySelector('.info').classList.remove('dnone');
+    }
+  }
+
       async checkForEnd(){
+         console.log("in checkForEnd()");
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        console.log("here, contractBalance = "+contractBalance);
         if(Number(this.state.Players)!==0){
+          console.log("players > 0");
           if(contractBalance===0){
+            console.log("contractBalance = 0");
             this.setState({isEnd: true});
             if(!this.state.MOTH){
             this.gameEnd();
           }
             contractTime = (await Utils.contract.last().call()).toNumber();
-
+            console.log("now contract time is const");
         }}
       }
 
