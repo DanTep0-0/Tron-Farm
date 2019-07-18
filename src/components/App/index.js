@@ -19,16 +19,17 @@ import Info from './info-icon.png';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TE7NUHHtgmzJGhuRxcq1RdkA7vw37rUFJb';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TE7NUHHtgmzJGhuRxcq1RdkA7vw37rUFJb - testnet(now)
+const contractAddress = 'TCosH1WUwJ8rDoayRFJERPd3WiLkWxkE6k';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TCosH1WUwJ8rDoayRFJERPd3WiLkWxkE6k - testnet(now)
 var isClicked = false;
-var period = 60;
+var period = 10;
 var contractBalance;
 var contractTime;
-var profit = [22, 80,272, 640, 1300];
+var profit = [110, 400,1360, 3200, 6500];
 var prices = [8400, 30000, 100000, 230400, 458800];
-var perPrice = 2500;
+var perPrice = 2400;
 var vall;
+var wait = 10;
 
 class App extends React.Component {
 
@@ -90,6 +91,7 @@ class App extends React.Component {
                 setTimeout(() => {this.fetchYourData();},2000);
               }
               }
+              setInterval(() => {this.updateWait();},1000);
     }
 
     setT(){
@@ -98,6 +100,10 @@ class App extends React.Component {
       this.fetchData();
         }, 7000)
       });
+    }
+
+    updateWait(){
+      wait++;
     }
 
     async componentDidMount() {
@@ -232,6 +238,9 @@ class App extends React.Component {
         Address: result5,
         href: "https://tronscan.org/#/address/" + result5.toString(),
       });
+      if(!this.state.isEnd){
+        this.checkForEnd();
+      }
     }
 
     checkForEntering(){
@@ -244,7 +253,6 @@ class App extends React.Component {
 
     async fetchYourData() {
       contractTime = new Date();
-      this.checkForEnd();
       var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
       var result1 = player.allCoins;
@@ -276,6 +284,7 @@ class App extends React.Component {
 
   async calcMoney(){
         contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        console.log(contractBalance);
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
         if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
@@ -291,7 +300,7 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-        var contractBalance2 = contractBalance -= playerAllCoins;
+        var contractBalance2 = contractBalance - playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 if(Added>contractBalance2){
@@ -409,6 +418,7 @@ class App extends React.Component {
 
     async dep(value){
       this.setState({valueDep: '',valueDepTRX: '',});
+      if(wait >= 8){
       if(!this.state.isEnd){
         if(value > 0){
           var yourBalance = window.tronWeb.trx.getBalance(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString()));
@@ -438,6 +448,7 @@ class App extends React.Component {
           this.state.timeR = setInterval(() => this.depDop(value),200);
     }
   }else{this.gameEnd();}
+}else {this.WAIT();}
   }
 
   depDop(value){
@@ -449,6 +460,7 @@ class App extends React.Component {
       if(!Number(this.state.yourTime)){
         this.setState({Players: Number(this.state.Players)+1});
       }
+      wait = 0;
       clearInterval(this.state.timeR);
       setTimeout(() => this.fetchData(), 7500);
       setTimeout(() => this.fetchYourData(), 8000);
@@ -457,6 +469,7 @@ class App extends React.Component {
 
     async buy(type, num){
         this.setState({ivch: '1',ivpg: '1',ivsh: '1',ivco: '1',ivge: '1'});
+        if(wait >= 8){
         if(!this.state.isEnd){
         if (num > 0){
           if(Number(this.state.allMoney)>=prices[Number(type)]*num){
@@ -472,6 +485,7 @@ class App extends React.Component {
           this.setState({allMoney: Number(this.state.allMoney)-coins,
             totalAnimals: Number(this.state.totalAnimals)+num
           });
+          wait = 0;
           setTimeout(() => this.fetchData(), 7500);
           setTimeout(() => this.fetchYourData(), 8000);
         }else{
@@ -484,10 +498,12 @@ class App extends React.Component {
         }
     }
   }else{this.gameEnd();}
+}else {this.WAIT();}
 }
 
     async improveFood(per){
       this.setState({ivper:1});
+      if(wait >= 8){
       if(!this.state.isEnd){
       if(Number(per) > 0 && Number(per) <=5 && Number(per)+Number(this.state.yourCoe)<=105){
         if(Number(per)*perPrice<=Number(this.state.allMoney)){
@@ -505,6 +521,7 @@ class App extends React.Component {
           allMoney: Number(this.state.allMoney)-coins,
           yourCoe: Number(this.state.yourCoe)+Number(per)
         });
+        wait = 0;
         setTimeout(() => this.fetchData(), 7500);
         setTimeout(() => this.fetchYourData(), 8000);
       }else{
@@ -525,12 +542,14 @@ class App extends React.Component {
 
      }
    }else{this.gameEnd();}
+ }else {this.WAIT();}
     }
 
     async pickUp(coins){
       coins = Number(coins);
       this.setState({puv: '',puvTRX: ''});
       await this.checkForEnd();
+      if(wait >= 8){
       if(!this.state.isEnd){
       if(coins > 0){
         if(Number(coins)<=Number(this.state.allMoney)){
@@ -543,12 +562,14 @@ class App extends React.Component {
             type: 'success'
 
         });
-        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
         coins = coins > contractBalance ? contractBalance : coins;
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        contractBalance -= coins;
         this.setState({allMoney: Number(this.state.allMoney)-coins,
           totalPayout: Number(this.state.totalPayout)+coins/80>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
+        wait = 0;
         setTimeout(() => this.fetchData(), 7500);
         setTimeout(() => this.fetchYourData(), 8000);
       }else{Swal({
@@ -559,16 +580,36 @@ class App extends React.Component {
       })}
       }
     }else{this.gameEnd();}
+  }else {this.WAIT();}
     }
 
     gameEnd(){
       Swal({
           title:'Game over',
           text: 'Smart-contract has no more money :(',
-          type: 'error'
+          type: 'warning'
 
       });
     }
+
+    WAIT(){
+      let timerInterval;
+  Swal.fire({
+    html: "<p><b>You can't do this now.</b></p><p>Please wait <strong></strong> seconds until the next transaction.</p>",
+    position: 'bottom-start',
+    timer: (8-wait)*1000,
+      onBeforeOpen: () => {
+      Swal.showLoading()
+        timerInterval = setInterval(() => {
+        Swal.getContent().querySelector('strong')
+          .textContent = Swal.getTimerLeft()/1000>>0
+        }, 500)
+    },
+    onClose: () => {
+      clearInterval(timerInterval)
+    }
+  })
+}
 
     visible(){
       if(Number(this.state.val) === 0 ){
@@ -633,9 +674,9 @@ class App extends React.Component {
                     <div className="name">My money</div>
                     <div className="myMoneyImg"><img src = {Money} alt="money bags"/></div>
                     <p className="info dnone">Smart-contract's balance: {this.beauty(this.minO(Number(contractBalance)))} Coins</p>
-                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{this.beauty(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{this.beauty(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
-                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{this.beauty(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you can freely use to buy animals or to withdraw. They are all yours!"/> Available:</p><p className="value" data-tooltip={this.state.allMoneyTRX}>{Math.floor(this.state.allMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've withdrawed."/> Returned:</p><p className="value" data-tooltip={this.state.returnedMoneyTRX}>{Math.floor(this.state.returnedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
+                    <p className="p"><img src = {Info} className="ym" alt="Tip" data-tooltip="The money you've invested to the game by buying coins."/> Invested:</p><p className="value" data-tooltip={this.state.investedMoneyTRX}>{Math.floor(this.state.investedMoney)}<img src = {Coin} className = "ym" alt="coin"/></p><hr></hr>
                   </div>
                   <div className="time">{this.state.timeLeft}</div>
                 </div>
