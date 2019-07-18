@@ -2,13 +2,13 @@ pragma solidity ^0.4.23;
 
 contract TronFarm {
 
-    uint constant coinPrice = 12500;
+    uint constant coinPrice = 125;
     uint constant animals = 5;
-    uint constant period = 10 seconds ;
+    uint constant period = 2 minutes;
 
-    uint[animals] prices = [8400, 30000, 100000, 230400, 458800];
-    uint[animals] profit = [110, 400, 1360, 3200, 6500];
-    uint perPrice = 2400;
+    uint[animals] prices = [84, 300, 1000, 2304, 4588];
+    uint[animals] profit = [11, 40, 136, 320, 650];
+    uint perPrice = 24;
     uint startCoe = 100;
 
     uint public last;
@@ -24,6 +24,7 @@ contract TronFarm {
         uint time;
         uint[animals] Animals;
         uint coe;
+        uint frac;
     }
 
     mapping(address => Player) public players;
@@ -69,7 +70,7 @@ contract TronFarm {
     function withdraw(uint _coins) public returns (bool success){
         require(_coins > 0);
         collect(msg.sender);
-        require(_coins <= players[msg.sender].allCoins);
+        require(_coins <= (players[msg.sender].allCoins));
 
         transfer(msg.sender, _coins * coinPrice);
         return true;
@@ -86,7 +87,16 @@ contract TronFarm {
             for (uint i = 0; i < animals; i++) {
                 hourlyProfit = hourlyProfit + (player.Animals[i] * profit[i]);
             }
-            player.allCoins = player.allCoins + (hoursAdded * hourlyProfit * player.coe / 100);
+            uint earned = (hoursAdded * hourlyProfit * player.coe / 100);
+            uint q = earned%1;
+            if(player.frac+(q*100)>=100){
+                player.frac -= 100*(1-q);
+                earned += 1-q;
+            }else{
+                player.frac += q*100;
+                earned -= q;
+            }
+            player.allCoins = player.allCoins + earned;
             player.time = player.time + (hoursAdded * period);
         }
     }

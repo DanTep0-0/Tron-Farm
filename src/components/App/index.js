@@ -19,17 +19,19 @@ import Info from './info-icon.png';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TRmGytELWcs1FGGMoiC9nA4RsLP8w9wQZU';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TRmGytELWcs1FGGMoiC9nA4RsLP8w9wQZU - testnet(now)
+const contractAddress = 'TEWQakbEu4JgwTY7R13Laos8AANeFsF791';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(4) TTbNbFcoDCZg7GXPPRNWP4eCGwmoucmZce -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TFf181aVjgZ4eb3J1ykpvdi5wawhUq3U4S - testnet(5) TEWQakbEu4JgwTY7R13Laos8AANeFsF791 -testnet(now)
 var isClicked = false;
-var period = 10;
+var period = 120;
 var contractBalance;
 var contractTime;
-var profit = [110, 400,1360, 3200, 6500];
-var prices = [8400, 30000, 100000, 230400, 458800];
-var perPrice = 2400;
+var profit = [11, 40,136, 320, 650];
+var prices = [84, 300, 1000, 2304, 4588];
+var perPrice = 24;
 var vall;
 var wait = 10;
+var coinPrice = 125;
+var course = 8000;
 
 class App extends React.Component {
 
@@ -219,21 +221,17 @@ class App extends React.Component {
     }
 
       async fetchData(){
-        console.log("in fetchData");
       try{
       var result1 = (await Utils.contract.totalPlayers().call()).toNumber();
     }catch(e){
       this.checkForEntering();
-      console.log("checking for enter");
       return;
     }
-    console.log("passed checkForEntering()");
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
-      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-      console.log("in fetch, balance = "+contractBalance);
-      var result2 = contractBalance/80 + result3;
+      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
+      var result2 = contractBalance/course + result3;
       this.setState({
         Players: result1,
         Invested: Math.ceil(result2),
@@ -243,12 +241,10 @@ class App extends React.Component {
         href: "https://tronscan.org/#/address/" + result5.toString(),
       });
       if(!this.state.isEnd){
-        console.log("now it is not end");
         if(wait >=8){
-          console.log("wait >= 8");
         this.checkForEnd();
       }
-      }
+    }
     }
 
     checkForEntering(){
@@ -260,11 +256,9 @@ class App extends React.Component {
     }
 
     async fetchYourData() {
-      console.log("in fetchYourData()");
       contractTime = new Date();
       var player = {};
       player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
-      console.log("here player.allCoins = " + player.allCoins);
       var result1 = player.allCoins;
       var result2 = player.usedCoins;
       var result3 = player.coinsReturned;
@@ -293,16 +287,13 @@ class App extends React.Component {
   }
 
   async calcMoney(){
-    console.log("in calcMoney");
-        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-        console.log("here contractBalance = "+contractBalance);
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
         contractTime = new Date();
         contractTime = contractTime.getTime()/1000 >> 0;
-        if(this.state.isEnd){console.log("it is end now");contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
+        if(this.state.isEnd){contractTime = (await Utils.contract.last().call()).toNumber(); document.querySelector('.info').classList.remove('dnone');}
         var player = {};
         player = await Utils.contract.players(Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString())).call();
         var playerAllCoins = player.allCoins;
-        console.log("here player.allCoins = "+player.allCoins);
         var timePassed = contractTime-Number(this.state.yourTime);
         var profitOfPlayer=0;
         var animals = [];
@@ -313,33 +304,28 @@ class App extends React.Component {
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
         var contractBalance2 = contractBalance - playerAllCoins;
-        console.log("contractBalance2 = "+contractBalance2);
                 var hoursAdded = Math.floor(timePassed/period);
-                console.log("hours added:  "+hoursAdded);
                 var Added = hoursAdded*profitOfPlayer;
-                console.log("so added = "+Added);
                 var waitFor;
                 if(wait>=8){waitFor=0;}else{waitFor=8-wait;}
               setTimeout(() => {
                 this.fetchDop(Added, playerAllCoins);
               }, waitFor*1000);
-              console.log("Timeout, waitFor = "+waitFor);
 
                 this.setState({allMoney: Number(playerAllCoins)+Added,
                   yourAllAnimals:animals[0]+animals[1]+animals[2]+animals[3]+animals[4],
                   yourProfit:profitOfPlayer,
-                  allMoneyTRX: this.beauty(this.minO((Number(playerAllCoins)+Added)/80)) + " TRX",
-                  investedMoneyTRX: this.beauty(this.minO(Number(this.state.investedMoney)/80)) + " TRX",
-                  returnedMoneyTRX: this.beauty(this.minO(Number(this.state.returnedMoney)/80)) + " TRX"
+                  allMoneyTRX: this.beauty(this.minO((Number(playerAllCoins)+Added)/course)) + " TRX",
+                  investedMoneyTRX: this.beauty(this.minO(Number(this.state.investedMoney)/course)) + " TRX",
+                  returnedMoneyTRX: this.beauty(this.minO(Number(this.state.returnedMoney)/course)) + " TRX"
                 });
                 if(!this.state.Timer){
                   if(!this.state.isEnd){
           if(contractBalance!==0 && profitOfPlayer>0){
-            console.log("setting timer, contractBalance = "+contractBalance+"and profit of player = "+profitOfPlayer);
             this.state.Timer = setInterval(() => {
               this.calcTime();
             }, 1000);
-          }else{this.setState({timeLeft: ''});console.log("removed timer")}
+          }else{this.setState({timeLeft: ''});}
         }
         }
         var wait2 = (period - (timePassed % period))*1000;
@@ -349,9 +335,7 @@ class App extends React.Component {
 }
 
   fetchDop(Added, playerAllCoins){
-    console.log("in fetchDop()");
     var contractBalance2 = contractBalance - playerAllCoins;
-    console.log("here contractBalance2 = "+contractBalance2);
     if(Number(Added)>Number(contractBalance2)){
       if(!this.state.isEnd && !this.state.MOTH){
         Swal({
@@ -366,19 +350,14 @@ class App extends React.Component {
   }
 
       async checkForEnd(){
-         console.log("in checkForEnd()");
-        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
-        console.log("here, contractBalance = "+contractBalance);
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
         if(Number(this.state.Players)!==0){
-          console.log("players > 0");
           if(contractBalance===0){
-            console.log("contractBalance = 0");
             this.setState({isEnd: true});
             if(!this.state.MOTH){
             this.gameEnd();
           }
             contractTime = (await Utils.contract.last().call()).toNumber();
-            console.log("now contract time is const");
         }}
       }
 
@@ -458,10 +437,10 @@ class App extends React.Component {
             vall = false;
            yourBalance.then( async function(result) {
             totalBalance = result;
-            if(totalBalance >= Number(value)*12500){
+            if(totalBalance >= Number(value)*coinPrice){
             await Utils.contract.deposit().send({
               shouldPollResponse: false,
-              callValue: value*12500});
+              callValue: value*coinPrice});
               vall = true;
               Swal({
                   title:'Transaction sent',
@@ -488,7 +467,7 @@ class App extends React.Component {
       contractBalance += value;
       this.setState({allMoney: Number(this.state.allMoney) + Number(value),
         investedMoney: Number(this.state.investedMoney) + Number(value),
-        Invested: Math.floor(Number(this.state.Invested) + Number(value)/80)
+        Invested: Math.floor(Number(this.state.Invested) + Number(value)/course)
       });
       if(!Number(this.state.yourTime)){
         this.setState({Players: Number(this.state.Players)+1});
@@ -596,10 +575,10 @@ class App extends React.Component {
 
         });
         coins = coins > contractBalance ? contractBalance : coins;
-        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/12500;
+        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
         contractBalance -= coins;
         this.setState({allMoney: Number(this.state.allMoney)-coins,
-          totalPayout: Number(this.state.totalPayout)+coins/80>>0,
+          totalPayout: Number(this.state.totalPayout)+coins/course>>0,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
         wait = 0;
@@ -686,14 +665,14 @@ class App extends React.Component {
                   <div className = "about">You have to buy coins to purchase animals</div>
                   <button className="improveFood button2" onClick={(event) => {event.preventDefault()
                     this.dep(this.state.valueDep)}  }>Buy</button>
-                  <input min="1" step="1" className = "buLa wa" type="number" name="denumber" placeholder = "0" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/80})}/>
+                  <input min="1" step="1" className = "buLa wa" type="number" name="denumber" placeholder = "0" value = {this.state.valueDep} onChange={e => this.setState({valueDep: e.target.value, valueDepTRX: e.target.value/course})}/>
                     <img className = "valCoins1" alt="coin" src = {Coin}/>
-                  <input min="0" className = "buLa2 wa" placeholder = "0" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*80})}/>
+                  <input min="0" className = "buLa2 wa" placeholder = "0" type = "number"  value = {this.state.valueDepTRX} onChange = {e => this.setState({valueDepTRX: e.target.value, valueDep: e.target.value*course})}/>
                     <div className = "TRX">TRX</div>
                   <div className = "about mt15 dop">1 TRX = 80<img src = {Coin} alt="coin" className= "coin" /></div>
-                  <p className = "about">You can withdraw money you've earned</p><input min="1" step="1" className = "buLa3 wa" placeholder = "0" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/80})}/>
+                  <p className = "about">You can withdraw money you've earned</p><input min="1" step="1" className = "buLa3 wa" placeholder = "0" type="number" name="pinumber" value = {this.state.puv} onChange={e => this.setState({puv: e.target.value, puvTRX: e.target.value/course})}/>
                   <img className = "valCoins2" src = {Coin} alt="coin"/><button className="pickUp" onClick={(event) => {event.preventDefault()
-                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*80, puvTRX: e.target.value})}/>
+                    this.pickUp(this.state.puv)}  }>Withdraw</button><input className = "wa buLa4" placeholder = "0" min="1" step="1" type = "number" name = "pinumber" value = {this.state.puvTRX} onChange = {e => this.setState({puv: e.target.value*course, puvTRX: e.target.value})}/>
                     <div className = "TRX">TRX</div></div>
                 </div>
 
