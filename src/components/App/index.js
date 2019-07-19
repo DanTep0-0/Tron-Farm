@@ -19,8 +19,8 @@ import Info from './info-icon.png';
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
 ////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TEWQakbEu4JgwTY7R13Laos8AANeFsF791';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(4) TTbNbFcoDCZg7GXPPRNWP4eCGwmoucmZce -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TFf181aVjgZ4eb3J1ykpvdi5wawhUq3U4S - testnet(5) TEWQakbEu4JgwTY7R13Laos8AANeFsF791 -testnet(now)
+const contractAddress = 'TNVxx2zPKLVaSempUsb5uKKoYx1VdHXZVW';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(4) TTbNbFcoDCZg7GXPPRNWP4eCGwmoucmZce -mainnet(now)
+////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TFf181aVjgZ4eb3J1ykpvdi5wawhUq3U4S - testnet(5) TNVxx2zPKLVaSempUsb5uKKoYx1VdHXZVW -testnet(now)
 var isClicked = false;
 var period = 120;
 var contractBalance;
@@ -32,6 +32,7 @@ var vall;
 var wait = 10;
 var coinPrice = 125;
 var course = 8000;
+var pickUpW = false;
 
 class App extends React.Component {
 
@@ -230,12 +231,12 @@ class App extends React.Component {
       var result3 = (await Utils.contract.totalPayout().call()).toNumber() / 1000000;
       var result4 = (await Utils.contract.totalAnimals().call()).toNumber();
       var result5 = Utils.tronWeb.address.fromHex(((await Utils.tronWeb.trx.getAccount()).address).toString());
-      contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
+      if(!pickUpW){contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;}
       var result2 = contractBalance/course + result3;
       this.setState({
         Players: result1,
-        Invested: Math.ceil(result2),
-        PaidOut: Math.ceil(result3),
+        Invested: result2,
+        PaidOut: result3,
         Animals: result4,
         Address: result5,
         href: "https://tronscan.org/#/address/" + result5.toString(),
@@ -303,7 +304,6 @@ class App extends React.Component {
                 }
                 profitOfPlayer = profitOfPlayer*Number(this.state.yourCoe)/100;
                 if(!profitOfPlayer){profitOfPlayer=0;}
-        var contractBalance2 = contractBalance - playerAllCoins;
                 var hoursAdded = Math.floor(timePassed/period);
                 var Added = hoursAdded*profitOfPlayer;
                 var waitFor;
@@ -574,14 +574,18 @@ class App extends React.Component {
             type: 'success'
 
         });
+        contractBalance = Number(await window.tronWeb.trx.getBalance(contractAddress)/coinPrice);
         coins = coins > contractBalance ? contractBalance : coins;
-        contractBalance = await window.tronWeb.trx.getBalance(contractAddress)/coinPrice;
         contractBalance -= coins;
+        var result2 = Number(contractBalance/course) + Number(this.state.PaidOut)+Number(coins/course>>0);
         this.setState({allMoney: Number(this.state.allMoney)-coins,
-          totalPayout: Number(this.state.totalPayout)+coins/course>>0,
+          totalPayout: Number(this.state.PaidOut)+coins/course>>0,
+          Invested: result2,
           returnedMoney: Number(this.state.returnedMoney)+coins
         });
         wait = 0;
+        pickUpW = true;
+        setTimeout(() => this.pickUpDop(), 3000);
         setTimeout(() => this.fetchData(), 7500);
         setTimeout(() => this.fetchYourData(), 8000);
       }else{Swal({
@@ -593,6 +597,10 @@ class App extends React.Component {
       }
     }else{this.gameEnd();}
   }else {this.WAIT();}
+    }
+
+    pickUpDop(){
+      pickUpW = false;
     }
 
     gameEnd(){
@@ -652,8 +660,8 @@ class App extends React.Component {
               <li className = "abgl adm">Your Address:<p className = "num"><a href={this.state.href} target="_blank" rel="noopener noreferrer" title="Click to see your transactions">{this.state.Address}</a></p></li>
               <li className = "abgl ads">Players:<p className = "num">{this.beauty(this.state.Players)}</p></li>
               <li className = "abgl ads">Animals:<p className = "num">{this.beauty(this.state.Animals)}</p></li>
-              <li className = "abgl adb">Invested:<p className = "num">{this.beauty(this.state.Invested)+" TRX"}</p></li>
-              <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(this.state.PaidOut)+" TRX"}</p></li>
+              <li className = "abgl adb">Invested:<p className = "num">{this.beauty(Math.ceil(this.state.Invested))+" TRX"}</p></li>
+              <li className = "abgl adb">Paid Out:<p className = "num">{this.beauty(Math.ceil(this.state.PaidOut))+" TRX"}</p></li>
             </ul>
 
             <div className = "account wow fadeIn" data-wow-delay="0.3s">My Account</div>

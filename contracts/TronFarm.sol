@@ -88,13 +88,12 @@ contract TronFarm {
                 hourlyProfit = hourlyProfit + (player.Animals[i] * profit[i]);
             }
             uint earned = (hoursAdded * hourlyProfit * player.coe / 100);
-            uint q = earned%1;
-            if(player.frac+(q*100)>=100){
-                player.frac -= 100*(1-q);
-                earned += 1-q;
+            uint q = (hoursAdded * hourlyProfit * player.coe)%100;
+            if(player.frac+q>=100){
+                player.frac -= (100-q);
+                earned += 1;
             }else{
-                player.frac += q*100;
-                earned -= q;
+                player.frac += q;
             }
             player.allCoins = player.allCoins + earned;
             player.time = player.time + (hoursAdded * period);
