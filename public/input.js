@@ -1,5 +1,5 @@
 //--------------------SMART-CONTRACT LINK-----------
-var x = "https://tronscan.org/#/contract/TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ";
+var x = "https://tronscan.org/#/contract/TL9Td5vNtjS8BFRMjLC5B3K7dM54QM46DN";
 document.querySelector(".contract1").href = x;
 document.querySelector(".contract2").href = x;
 document.querySelector(".contract3").href = x;
@@ -11,14 +11,6 @@ document.querySelector(".contract4").href = x;
 var showingTooltip;
 
 document.onmouseover = function(e) {
-// -------------------BREAK IF DISPLAY-NONE---------
-  // var info = document.getElementById("info");
-  // var infoClass = info.className;
-  // switch(infoClass) {
-  //   case "display-none":
-  //   break;
-  // }
-
   var target = e.target;
 
   var tooltip = target.getAttribute('data-tooltip');
@@ -32,10 +24,10 @@ document.onmouseover = function(e) {
   var coords = target.getBoundingClientRect();
 
   var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
-  if (left < 0) left = 30; // не вылезать за левую границу окна
+  if (left < 0) left = 30;
 
   var top = coords.top - tooltipElem.offsetHeight - 5;
-  if (top < 0) { // не вылезать за верхнюю границу окна
+  if (top < 0) {
     top = coords.top + target.offsetHeight + 5;
   }
 
