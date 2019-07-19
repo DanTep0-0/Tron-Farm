@@ -2,13 +2,13 @@ pragma solidity ^0.4.23;
 
 contract TronFarm {
 
-    uint constant coinPrice = 125;
+    uint constant coinPrice = 12500;
     uint constant animals = 5;
-    uint constant period = 2 minutes;
+    uint constant period = 1 hours;
 
-    uint[animals] prices = [84, 300, 1000, 2304, 4588];
+    uint[animals] prices = [8400, 30000, 100000, 230400, 458800];
     uint[animals] profit = [11, 40, 136, 320, 650];
-    uint perPrice = 24;
+    uint perPrice = 2400;
     uint startCoe = 100;
 
     uint public last;

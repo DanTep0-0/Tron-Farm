@@ -18,20 +18,20 @@ import Info from './info-icon.png';
 
 const FOUNDATION_ADDRESS = 'TWiWt5SEDzaEqS6kE5gandWMNfxR2B5xzg';
 
-////////////////////////////////////////////////////////////////////////////////////  TWZKc8UuVBZi7KcSuD9WaUBQJCYK2XtTCs - mainnet(0)
-const contractAddress = 'TNVxx2zPKLVaSempUsb5uKKoYx1VdHXZVW';   /// Add your contract address here TTdXi3GmM2Wj9EAcpkGiGyLzpNZ74v6wtN - mainnet(1)  TAdeCTb92LGwEP1QygfdhHb23hydwRbf53 - mainnet(2)  TC5xZKwk8ttafnWt56YB22Ev6NnMyyUm7B - mainnet(3) TXhSWnFWu91Qo4P6Lay5Bbd2q7inBBabVQ -mainnet(4) TTbNbFcoDCZg7GXPPRNWP4eCGwmoucmZce -mainnet(now)
-////////////////////////////////////////////////////////////////////////////////////  TNXzh6W6i2CTvKexaSeZ6863qZM4dkKog8 - testnet TGCSK1RXuzGvjvBW7j9QBFz5P4fHU48sCj -testnet(2) TVhadi9aa1ryHRYnB776NVB6EgTstUfkMZ - testnet(3) TQUfVzJXs2u99uY4XHxdd4656y6bSv3Yzr - testnet(4) TFf181aVjgZ4eb3J1ykpvdi5wawhUq3U4S - testnet(5) TNVxx2zPKLVaSempUsb5uKKoYx1VdHXZVW -testnet(now)
+////////////////////////////////////////////////////////////////////////////////////
+const contractAddress = 'TL9Td5vNtjS8BFRMjLC5B3K7dM54QM46DN';
+////////////////////////////////////////////////////////////////////////////////////
 var isClicked = false;
-var period = 120;
+var period = 3600;
 var contractBalance;
 var contractTime;
 var profit = [11, 40,136, 320, 650];
-var prices = [84, 300, 1000, 2304, 4588];
-var perPrice = 24;
+var prices = [8400, 30000, 100000, 230400, 45880];
+var perPrice = 2400;
 var vall;
 var wait = 10;
-var coinPrice = 125;
-var course = 8000;
+var coinPrice = 12500;
+var course = 80;
 var pickUpW = false;
 
 class App extends React.Component {
@@ -464,7 +464,7 @@ class App extends React.Component {
 
   depDop(value){
     if(vall){
-      contractBalance += value;
+      contractBalance += Number(value);
       this.setState({allMoney: Number(this.state.allMoney) + Number(value),
         investedMoney: Number(this.state.investedMoney) + Number(value),
         Invested: Math.floor(Number(this.state.Invested) + Number(value)/course)
