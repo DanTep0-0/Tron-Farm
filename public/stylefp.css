@@ -217,6 +217,9 @@ body{
   display: inline-block;
   font-size: 16px;
 }
+.hidden{
+  display: none;
+}
 .buttonCopy:hover{
   background-color: #a4b740;
 }
