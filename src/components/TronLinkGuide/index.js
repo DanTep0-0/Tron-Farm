@@ -19,7 +19,7 @@ const TronLinkGuide = props => {
                     <div className = "text">
                       If you haven't downloaded the TRON wallet web extension yet,
                       download TronLink to work with the website.
-                      <p>Make sure you are on the Mainnet network and not using test network (shasta).
+                      <p>Make sure you are on the Mainnet network and not using a test network (Shasta).
                       You can change it in the settings by switching node.</p>
                       <p>After logging in the wallet or changing the network,
                       please reload the page.</p>

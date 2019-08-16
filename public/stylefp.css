@@ -39,15 +39,30 @@ body{
   list-style: none;
   position: relative;
 }
+.menuBottom .list{
+  width: auto;
+}
+.menuBottom a, .menuBottom .list:last-child{
+  padding: 0 25px;
+}
+.menuBottom .menu{
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
 .menuFixed .list:hover{
   background-color: #4b79a6;
   transform: translateY(-2px);
 }
-.menuBottom a:hover {
+.menuBottom .list:hover {
   background-color: #4f8541;
   transform: translateY(-2px);
 }
-.menuBottom a, .list, .buttonCopy, .dropdownChild, .hidden .sc{
+.menuBottom .list:last-child:hover{
+  background-color: inherit;
+  transform: none;
+}
+.menuBottom .list, .list, .dropdownChild, .hidden .sc{
   transition: background 0.5s, transform 0.5s;
 }
 .link{
@@ -55,15 +70,12 @@ body{
   height: 70px;
   width: 100%;
 }
-.hidden{
-  display: none;
-}
 .menuFixed.hidden{
   text-align: center;
   height: 90px;
 }
 .menuButton{
-  background-color: #5f98c9;
+  background-color: transparent;
   border: none;
   font-size: 35px;
   color: white;
@@ -106,11 +118,14 @@ body{
   opacity: 1;
   visibility: visible;
 }
-.sc, .contact{
+.sc, .SC, .contact{
   text-decoration: none;
   color: white;
   font-size: 24px;
   cursor: pointer;
+}
+.email.contact{
+  font-size: 16px;
 }
 .sc:visited {
   color: white;
@@ -189,9 +204,9 @@ body{
 }
 .fab{
   color: white;
-  font-size: 30px;
+  font-size: 25px;
 }
-.contact, .sc, .sc p, .btnText2, .btnText1{
+.contact, .sc, .SC, .sc p, .btnText2, .btnText1{
   display: inline-block;
 }
 #emailAdress{
@@ -215,16 +230,17 @@ body{
   border: none;
   border-radius: 15px;
   display: inline-block;
-  font-size: 16px;
+  transition: background 0.1s, transform 0.5s;
 }
 .hidden{
   display: none;
 }
 .buttonCopy:hover{
-  background-color: #a4b740;
+  transform: translateY(-2px);
 }
 .buttonCopy:focus{
   outline: 0px;
+  background-color: #a4b740;
 }
 .btnText2{
   display: none;
@@ -356,7 +372,7 @@ body{
   #emailAdress{
     font-size: 16px;
     width: 165px;
-    padding-left: 5px;
+    padding-left: 10px;
   }
   #qna, #aboutFarm{
     width: 75%;
@@ -368,11 +384,11 @@ body{
     width: 85%;
   }
 }
-@media (max-width: 1300px) {
+/* @media (max-width: 1300px) {
   #emailAdress{
     width: 150px;
   }
-}
+} */
 @media (max-width: 1200px) {
   .menu{
     width: 75vw;
@@ -380,37 +396,20 @@ body{
   .list{
     width: 25vw;
   }
-  #emailAdress{
+  /* #emailAdress{
     font-size: 16px;
     width: 170px;
-  }
+  } */
 }
 @media (max-width: 990px) {
   .divForLogo{
     margin-top: 120px;
   }
-  .scBottom .contact, #emailAdress{
-    display: none;
-  }
-  .fab, .sc .fas{
-    font-size: 35px;
-    margin: 15px;
-  }
   .menuFixed .fas{
     font-size: inherit;
   }
-  .main{
-    display: none;
-  }
-  .hidden{
-    display: inline-block;
-  }
   #qna, #aboutFarm{
     color: #333;
-  }
-  .buttonCopy{
-    font-size: 24px;
-    padding: 3px 13px;
   }
 }
 @media (max-width: 1050px) {
@@ -419,6 +418,13 @@ body{
   }
   .list{
     width: 30vw;
+  }
+  .menuBottom a{
+    padding: 0 40px;
+  }
+  .menuBottom .list:last-child {
+    padding: 0;
+    cursor: pointer;
   }
   .container, .qnaD, .tronFarmLogo{
     width: 500px;
@@ -462,23 +468,22 @@ body{
   #qna, #aboutFarm{
     margin-bottom: 50px;
   }
-  #emailAdress{
-    font-size: 18px;
+  .scBottom .contact, .buttonCopy .contact, #emailAdress{
+    display: none;
   }
-}
-@media (max-width: 950px) {
-  #emailAdress{
-    width: 150px;
+  .fab, .menuBottom .SC .fas{
+    font-size: 35px;
+    margin: 15px;
   }
-}
-@media (max-width: 800px) {
-  #emailAdress{
-  width: 120px;
+.SC {
+    width: auto;
+    height: 70px;
   }
-}
-@media (max-width: 730px) {
-  .buttonCopy{
-    font-size: 18px;
+  .main{
+    display: none;
+  }
+  .hidden{
+    display: inline-block;
   }
 }
 @media (max-width: 700px) {
@@ -494,15 +499,12 @@ body{
   .cyf, .es, .txt p, .answer{
     font-size: 24px;
   }
-  #emailAdress{
-  width: 75px;
+  .menuBottom a {
+    padding: 0 25px;
   }
 }
 
 @media (max-width: 550px) {
-  .sc, .contact{
-    font-size: 18px;
-  }
   .tronFarmLogo, .container, .qnaD{
     width: 250px;
   }
@@ -511,13 +513,6 @@ body{
   }
   .cyf, .es, .txt p, .answer{
     font-size: 22px;
-  }
-  #emailAdress{
-  width: 60px;
-  }
-  .buttonCopy{
-    font-size: 18px;
-    padding: 3px 8px;
   }
 }
 

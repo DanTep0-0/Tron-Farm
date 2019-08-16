@@ -26,7 +26,7 @@ document.onmouseover = function(e) {
   var left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) / 2;
   if (left < 0) left = 30;
 
-  var top = coords.top - tooltipElem.offsetHeight - 5;
+  var top = coords.top - tooltipElem.offsetHeight - 10;
   if (top < 0) {
     top = coords.top + target.offsetHeight + 5;
   }
